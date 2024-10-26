@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { PostService } from '../../../services/post.service';
+import { PostService } from '../../../services/post/post.service';
 import { Post } from '../../../models/post';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [],
+  imports: [PostComponent],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss'
 })

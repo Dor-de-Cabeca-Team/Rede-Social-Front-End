@@ -11,6 +11,11 @@
       <blockquote class="blockquote mb-0">
         <footer class="blockquote-footer">{{ post.data | date:'medium'  }}</footer>
       </blockquote>
+
+    <div class="like-button-container">
+      <button class="like-button" (click)="likePost()">
+        <span class="heart-icon" [class.liked]="isLiked">❤️</span>
+      </button>
     </div>
   </div>
 </div>
