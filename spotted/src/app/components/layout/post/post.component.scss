@@ -1,0 +1,38 @@
+.animal-pic {
+    width: 40px;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.post-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.post-container p {
+  margin: 0; /* Removes default paragraph margin */
+  display: flex; /* Allows vertical alignment adjustments */
+  align-items: center; /* Centers text vertically with respect to the container */
+  line-height: 1.5; /* Adjusts line height for better alignment */
+  padding-top: 4px; /* Adjust this value as needed */
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.post {
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
