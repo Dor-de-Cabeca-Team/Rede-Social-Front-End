@@ -6,16 +6,27 @@
         <p><strong>{{ post.imagemNome }} Anônimo disse:</strong> </p>
       </div>
     </div>
+
     <div class="card-body">
       <p><strong>{{ post.conteudo }}</strong></p>
       <blockquote class="blockquote mb-0">
         <footer class="blockquote-footer">{{ post.data | date:'medium'  }}</footer>
       </blockquote>
+    </div>
 
     <div class="like-button-container">
+      <!-- Botão de Like -->
       <button class="like-button" (click)="likePost()">
         <span class="heart-icon" [class.liked]="isLiked">❤️</span>
+        <span class="like-counter">{{ post.likes.length }}</span>
       </button>
+      <!-- Botão de Denúncia -->
+      <button class="report-button" (click)="denunciarPost()">
+          <span class="icon">🚨</span>
+      </button>
+      <!-- Comentários -->
+      <span (click)="showComments()"> {{ post.comments.length }} Comentários</span>
     </div>
+
   </div>
 </div>

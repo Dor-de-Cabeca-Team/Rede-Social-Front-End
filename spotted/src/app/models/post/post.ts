@@ -3,6 +3,9 @@ export class Post {
   conteudo!: string;
   data!: Date;
   valido!: boolean;
+  likes!: number[];
+  complaints!: number[];
+  comments!: string[];
   imagem?: string;
   imagemNome?: string;
 
@@ -12,5 +15,8 @@ export class Post {
     this.conteudo = conteudo;
     this.data = data;
     this.valido = valido;
+    this.complaints = [];
+    this.likes = [];
+    this.comments = [];
   }
 }
