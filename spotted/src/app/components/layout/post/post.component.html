@@ -1,0 +1,21 @@
+<div *ngIf="post.valido">
+  <div class="card post" style="width: 38rem;">
+    <div class="card-header post">
+      <div class="post-container">
+        <img class="animal-pic" [src]="post.imagem" alt="img">
+        <p><strong>{{ post.imagemNome }} Anônimo disse:</strong> </p>
+      </div>
+    </div>
+    <div class="card-body">
+      <p><strong>{{ post.conteudo }}</strong></p>
+      <blockquote class="blockquote mb-0">
+        <footer class="blockquote-footer">{{ post.data | date:'medium'  }}</footer>
+      </blockquote>
+
+    <div class="like-button-container">
+      <button class="like-button" (click)="likePost()">
+        <span class="heart-icon" [class.liked]="isLiked">❤️</span>
+      </button>
+    </div>
+  </div>
+</div>

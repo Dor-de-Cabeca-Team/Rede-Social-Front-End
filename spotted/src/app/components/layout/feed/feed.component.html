@@ -1,0 +1,5 @@
+<article class="feed-container">
+  @for (post of posts; track $index) {
+    <app-post [post]="post"></app-post>
+  }
+</article>
