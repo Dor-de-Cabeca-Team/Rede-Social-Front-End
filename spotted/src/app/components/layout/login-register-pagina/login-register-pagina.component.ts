@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LoginRegisterFormComponent } from "../forms/login-register-form/login-register-form.component";
 
 @Component({
@@ -9,5 +9,4 @@ import { LoginRegisterFormComponent } from "../forms/login-register-form/login-r
   styleUrl: './login-register-pagina.component.scss'
 })
 export class LoginRegisterPaginaComponent {
-
 }

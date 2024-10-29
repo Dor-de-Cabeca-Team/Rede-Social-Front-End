@@ -4,5 +4,6 @@ import { LoginRegisterPaginaComponent } from './components/layout/login-register
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: "login", component: LoginRegisterPaginaComponent }
+  { path: "login", component: LoginRegisterPaginaComponent },
+  { path: "principal", component: PrincipalComponent }
 ];

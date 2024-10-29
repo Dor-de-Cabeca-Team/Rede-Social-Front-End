@@ -37,6 +37,7 @@ export class FeedComponent {
     });
   }
 
+
   getRandomAnimalImage(): { name: string, path: string } {
     const images = [
       { name: 'Cachorro', path: 'assets/animals/Recurso37@2x.png' },
@@ -64,5 +65,4 @@ export class FeedComponent {
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
   }
-
 }
