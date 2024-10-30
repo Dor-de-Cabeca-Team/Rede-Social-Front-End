@@ -1,4 +1,25 @@
-<app-sidebar></app-sidebar>
-<app-feed></app-feed>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3 sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
 
+    <!-- Feed -->
+    <div class="col-md-6">
+      <div class="post-box mb-4">
+        <input type="text" class="form-control" placeholder="Manda algo ai" />
+        <button class="btn btn-primary mt-2">Postar</button>
+      </div>
 
+      <div class="card post feed mb-3">
+        <app-feed></app-feed>
+      </div>
+    </div>
+
+    <!-- Trending -->
+    <div class="col-md-3 trending">
+      <app-treding></app-treding>
+    </div>
+  </div>
+</div>

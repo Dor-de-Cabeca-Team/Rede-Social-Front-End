@@ -1,0 +1,35 @@
+.feed {
+  padding: 2rem;
+}
+
+.trending {
+  background-color: #33333321;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.post-box input {
+  background-color: #33333321;
+  border: none;
+}
+
+.post-box button {
+  background-color: #1da1f2;
+  border: none;
+}
+
+.card.post {
+  background-color: #33333321;
+  border: none;
+}
+
+.feed {
+  height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox: Remove a barra de rolagem */
+}
+
+/* Para navegadores baseados em WebKit (Chrome, Safari, Edge) */
+.feed::-webkit-scrollbar {
+  display: none; /* Remove a barra de rolagem */
+}
