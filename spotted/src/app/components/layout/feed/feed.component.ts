@@ -2,17 +2,21 @@ import { Component, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { Post } from '../../../models/post/post';
 import { PostComponent } from '../post/post.component';
+import { CommentComponent } from '../comment/comment.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [PostComponent],
+  imports: [PostComponent, CommentComponent, CommonModule],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss'
 })
 export class FeedComponent {
   postService = inject(PostService);
   posts: Post[] = [];
+  selectedPostId: string | null = null;
+  showModal: boolean = false;
 
   constructor() {
     this.findAll();
@@ -36,7 +40,6 @@ export class FeedComponent {
       },
     });
   }
-
 
   getRandomAnimalImage(): { name: string, path: string } {
     const images = [

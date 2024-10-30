@@ -1,3 +1,5 @@
+import { Comment } from "../comment/comment";
+
 export class Post {
   uuid!: string;
   conteudo!: string;
@@ -5,7 +7,7 @@ export class Post {
   valido!: boolean;
   likes!: number[];
   complaints!: number[];
-  comments!: string[];
+  comments!: Comment[];
   imagem?: string;
   imagemNome?: string;
 

@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Comentários</h2>
+<mat-dialog-content class="mat-typography">
+
+  <!-- Sessão Post -->
+  <div *ngIf="post.valido">
+    <div class="card post" style="width: 38rem;">
+      <div class="card-header post">
+        <div class="post-container">
+          <img class="animal-pic" [src]="post.imagem" alt="img">
+          <p><strong>{{ post.imagemNome }} Anônimo disse:</strong> </p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p><strong>{{ post.conteudo }}</strong></p>
+        <blockquote class="blockquote mb-0">
+          <footer class="blockquote-footer">{{ post.data | date:'medium'  }}</footer>
+        </blockquote>
+      </div>
+
+      <div class="like-button-container">
+        <!-- Botão de Like -->
+        <button class="like-button" >
+          <span class="heart-icon" >❤️</span>
+          <span class="like-counter">{{ post.likes.length }}</span>
+        </button>
+        <!-- Botão de Denúncia -->
+        <button class="report-button" >
+            <span class="icon">🚨</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Sessão Comentario -->
+  @for (comment of post.comments; track $index) {
+    <app-comment [comment]="comment"></app-comment>
+  }
+</mat-dialog-content>
+
+<!-- Botoes pra sair do modal -->
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</mat-dialog-actions>
