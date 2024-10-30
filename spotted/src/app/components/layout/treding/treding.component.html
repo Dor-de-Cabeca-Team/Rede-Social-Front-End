@@ -1,1 +1,7 @@
 <h5 class="text-white">Trending</h5>
+<div class="list-group">
+  <div *ngFor="let item of trendingList" class="list-group-item text-white mb-2 rounded cor">
+    <small class="text-muted">{{ item.category }}</small>
+    <p class="mb-1">{{ item.description }}</p>
+  </div>
+</div>
