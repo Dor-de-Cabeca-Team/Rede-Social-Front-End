@@ -7,7 +7,12 @@
       <form>
         <!-- Email input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="email" id="loginName" class="form-control text-white" />
+          <input
+            mdbInput
+            type="email"
+            id="loginName"
+            class="form-control text-white"
+          />
           <label mdbLabel class="form-label text-white" for="loginName"
             >Email or username</label
           >
@@ -52,7 +57,12 @@
         </div>
 
         <!-- Submit button -->
-        <button mdbRipple type="submit" class="btn btn-primary btn-block mb-4" (click)="logar()">
+        <button
+          mdbRipple
+          type="submit"
+          class="btn btn-primary btn-block mb-4"
+          (click)="logar()"
+        >
           Sign in
         </button>
       </form></mdb-tab
@@ -61,8 +71,15 @@
       <form>
         <!-- Name input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="text" id="registerName" class="form-control text-white" />
-          <label mdbLabel class="form-label text-white" for="registerName">Name</label>
+          <input
+            mdbInput
+            type="text"
+            id="registerName"
+            class="form-control text-white"
+          />
+          <label mdbLabel class="form-label text-white" for="registerName"
+            >Name</label
+          >
         </mdb-form-control>
 
         <!-- Username input -->
@@ -86,7 +103,9 @@
             id="registerEmail"
             class="form-control text-white"
           />
-          <label mdbLabel class="form-label text-white" for="registerEmail">Email</label>
+          <label mdbLabel class="form-label text-white" for="registerEmail"
+            >Email</label
+          >
         </mdb-form-control>
 
         <!-- Password input -->
@@ -110,10 +129,23 @@
             id="registerRepeatPassword"
             class="form-control text-white"
           />
-          <label mdbLabel class="form-label text-white" for="registerRepeatPassword"
+          <label
+            mdbLabel
+            class="form-label text-white"
+            for="registerRepeatPassword"
             >Repeat password</label
           >
         </mdb-form-control>
+
+        <mat-form-field>
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="DD/MMM/YYYY" />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
         <!-- Checkbox -->
         <div class="form-check d-flex justify-content-center mb-4">
