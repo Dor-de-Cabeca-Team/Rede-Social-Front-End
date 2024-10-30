@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FeedComponent } from '../feed/feed.component';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
-import { TredingComponent } from "../treding/treding.component";
+import { TredingComponent } from "../trending/treding.component";
 
 @Component({
   selector: 'app-principal',
