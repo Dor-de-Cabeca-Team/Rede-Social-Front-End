@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { PostService } from '../../../services/post/post.service';
 import { CommentComponent } from '../comment/comment.component';
 import { ModalCommentComponent } from '../modal-comment/modal-comment.component';
-import { DialogContentExampleDialog } from '../modal-comment/modal-comment.component';
+import { DialogContentCommentDialog } from '../modal-comment/modal-comment.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LikeButtonComponent } from '../like-button/like-button.component';
 import { ComplainButtonComponent } from '../complain-button/complain-button.component';
@@ -32,7 +32,7 @@ export class PostComponent {
   constructor(private dialog: MatDialog) {}
 
   openDialog() {
-    this.dialog.open(DialogContentExampleDialog, {
+    this.dialog.open(DialogContentCommentDialog, {
       data: {
         post: this.post,
       }

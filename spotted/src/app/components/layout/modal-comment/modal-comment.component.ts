@@ -22,18 +22,18 @@ export class ModalCommentComponent {
 
 @Component({
   selector: 'dialog-content-example-dialog',
-  templateUrl: 'dialog-content-example-dialog.html',
+  templateUrl: 'dialog-content-comment-dialog.html',
   standalone: true,
   styleUrl: './modal-comment.component.scss',
   imports: [MatDialogModule, MatButtonModule, PostComponent, CommentComponent, CommonModule, LikeButtonComponent, ComplainButtonComponent],
 })
-export class DialogContentExampleDialog {
+export class DialogContentCommentDialog {
   post: Post;
   postService = inject(PostService);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { post: Post },
-    public dialogRef: MatDialogRef<DialogContentExampleDialog>
+    public dialogRef: MatDialogRef<DialogContentCommentDialog>
   ) {
     this.post = data.post;
     this.assignRandomImagesToComments();
