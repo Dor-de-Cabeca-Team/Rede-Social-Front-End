@@ -8,6 +8,7 @@ export class Post {
   likes!: number[];
   complaints!: number[];
   comments!: Comment[];
+  profileAnimal!: number;
   imagem?: string;
   imagemNome?: string;
 

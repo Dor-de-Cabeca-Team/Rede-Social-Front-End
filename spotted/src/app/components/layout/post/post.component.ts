@@ -27,7 +27,7 @@ export class PostComponent {
   showCommentsComponent: boolean = false;
   showModal: boolean = false;
 
-  userid = '468bc00f-8867-48bc-8bf0-64eba813e2d4'; // fixo por enquanto
+  userid = '88fc4171-c04e-4659-a8f3-073745701517'; // fixo por enquanto
 
   constructor(private dialog: MatDialog) {}
 

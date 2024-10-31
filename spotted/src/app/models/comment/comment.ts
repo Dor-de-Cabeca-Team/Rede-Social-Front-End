@@ -5,6 +5,9 @@ export class Comment {
   valido!: boolean;
   complaints!: number[];
   likes!: number[];
+  profileAnimal!: number;
+  imagem?: string;
+  imagemNome?: string;
 
   constructor(uuid: string, data: Date, conteudo: string, valido: boolean) {
     this.uuid = uuid;

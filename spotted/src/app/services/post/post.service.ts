@@ -67,5 +67,31 @@ export class PostService {
   //  });
   // }
 
+  getRandomAnimalImage(index: number): { name: string, path: string } {
+    const images = [
+      { name: 'Cachorro Anônimo', path: 'assets/animals/Recurso37@2x.png' },
+      { name: 'Borboleta Anônima', path: 'assets/animals/Recurso4@2x.png' },
+      { name: 'Galo Anônimo', path: 'assets/animals/Recurso36@2x.png' },
+      { name: 'Coelho Anônimo', path: 'assets/animals/Recurso6@2x.png' },
+      { name: 'Porco Anônimo', path: 'assets/animals/Recurso3@2x.png' },
+      { name: 'Rinoceronte Anônimo', path: 'assets/animals/Recurso35@2x.png' },
+      { name: 'Águia Anônima', path: 'assets/animals/Recurso34@2x.png' },
+      { name: 'Touro Anônimo', path: 'assets/animals/Recurso33@2x.png' },
+      { name: 'Cavalo Anônimo', path: 'assets/animals/Recurso32@2x.png' },
+      { name: 'Coiote Anônimo', path: 'assets/animals/Recurso31@2x.png' },
+      { name: 'Elefante Anônimo', path: 'assets/animals/Recurso30@2x.png' },
+      { name: 'Papagaio Anônimo', path: 'assets/animals/Recurso29@2x.png' },
+      { name: 'Tucano Anônimo', path: 'assets/animals/Recurso28@2x.png' },
+      { name: 'Gato Anônimo', path: 'assets/animals/Recurso27@2x.png' },
+      { name: 'Calau Anônimo', path: 'assets/animals/Recurso26@2x.png' },
+      { name: 'Pato Anônimo', path: 'assets/animals/Recurso25@2x.png' },
+      { name: 'Antílope Anônimo', path: 'assets/animals/Recurso24@2x.png' },
+      { name: 'Alce Anônimo', path: 'assets/animals/Recurso23@2x.png' },
+      { name: 'Ema Anônima', path: 'assets/animals/Recurso22@2x.png' },
+      { name: 'Hipopótamo Anônimo', path: 'assets/animals/Recurso21@2x.png' },
+    ];
+
+    return images[index];
+  }
   constructor() {}
 }
