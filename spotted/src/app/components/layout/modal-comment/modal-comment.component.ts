@@ -5,6 +5,8 @@ import { PostComponent } from '../post/post.component';
 import { Post } from '../../../models/post/post';
 import { CommonModule } from '@angular/common';
 import { CommentComponent } from '../comment/comment.component';
+import { LikeButtonComponent } from '../like-button/like-button.component';
+import { ComplainButtonComponent } from '../complain-button/complain-button.component';
 
 @Component({
   selector: 'app-modal-comment',
@@ -22,7 +24,7 @@ export class ModalCommentComponent {
   templateUrl: 'dialog-content-example-dialog.html',
   standalone: true,
   styleUrl: './modal-comment.component.scss',
-  imports: [MatDialogModule, MatButtonModule, PostComponent, CommentComponent, CommonModule],
+  imports: [MatDialogModule, MatButtonModule, PostComponent, CommentComponent, CommonModule, LikeButtonComponent, ComplainButtonComponent],
 })
 export class DialogContentExampleDialog {
   post: Post;

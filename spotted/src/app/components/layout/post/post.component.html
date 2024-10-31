@@ -16,14 +16,9 @@
 
     <div class="like-button-container">
       <!-- Botão de Like -->
-      <button class="like-button" (click)="likePost()">
-        <span class="heart-icon" [class.liked]="isLiked">❤️</span>
-        <span class="like-counter">{{ post.likes.length }}</span>
-      </button>
+      <app-like-button [postUuid]="post.uuid" [likes]="post.likes"></app-like-button>
       <!-- Botão de Denúncia -->
-      <button class="report-button" (click)="denunciarPost()">
-          <span class="icon">🚨</span>
-      </button>
+      <app-complain-button [postUuid]="post.uuid"></app-complain-button>
       <!-- Comentários -->
       <span (click)="openDialog()"> {{ post.comments.length }} Comentários</span>
 

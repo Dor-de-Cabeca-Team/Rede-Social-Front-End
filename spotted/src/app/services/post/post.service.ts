@@ -26,8 +26,20 @@ export class PostService {
     });
   }
 
+  likeComment(idComment: string, idUser: string): Observable<string> {
+    return this.http.post<string>(`${this.API}/post/like-comentario?idComentario=${idComment}&idUser=${idUser}`, null, {
+      responseType: 'text' as 'json'
+    });
+  }
+
   denunciarPost(idPost: string, idUser: string): Observable<string> {
     return this.http.post<string>(`${this.API}/post/denunciar-post?idPost=${idPost}&idUser=${idUser}`, null, {
+      responseType: 'text' as 'json'
+    });
+  }
+
+  denunciarComentario(idComment: string, idUser: string): Observable<string> {
+    return this.http.post<string>(`${this.API}/post/denunciar-comentario?idComentario=${idComment}&idUser=${idUser}`, null, {
       responseType: 'text' as 'json'
     });
   }

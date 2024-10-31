@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Post } from '../../../models/post/post';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -7,11 +7,13 @@ import { CommentComponent } from '../comment/comment.component';
 import { ModalCommentComponent } from '../modal-comment/modal-comment.component';
 import { DialogContentExampleDialog } from '../modal-comment/modal-comment.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { LikeButtonComponent } from '../like-button/like-button.component';
+import { ComplainButtonComponent } from '../complain-button/complain-button.component';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule, RouterLink, CommentComponent, ModalCommentComponent, MatDialogModule],
+  imports: [CommonModule, RouterLink, CommentComponent, ModalCommentComponent, MatDialogModule, LikeButtonComponent, ComplainButtonComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
@@ -41,19 +43,6 @@ export class PostComponent {
     this.showModal = !this.showModal;
   }
 
-  likePost() {
-    this.postService.likePost(this.post.uuid, this.userid).subscribe({
-      next: (response) => {
-        this.isLiked = !this.isLiked;
-        console.log('Post liked: ' + response); // Aqui a resposta será a string do backend
-        alert('Post liked successfully: ' + response); // Exibe a string de sucesso
-      },
-      error: (err) => {
-        console.error('Error: ', err);
-        alert('Error: ' + err.error?.error || 'Ocorreu um erro desconhecido'); // Exibe erro, se houver
-      },
-    });
-  }
 
   denunciarPost() {
     this.postService.denunciarPost(this.post.uuid, this.userid).subscribe({

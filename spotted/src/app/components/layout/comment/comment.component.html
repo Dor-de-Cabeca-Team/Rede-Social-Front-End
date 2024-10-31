@@ -4,6 +4,10 @@
         <p><strong>Anônimo respondeu:</strong> </p>
         <p>{{ comment.conteudo }}</p>
       </div>
+     <!-- Like Button -->
+     <app-like-button [commentUuid]="comment.uuid" [likes]="comment.likes"></app-like-button>
+     <!-- Complain Button -->
+     <app-complain-button [commentUuid]="comment.uuid"></app-complain-button>
     </div>
  </div>
 

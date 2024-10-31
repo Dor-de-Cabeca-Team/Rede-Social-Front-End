@@ -19,15 +19,10 @@
       </div>
 
       <div class="like-button-container">
-        <!-- Botão de Like -->
-        <button class="like-button" >
-          <span class="heart-icon" >❤️</span>
-          <span class="like-counter">{{ post.likes.length }}</span>
-        </button>
-        <!-- Botão de Denúncia -->
-        <button class="report-button" >
-            <span class="icon">🚨</span>
-        </button>
+      <!-- Botão de Like -->
+      <app-like-button [postUuid]="post.uuid" [likes]="post.likes"></app-like-button>
+      <!-- Botão de Denúncia -->
+      <app-complain-button [postUuid]="post.uuid"></app-complain-button>
 
       </div>
     </div>
