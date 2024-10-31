@@ -3,6 +3,9 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../../models/post/post';
 import { Comment } from '../../models/comment/comment';
+import { Tag } from '../../models/tag/tag';
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +14,17 @@ export class PostService {
   http = inject(HttpClient);
   API = 'http://localhost:8080/api';
 
+  createPost(content: string, userId: string, tags: Tag[]): Observable<Post> {
+    const payload = {
+      conteudo: content,
+      tags: tags.map(tag => ({ uuid: tag.uuid })),
+      user: { uuid: userId }
+    };
+  
+    return this.http.post<Post>(`${this.API}/post/save`, payload);
+  }
+
+  
   findAll(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.API}/post/findAll`);
   }

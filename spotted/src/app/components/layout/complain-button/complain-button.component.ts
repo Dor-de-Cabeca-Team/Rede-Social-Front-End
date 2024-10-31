@@ -13,7 +13,7 @@ export class ComplainButtonComponent {
   @Input() commentUuid!: string;
   postService = inject(PostService);
 
-  userid = '88fc4171-c04e-4659-a8f3-073745701517'; // fixo por enquanto
+  userid = 'bbd03652-bf81-4cf0-aeb9-8def7ee59649'; // fixo por enquanto
 
   denunciarPost() {
     this.postService.denunciarPost(this.postUuid, this.userid).subscribe({

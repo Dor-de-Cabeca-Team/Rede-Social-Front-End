@@ -1,0 +1,8 @@
+<div class="post-box">
+    <div class="textarea-div">
+      <textarea [(ngModel)]="postContent" class="form-control" placeholder="What's happening?" maxlength="250" rows="3"></textarea>
+    </div>
+    <div class="btn-div position-relative">
+      <button (click)="createPost()" class="btn btn-primary position-absolute bottom-0 end-0">Post</button>
+    </div>
+  </div>
