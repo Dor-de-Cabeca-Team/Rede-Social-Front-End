@@ -26,9 +26,11 @@ export class FeedComponent {
     this.postService.findAll().subscribe({
       next: (value) => {
         this.posts = value.map(post => {
+          const validComments = post.comments?.filter(comment => comment.valido === true) || [];
           const randomImage = this.postService.getRandomAnimalImage(post.profileAnimal);
           return {
             ...post,
+            comments: validComments,
             imagem: randomImage.path,
             imagemNome: randomImage.name
           };

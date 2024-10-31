@@ -43,7 +43,6 @@ export class PostComponent {
     this.showModal = !this.showModal;
   }
 
-
   denunciarPost() {
     this.postService.denunciarPost(this.post.uuid, this.userid).subscribe({
       next: (response) => {

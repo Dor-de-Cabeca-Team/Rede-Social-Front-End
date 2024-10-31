@@ -3,11 +3,13 @@
       <div class="post-container">
         <img class="animal-pic" [src]="comment.imagem" alt="img">
         <p><strong>{{ comment.imagemNome }} respondeu:</strong> </p>
-        <p>{{ comment.conteudo }}</p>
       </div>
+    <div class="card-body">
+      <p><strong>{{ comment.conteudo }}</strong></p>
       <blockquote class="blockquote mb-0">
         <footer class="blockquote-footer">{{ comment.data | date:'medium'  }}</footer>
       </blockquote>
+    </div>
      <!-- Like Button -->
      <app-like-button [commentUuid]="comment.uuid" [likes]="comment.likes"></app-like-button>
      <!-- Complain Button -->
