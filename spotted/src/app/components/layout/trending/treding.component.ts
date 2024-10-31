@@ -1,3 +1,4 @@
+// trending.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
@@ -12,7 +13,7 @@ import { Post } from '../../../models/post/post';
 })
 export class TredingComponent {
   postService = inject(PostService);
-  trendingList: { category: string; description: string }[] = [];
+  trendingList: { tags: string[]; description: string }[] = [];
 
   constructor() {
     this.loadTrendingPosts();
@@ -22,7 +23,7 @@ export class TredingComponent {
     this.postService.top10PostsComLike().subscribe({
       next: (posts: Post[]) => {
         this.trendingList = posts.map((post) => ({
-          category: post.conteudo, // Ajuste para o nome correto do campo da categoria
+          tags: post.tags.map((tag) => tag.nome), // Extrai o nome de cada tag
           description: post.conteudo,
         }));
       },

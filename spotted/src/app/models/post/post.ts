@@ -1,4 +1,5 @@
 import { Comment } from "../comment/comment";
+import { Tag } from '../tag/tag';
 
 export class Post {
   uuid!: string;
@@ -10,6 +11,7 @@ export class Post {
   comments!: Comment[];
   imagem?: string;
   imagemNome?: string;
+  tags!: Tag[];
 
   constructor(uuid: string, conteudo: string, data: Date, valido: boolean) {
     // adicionar tags likes etc
@@ -20,5 +22,6 @@ export class Post {
     this.complaints = [];
     this.likes = [];
     this.comments = [];
+    this.tags = [];
   }
 }
