@@ -10,17 +10,17 @@
 }
 
 /* Estilo para a rota selecionada */
-.selected-route {
-  color: #1DA1F2;
+.selected-route{
+  color: #1DA1F2 !important;
 }
 
 /* Estilo dos links dentro dos itens do grupo de lista */
-.list-group-item a {
+#sidebar-wrapper .list-group-item a {
   color: #FFFFFF;
 }
 
 /* Efeito de hover para os links */
-.list-group-item:hover a {
+#sidebar-wrapper .list-group-item:hover a {
   color: #1DA1F2;
   cursor: pointer;
 }
@@ -41,32 +41,24 @@
 }
 
 /* Estilo dos ícones SVG dentro dos itens do grupo de lista */
-.list-group-item svg {
+#sidebar-wrapper .list-group-item svg {
   width: 1.5rem;
   margin-right: 0.5rem;
 }
 
-/* Estilo do wrapper principal */
-#wrapper {
-  margin-left: 5rem;
-}
-
 /* Estilo do sidebar */
 #sidebar-wrapper {
-  min-height: 90vh;
-  background-image: url('../../../../assets/Background/Home.png');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-color: transparent;
-  color: #FFFFFF;
+  position: fixed;
   display: flex;
+  height: 90vh;
   flex-direction: column;
 }
 
 /* Estilo do grupo de lista */
-.list-group {
-  flex-grow: 1; /* Permite que a lista ocupe o espaço restante */
+#sidebar-wrapper .list-group {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Estilo da seção de informações do usuário */
@@ -74,16 +66,12 @@
   border-top: 1px solid #333;
   padding-top: 15px;
   padding-bottom: 10px;
-  margin-top: auto; /* Empurra a seção para o final */
+  margin-top: auto;
 }
+
 
 /* Estilo do cabeçalho do sidebar */
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   padding-bottom: 1.75rem;
-}
-
-/* Largura do grupo de lista */
-#sidebar-wrapper .list-group {
-  width: 15rem;
 }
