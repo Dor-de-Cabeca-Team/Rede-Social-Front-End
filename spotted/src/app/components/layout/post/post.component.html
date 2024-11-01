@@ -3,7 +3,7 @@
     <img class="animal-pic me-2" [src]="post.imagem" alt="User Profile" />
     <div>
       <p class="mb-0 fw-bold text-white">{{ post.imagemNome }}</p>
-      <small class=" text-white">{{ post.data | date : "medium" }}</small>
+      <small class="text-white">{{ post.data | date : 'medium' }}</small>
     </div>
   </div>
 
@@ -11,26 +11,17 @@
     <p class="card-text text-white">{{ post.conteudo }}</p>
   </div>
 
-  <div
-    class="card-footer d-flex justify-content-between align-items-center  border-0"
-  >
-    <button type="button" class="btn btn-light btn-sm me-2">
-      <i class="far fa-thumbs-up"></i> {{ post.likes?.length || 0 }}
-    </button>
-    <span
-      class="me-2 text-white"
-      (click)="openDialog()"
-      style="cursor: pointer"
-    >
-      <i class="far fa-comments "></i>
+  <div class="card-footer d-flex justify-content-between align-items-center border-0">
+    <!-- Botão de Like -->
+    <app-like-button [postUuid]="post.uuid" [likes]="post.likes"></app-like-button>
+
+    <!-- Comentários -->
+    <span class="me-2 text-white" (click)="openDialog()" style="cursor: pointer">
+      <i class="far fa-comments"></i>
       {{ post.comments?.length || 0 }} Comentários
     </span>
-    <button
-      type="button"
-      class="btn btn-outline-danger btn-sm"
-      (click)="denunciarPost()"
-    >
-      <i class="fas fa-flag"></i>
-    </button>
+
+    <!-- Botão de Denúncia -->
+    <app-complain-button [postUuid]="post.uuid"></app-complain-button>
   </div>
 </div>
