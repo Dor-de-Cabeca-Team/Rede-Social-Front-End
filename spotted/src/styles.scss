@@ -10,3 +10,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed; /* Mantém a imagem fixa ao rolar a página */
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

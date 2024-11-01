@@ -8,5 +8,5 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), provideHttpClient(), provideClientHydration(), provideZoneChangeDetection(), provideAnimations(), provideAnimationsAsync()]
+  providers: [provideRouter(routes), provideAnimations(), provideHttpClient(), provideClientHydration(), provideZoneChangeDetection(), provideAnimations(), provideAnimationsAsync(), provideAnimationsAsync()]
 };

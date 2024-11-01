@@ -1,0 +1,21 @@
+.image-container {
+  position: relative; 
+  width: 100%; 
+  max-width: 75rem; 
+  overflow: hidden; 
+}
+
+.base-image {
+  width: 100%; 
+  display: block; 
+  margin-top: 9.375rem; 
+  mix-blend-mode: hard-light;
+}
+
+.overlay-image {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%;
+  opacity: 0.8; 
+}
