@@ -1,27 +1,36 @@
-<div *ngIf="post.valido">
-  <div class="card post" style="width: 38rem;">
-    <div class="card-header post">
-      <div class="post-container">
-        <img class="animal-pic" [src]="post.imagem" alt="img">
-        <p><strong>{{ post.imagemNome }} disse:</strong> </p>
-      </div>
+<div *ngIf="post.valido" class="card mb-3">
+  <div class="card-header d-flex align-items-center border-0">
+    <img class="animal-pic me-2" [src]="post.imagem" alt="User Profile" />
+    <div>
+      <p class="mb-0 fw-bold text-white">{{ post.imagemNome }}</p>
+      <small class=" text-white">{{ post.data | date : "medium" }}</small>
     </div>
+  </div>
 
-    <div class="card-body">
-      <p><strong>{{ post.conteudo }}</strong></p>
-      <blockquote class="blockquote mb-0">
-        <footer class="blockquote-footer">{{ post.data | date:'medium'  }}</footer>
-      </blockquote>
-    </div>
+  <div class="card-body">
+    <p class="card-text text-white">{{ post.conteudo }}</p>
+  </div>
 
-    <div class="like-button-container">
-      <!-- Botão de Like -->
-      <app-like-button [postUuid]="post.uuid" [likes]="post.likes"></app-like-button>
-      <!-- Botão de Denúncia -->
-      <app-complain-button [postUuid]="post.uuid"></app-complain-button>
-      <!-- Comentários -->
-      <span (click)="openDialog()"> {{ post.comments.length }} Comentários</span>
-
-    </div>
+  <div
+    class="card-footer d-flex justify-content-between align-items-center  border-0"
+  >
+    <button type="button" class="btn btn-light btn-sm me-2">
+      <i class="far fa-thumbs-up"></i> {{ post.likes?.length || 0 }}
+    </button>
+    <span
+      class="me-2 text-white"
+      (click)="openDialog()"
+      style="cursor: pointer"
+    >
+      <i class="far fa-comments "></i>
+      {{ post.comments?.length || 0 }} Comentários
+    </span>
+    <button
+      type="button"
+      class="btn btn-outline-danger btn-sm"
+      (click)="denunciarPost()"
+    >
+      <i class="fas fa-flag"></i>
+    </button>
   </div>
 </div>
