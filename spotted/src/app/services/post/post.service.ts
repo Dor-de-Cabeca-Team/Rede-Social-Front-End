@@ -20,11 +20,21 @@ export class PostService {
       tags: tags.map(tag => ({ uuid: tag.uuid })),
       user: { uuid: userId }
     };
-  
+
     return this.http.post<Post>(`${this.API}/post/save`, payload);
   }
 
-  
+  createComment(content: string, userId: string, postId: string): Observable<Comment> {
+    const payload = {
+      conteudo: content,
+      post: { uuid: postId },
+      user: { uuid: userId }
+    };
+
+    return this.http.post<Comment>(`${this.API}/comment/save`, payload);
+  }
+
+
   findAll(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.API}/post/findAll`);
   }

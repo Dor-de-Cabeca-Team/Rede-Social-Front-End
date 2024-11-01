@@ -34,10 +34,7 @@
     }
   </mat-dialog-content>
 
-  <form>
-    <input type="text" class="form-control" placeholder="Digite seu comentário" />
-    <button class="btn btn-primary mt-2">Comentar</button>
-  </form>
+  <app-create-comment [post]="post"></app-create-comment>
 <!-- Botoes pra sair do modal -->
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
