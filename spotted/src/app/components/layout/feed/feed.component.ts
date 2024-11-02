@@ -4,13 +4,14 @@ import { Post } from '../../../models/post/post';
 import { PostComponent } from '../post/post.component';
 import { CommentComponent } from '../comment/comment.component';
 import { CommonModule } from '@angular/common';
+import { CreatePostComponent } from "../create-post/create-post.component";
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [PostComponent, CommentComponent, CommonModule],
+  imports: [PostComponent, CommentComponent, CommonModule, CreatePostComponent],
   templateUrl: './feed.component.html',
-  styleUrl: './feed.component.scss'
+  styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent {
   postService = inject(PostService);
@@ -25,14 +26,17 @@ export class FeedComponent {
   findAll() {
     this.postService.findAll().subscribe({
       next: (value) => {
-        this.posts = value.map(post => {
-          const validComments = post.comments?.filter(comment => comment.valido === true) || [];
-          const randomImage = this.postService.getRandomAnimalImage(post.profileAnimal);
+        this.posts = value.map((post) => {
+          const validComments =
+            post.comments?.filter((comment) => comment.valido === true) || [];
+          const randomImage = this.postService.getRandomAnimalImage(
+            post.profileAnimal
+          );
           return {
             ...post,
             comments: validComments,
             imagem: randomImage.path,
-            imagemNome: randomImage.name
+            imagemNome: randomImage.name,
           };
         });
       },
@@ -43,4 +47,9 @@ export class FeedComponent {
     });
   }
 
+  onPostCreated() {
+    setTimeout(() => {
+      this.findAll();
+    }, 2000); // Atualiza o feed após 2 segundos
+  }
 }

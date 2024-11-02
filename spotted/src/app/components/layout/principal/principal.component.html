@@ -8,11 +8,13 @@
     <!-- Feed -->
     <div class="col-md-6">
       <div class="mb-4">
-        <app-create-post></app-create-post>
+        <!-- Vincule o evento (postCreated) ao método onPostCreated do app-feed -->
+        <app-create-post (postCreated)="feed.onPostCreated()"></app-create-post>
       </div>
 
       <div class="card post feed mb-3">
-        <app-feed></app-feed>
+        <!-- Adicione uma referência (#feed) ao componente para acessar seu método -->
+        <app-feed #feed></app-feed>
       </div>
     </div>
 
