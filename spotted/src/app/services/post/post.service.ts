@@ -17,26 +17,33 @@ export class PostService {
   createPost(content: string, userId: string, tags: Tag[]): Observable<Post> {
     const payload = {
       conteudo: content,
-      tags: tags.map(tag => ({ uuid: tag.uuid })),
-      user: { uuid: userId }
+      tags: tags.map((tag) => ({ uuid: tag.uuid })),
+      user: { uuid: userId },
     };
 
     return this.http.post<Post>(`${this.API}/post/save`, payload);
   }
 
-  createComment(content: string, userId: string, postId: string): Observable<Comment> {
+  createComment(
+    content: string,
+    userId: string,
+    postId: string
+  ): Observable<Comment> {
     const payload = {
       conteudo: content,
       post: { uuid: postId },
-      user: { uuid: userId }
+      user: { uuid: userId },
     };
 
     return this.http.post<Comment>(`${this.API}/comment/save`, payload);
   }
 
-
   findAll(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.API}/post/findAll`);
+  }
+
+  findAllValidos(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.API}/post/postsValidos`);
   }
 
   findById(uuid: string): Observable<Post> {
@@ -54,9 +61,13 @@ export class PostService {
   }
 
   likeComment(idComment: string, idUser: string): Observable<string> {
-    return this.http.post<string>(`${this.API}/post/like-comentario?idComentario=${idComment}&idUser=${idUser}`, null, {
-      responseType: 'text' as 'json'
-    });
+    return this.http.post<string>(
+      `${this.API}/post/like-comentario?idComentario=${idComment}&idUser=${idUser}`,
+      null,
+      {
+        responseType: 'text' as 'json',
+      }
+    );
   }
 
   denunciarPost(idPost: string, idUser: string): Observable<string> {
@@ -70,9 +81,13 @@ export class PostService {
   }
 
   denunciarComentario(idComment: string, idUser: string): Observable<string> {
-    return this.http.post<string>(`${this.API}/post/denunciar-comentario?idComentario=${idComment}&idUser=${idUser}`, null, {
-      responseType: 'text' as 'json'
-    });
+    return this.http.post<string>(
+      `${this.API}/post/denunciar-comentario?idComentario=${idComment}&idUser=${idUser}`,
+      null,
+      {
+        responseType: 'text' as 'json',
+      }
+    );
   }
 
   showComments(idPost: string): Observable<Comment[]> {
@@ -91,7 +106,7 @@ export class PostService {
   //  });
   // }
 
-  getRandomAnimalImage(index: number): { name: string, path: string } {
+  getRandomAnimalImage(index: number): { name: string; path: string } {
     const images = [
       { name: 'Cachorro Anônimo', path: 'assets/animals/Recurso37@2x.png' },
       { name: 'Borboleta Anônima', path: 'assets/animals/Recurso4@2x.png' },
