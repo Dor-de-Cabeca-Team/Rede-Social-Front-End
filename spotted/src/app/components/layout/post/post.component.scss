@@ -7,13 +7,21 @@
 
 .card {
   border-radius: 12px;
-  background-color: #1c2733;
+  position: relative;
+  display: flex;
+  height: auto;
+  padding: var(--base-size-8) var(--base-size-8) 0;
+  background: #1C2733 ;
+
 }
 
 .card-footer .btn {
   font-size: 0.875rem;
   display: flex;
   align-items: center;
+  justify-content:space-between;
+  align-items: center; 
+  border: 0;
 }
 
 .card-header p {
