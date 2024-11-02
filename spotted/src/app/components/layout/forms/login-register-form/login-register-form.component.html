@@ -4,7 +4,7 @@
   <br />
   <mdb-tabs [pills]="true" [fill]="true">
     <mdb-tab title="Login">
-      <form>
+      <form (submit)="onLoginSubmit($event)">
         <!-- Email input -->
         <mdb-form-control class="mb-4">
           <input
@@ -12,10 +12,13 @@
             type="email"
             id="loginName"
             class="form-control text-white"
+            [(ngModel)]="email"
+            name="email"
+            required
           />
-          <label mdbLabel class="form-label text-white" for="loginName"
-            >Email or username</label
-          >
+          <label mdbLabel class="form-label text-white" for="loginName">
+            Email
+          </label>
         </mdb-form-control>
 
         <!-- Password input -->
@@ -25,45 +28,18 @@
             type="password"
             id="loginPassword"
             class="form-control text-white"
+            [(ngModel)]="senha"
+            name="senha"
+            required
           />
-          <label mdbLabel class="form-label text-white" for="loginPassword"
-            >Password</label
-          >
+          <label mdbLabel class="form-label text-white" for="loginPassword">
+            Senha
+          </label>
         </mdb-form-control>
 
-        <!-- 2 column grid layout -->
-        <div class="row mb-4">
-          <div class="col-md-6 d-flex justify-content-center">
-            <!-- Checkbox -->
-            <div class="form-check mb-3 mb-md-0">
-              <input
-                mdbCheckbox
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="loginCheck"
-                [checked]="true"
-              />
-              <label class="form-check-label text-white" for="loginCheck">
-                Remember me
-              </label>
-            </div>
-          </div>
-
-          <div class="col-md-6 d-flex justify-content-center">
-            <!-- Simple link -->
-            <a href="#!">Forgot password?</a>
-          </div>
-        </div>
-
         <!-- Submit button -->
-        <button
-          mdbRipple
-          type="submit"
-          class="btn btn-primary btn-block mb-4"
-          (click)="logar()"
-        >
-          Sign in
+        <button mdbRipple type="submit" class="btn btn-primary btn-block mb-4" >
+          Logar
         </button>
       </form></mdb-tab
     >

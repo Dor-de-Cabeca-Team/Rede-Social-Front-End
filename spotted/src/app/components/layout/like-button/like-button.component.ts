@@ -1,12 +1,13 @@
 import { Component, Input, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
+import { IdGlobalService } from '../../../services/user/login/id-global.service';
 
 @Component({
   selector: 'app-like-button',
   standalone: true,
   imports: [],
   templateUrl: './like-button.component.html',
-  styleUrl: './like-button.component.scss'
+  styleUrls: ['./like-button.component.scss'],
 })
 export class LikeButtonComponent {
   @Input() postUuid!: string;
@@ -14,26 +15,42 @@ export class LikeButtonComponent {
   @Input() likes: any[] = [];
   postService = inject(PostService);
   isLiked = false;
+  idGlobalService = inject(IdGlobalService);
 
-  userid = 'bbd03652-bf81-4cf0-aeb9-8def7ee59649'; // fixo por enquanto
+  private getUserId(): string | null {
+    return this.idGlobalService.getUserUuid(); // Chama a função para obter o UUID
+  }
 
   likePost() {
-    this.postService.likePost(this.postUuid, this.userid).subscribe({
+    const userid = this.getUserId();
+    if (!userid) {
+      alert('Usuário não logado.');
+      return; // Retorna caso o usuário não esteja logado
+    }
+
+    this.postService.likePost(this.postUuid, userid).subscribe({
       next: (response) => {
-        this.isLiked = !this.isLiked;
-        console.log('Post liked: ' + response); // Aqui a resposta será a string do backend
-        alert('Post liked successfully: ' + response); // Exibe a string de sucesso
+        this.isLiked = !this.isLiked; // Alterna o estado do like
+        console.log('Post liked: ' + response);
+        alert('Post liked successfully: ' + response);
       },
       error: (err) => {
         console.error('Error: ', err);
-        alert('Error: ' + err.error?.error || 'Ocorreu um erro desconhecido'); // Exibe erro, se houver
+        alert('Error: ' + err.error?.error || 'Ocorreu um erro desconhecido');
       },
     });
   }
 
   likeComment() {
-    this.postService.likeComment(this.commentUuid, this.userid).subscribe({
+    const userid = this.getUserId();
+    if (!userid) {
+      alert('Usuário não logado.');
+      return; // Retorna caso o usuário não esteja logado
+    }
+
+    this.postService.likeComment(this.commentUuid, userid).subscribe({
       next: (response) => {
+        this.isLiked = !this.isLiked; // Alterna o estado do like
         console.log('Comment liked: ' + response);
         alert('Comment liked successfully: ' + response);
       },
