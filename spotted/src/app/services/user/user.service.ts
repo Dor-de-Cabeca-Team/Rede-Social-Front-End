@@ -22,5 +22,9 @@ export class UserService {
     );
   }
 
+  register(user: UserInterface): Observable<UserInterface> {
+    return this.http.post<UserInterface>(`${this.API_URL}/save`, user);
+  }
+
   constructor() {}
 }

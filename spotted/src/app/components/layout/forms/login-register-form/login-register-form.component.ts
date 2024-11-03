@@ -30,29 +30,83 @@ import { FormsModule } from '@angular/forms';
 export class LoginRegisterFormComponent {
   email: string = '';
   senha: string = '';
+  repeatPassword: string = '';
+  nome: string = '';
+  idade!: number;
+  dataNascimento!: Date;
+  termosAceitos: boolean = false;
 
   router = inject(Router);
-
   user: UserInterface | null = null;
 
   constructor(private userService: UserService) {}
 
   onLoginSubmit(event: Event): void {
-    event.preventDefault(); // Evita o reload da página
+    event.preventDefault();
     this.logar(this.email, this.senha);
   }
 
   logar(email: string, senha: string): void {
     this.userService.login(email, senha).subscribe(
       (user) => {
-        this.user = user; // Armazene as informações do usuário
-        localStorage.setItem('loggedUser', JSON.stringify(user)); // Salve no localStorage para persistência
+        this.user = user;
+        localStorage.setItem('loggedUser', JSON.stringify(user));
         console.log('Usuário logado com sucesso', user);
-         this.router.navigate(['/principal']);
+        this.router.navigate(['/principal']);
       },
       (error) => {
         console.error('Erro ao fazer login', error);
         alert('Erro ao fazer login');
+      }
+    );
+  }
+
+  calcularIdade(dataNascimento: Date): number {
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+    const mes = hoje.getMonth() - dataNascimento.getMonth();
+    if (mes < 0 || (mes === 0 && hoje.getDate() < dataNascimento.getDate())) {
+      idade--;
+    }
+    return idade;
+  }
+
+  onRegisterSubmit(event: Event): void {
+    event.preventDefault();
+
+    console.log('Termos Aceitos:', this.termosAceitos);
+
+    if (this.senha !== this.repeatPassword) {
+      alert('As senhas não coincidem');
+      return;
+    }
+
+    if (!this.termosAceitos) {
+      alert('Você deve aceitar os termos.');
+      return; 
+    }
+
+    // Calcular a idade a partir da data de nascimento
+    this.idade = this.calcularIdade(this.dataNascimento);
+
+    const newUser: UserInterface = {
+      nome: this.nome,
+      idade: this.idade,
+      email: this.email,
+      senha: this.senha,
+      uuid: '',
+      ativo: false,
+    };
+
+    this.userService.register(newUser).subscribe(
+      (user) => {
+        this.user = user;
+        alert('Usuário registrado com sucesso');
+        console.log('Usuário registrado:', user);
+      },
+      (error) => {
+        console.error('Erro ao registrar usuário', error);
+        alert('Erro ao registrar usuário');
       }
     );
   }
