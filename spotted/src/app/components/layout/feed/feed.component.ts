@@ -73,7 +73,7 @@ export class FeedComponent {
 
   onPostCreated() {
     setTimeout(() => {
-      this.findAll();
-    }, 2000); // Atualiza o feed após 2 segundos
+      this.findAllValidos();
+    }, 1500); // Atualiza o feed após 2 segundos
   }
 }
