@@ -12,13 +12,14 @@ import { IdGlobalService } from '../../../services/user/login/id-global.service'
   styleUrls: ['./create-post.component.scss'],
 })
 export class CreatePostComponent {
-  @Output() postCreated = new EventEmitter<void>(); // Emite um evento quando um post é criado
-
+  @Output() postCreated = new EventEmitter<void>();
+  
   idGlobalService = inject(IdGlobalService);
   postService = inject(PostService);
-
+  
   postContent = '';
   tags: Tag[] = [];
+  isLoading = false;
 
   private getUserId(): string | null {
     return this.idGlobalService.getUserUuid();
@@ -32,19 +33,27 @@ export class CreatePostComponent {
     }
 
     if (this.postContent.trim()) {
-      this.postService
-        .createPost(this.postContent, userid, this.tags)
-        .subscribe({
-          next: (response) => {
-            console.log('Post criado com sucesso:', response);
-            this.postContent = '';
-            this.postCreated.emit(); // Emite o evento após a criação
-          },
-          error: (error) => {
-            console.error('Erro ao criar post:', error);
-            alert('Erro ao criar post. Tente novamente.');
-          },
-        });
+      this.isLoading = true;
+      
+      this.postService.createPost(this.postContent, userid, this.tags).subscribe({
+        next: (response) => {
+          console.log('Post criado com sucesso:', response);
+          this.postContent = '';
+          this.postCreated.emit();
+        },
+        error: (error) => {
+          console.error('Erro ao criar post:', error);
+          alert('Erro ao criar post. Tente novamente.');
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+
+      // Opcional: desativar o spinner após 3 segundos
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 3000);
     } else {
       alert('Por favor, insira algum conteúdo antes de postar.');
     }
