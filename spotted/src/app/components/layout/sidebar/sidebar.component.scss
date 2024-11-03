@@ -10,7 +10,7 @@
 }
 
 /* Estilo para a rota selecionada */
-.selected-route {
+.selected-route a {
   color: #1DA1F2 !important; /* Asegúrate de que esto no cause conflictos */
 }
 
@@ -87,16 +87,27 @@
   margin-right: 5.5rem;
 }
 
+/* Estilo para desktop */
+#sidebar-wrapper .list-group-item .icon {
+  display: inline-block;
+  width: 1.5rem; /* Tamanho do ícone */
+  margin-right: 5.5rem;
+}
+
+/* Estilo para o texto */
+#sidebar-wrapper .list-group-item .text {
+  display: inline-block;
+}
+
 /* Transformação para footer no mobile */
 @media (max-width: 768px) {
-
-  .user-info, .user-avatar, .user-name, .sidebar-heading{
+  /* Oculta a logo e as informações do usuário */
+  .user-info, .user-name, .sidebar-heading {
+    border: 0;
     display: none;
-    border: none;
-    margin:0;
   }
 
-
+  /* Estilo do sidebar na versão mobile */
   #sidebar-wrapper {
     position: fixed;
     bottom: 0;
@@ -104,42 +115,53 @@
     width: 100%;
     height: auto;
     display: flex;
-    padding: 0.5rem 0;
   }
 
-  /* Estilos para exibir apenas ícones em linha */
+  .list-group {
+    border-radius: 0;
+    display: flex; /* Garante que os itens fiquem lado a lado */
+    flex-direction: row !important; /* Força o layout horizontal */
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  /* Configuração para exibir apenas os ícones no footer */
   .list-group-item {
     flex: 1;
+    display: flex;
     text-align: center;
+    justify-content: center !important;
     padding: 0.5rem;
-  }
-
-  /* Esconde o texto dos links */
-  .list-group-item span {
-    display: none;
-  }
-
-  /* Linha divisória entre os ícones */
-  .list-group-item:not(:last-child) {
-    border-right: 1px solid #fff;
-  }
-
-  /* Ajuste dos ícones */
-  .list-group-item svg {
-    margin-right: 0;
-  }
-  
-  .list-group-item span {
-    display: none;
-  }
-  
-  /* Adicionar divisórias entre os ícones no footer */
-  .list-group-item {
     border-right: 1px solid #ccc;
+  }
+
+  /* Garante que o ícone seja visível */
+  .list-group-item .icon {
+    display: inline-block; /* Exibe o ícone */
+    margin-right: 0 !important;
+    width: 30px !important;
+  }
+
+  .user-avatar{
+    width: 32px;
+  }
+
+  /* Oculta o texto na versão mobile */
+  .list-group-item .text {
+    display: none !important;
   }
 
   /* Remover a borda no último ícone do footer */
   .list-group-item:last-child {
     border-right: none;
   }
-}
+
+  #sidebar-wrapper .list-group-item:hover a {
+    color: #FFFFFF;
+  }
+
+  .selected-route {
+    box-shadow: inset 0px 4px 12px rgba(0, 0, 0, 0.4); /* Sombra interna mais destacada */
+  }
+  }

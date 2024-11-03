@@ -5,14 +5,14 @@
     </a>
   </div>
   <div class="list-group">
-    @for(item of menuItems; track $index){
-      <div class="list-group-item d-flex align-items-center">
-        <a [href]="item.route" [ngClass]="{'selected-route': isActive(item.route)}">
-          <span [innerHTML]="item.icon"></span>
-        <span class="d-none d-md-inline"><p>{{ item.name }}</p></span>
+    @for(item of menuItems; track $index) {
+      <div class="list-group-item d-flex align-items-center" [ngClass]="{'selected-route': isActive(item.route)}">
+        <a [href]="item.route">
+          <span class="icon" [innerHTML]="item.icon"></span>
+          <span class="text d-none d-md-inline">{{ item.name }}</span>
         </a>
       </div>
-  }
+    }  
     <div class="user-info d-flex align-items-center list-group-item">
       <img [src]="user.picture" alt="User Profile" class="rounded-circle user-avatar">
       <span class="user-name ms-2">{{ user.username }}</span>
