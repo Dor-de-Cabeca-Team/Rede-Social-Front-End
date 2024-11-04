@@ -5,3 +5,53 @@
 .cor {
   background-color: #1c2733;
 }
+@media (min-width: 768px) and (max-width: 1024px) {
+  .text-title{
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    padding-bottom: 5px;
+  }
+  .list-group-item {
+    border: none;
+  }
+  
+  .cor {
+    background-color: #1c2733;
+  }
+  
+  .list-group-item p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Limitar a 2 líneas */
+    text-overflow: ellipsis; /* Agregar "..." al final si hay más texto */
+  }
+}
+
+@media (min-width: 1025px) {
+  .text-title{
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    padding-bottom: 5px;
+  }
+  .list-group-item {
+    border: none;
+  }
+  
+  .cor {
+    background-color: #1c2733;
+  }
+  
+  .list-group-item p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Limitar a 2 líneas */
+    text-overflow: ellipsis; /* Agregar "..." al final si hay más texto */
+  }
+
+}
