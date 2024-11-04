@@ -1,167 +1,136 @@
-/* Estilo dos itens do grupo de lista */
-.list-group-item {
-  // background-image: url('../../../../assets/Background/Home.png');
-  // background-size: cover;
-  // background-attachment: fixed; /* Esto puede generar problemas de rendimiento */
-  // background-position: center;
-  background-color: red; 
-  color: #FFFFFF;
-  border: 0;
+/* Variables para colores y medidas comunes */
+:root {
+  --primary-bg: #1C2733;
+  --text-color: #FFFFFF;
+  --accent-color: #1DA1F2;
+  --border-color: #333;
 }
 
-/* Estilo para a rota selecionada */
-.selected-route a {
-  color: #1DA1F2 !important; /* Asegúrate de que esto no cause conflictos */
-}
-
-/* Estilo dos links dentro dos itens do grupo de lista */
-#sidebar-wrapper .list-group-item a {
-  color: #FFFFFF;
-  text-decoration: none; /* Asegúrate de que no haya subrayado */
-}
-
-/* Efeito de hover para os links */
-#sidebar-wrapper .list-group-item:hover a {
-  color: #1DA1F2;
-  cursor: pointer;
-}
-
-/* Estilo do avatar do usuário */
-.user-avatar {
-  width: 1.5rem;
-}
-
-/* Estilo do nome do usuário */
-.user-name {
-  font-size: 16px; /* Considera usar un tamaño de fuente relativo */
-}
-
-/* Estilo do logo */
-.img-logo {
-  width: 2.5rem; /* Ajusta si es necesario */
-}
-
-/* Estilo dos ícones SVG dentro dos itens do grupo de lista */
-#sidebar-wrapper .list-group-item svg {
-  width: 1.5rem;
-  margin-right: 5.5rem;
-}
-
-/* Estilo do sidebar */
+/* Estilos base del sidebar */
 #sidebar-wrapper {
   display: flex;
- /* Considera usar vh para mayor adaptabilidad */
   flex-direction: column;
+  background-color: #1C2733;
+  width: 16rem;
+  margin-left: 1;
 }
 
-/* Estilo do grupo de lista */
 #sidebar-wrapper .list-group {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Estilo da seção de informações do usuário */
+/* Estilos de los items */
+.list-group-item {
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+  border: 0;
+  width: 5rem;
+}
+
+.list-group-item a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.list-group-item:hover a {
+  color: var(--accent-color);
+  cursor: pointer;
+}
+
+/* Ruta seleccionada */
+.selected-route a {
+  color: var(--accent-color) !important;
+}
+
+/* Elementos UI */
+.user-avatar {
+  width: 1.5rem;
+}
+
+.user-name {
+  font-size: 1rem;
+}
+
+.img-logo {
+  width: 2.5rem;
+}
+
+/* Sección de usuario */
 .user-info {
   align-items: center;
-  border-top: 1px solid #333; /* Asegúrate de que el color sea coherente con tu diseño */
-  padding-top: 15px;
-  padding-bottom: 10px;
-  margin-top: auto; /* Esto empuja la sección al fondo del sidebar */
+  border-top: 1px solid var(--border-color);
+  padding: 10rem 0 25rem;
+  margin-top: auto;
 }
 
-/* Estilo do cabeçalho do sidebar */
-#sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  padding-bottom: 1.75rem; /* Considera ajustar esto para mayor espacio */
+.sidebar-heading {
+  padding: 0.875rem 1.25rem 1.75rem;
 }
 
-/* Estilos padrão */
-#sidebar-wrapper .list-group-item {
-  display: flex;
-  align-items: center;
-}
-
-#sidebar-wrapper .list-group-item svg {
-  width: 1.5rem;
-  margin-right: 5.5rem;
-}
-
-/* Estilo para desktop */
-#sidebar-wrapper .list-group-item .icon {
-  display: inline-block;
-  width: 1.5rem; /* Tamanho do ícone */
-  margin-right: 5.5rem;
-}
-
-/* Estilo para o texto */
-#sidebar-wrapper .list-group-item .text {
-  display: inline-block;
-}
-
-/* Transformação para footer no mobile */
+/* Media query para móviles */
 @media (max-width: 768px) {
-  /* Oculta a logo e as informações do usuário */
-  .user-info, .user-name, .sidebar-heading {
-    border: 0;
+  .col-md-1 .sidebar {
+    flex: 0 0 auto;
+    width: 15.3%;
+    margin-top: 2rem;
+  }
+
+  .user-info, 
+  .user-name, 
+  .sidebar-heading {
     display: none;
   }
 
-  /* Estilo do sidebar na versão mobile */
   #sidebar-wrapper {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     height: auto;
-    display: flex;
   }
 
   .list-group {
-    border-radius: 0;
-    display: flex; /* Garante que os itens fiquem lado a lado */
-    flex-direction: row !important; /* Força o layout horizontal */
-    padding: 0;
-    margin: 0;
+    display: flex;
+    flex-direction: row !important;
     width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
   }
 
-  /* Configuração para exibir apenas os ícones no footer */
   .list-group-item {
     flex: 1;
     display: flex;
-    text-align: center;
     justify-content: center !important;
     padding: 0.5rem;
     border-right: 1px solid #ccc;
   }
 
-  /* Garante que o ícone seja visível */
+  .list-group-item:last-child {
+    border-right: 0;
+  }
+
   .list-group-item .icon {
-    display: inline-block; /* Exibe o ícone */
+    display: inline-block;
     margin-right: 0 !important;
     width: 30px !important;
   }
 
-  .user-avatar{
-    width: 32px;
-  }
-
-  /* Oculta o texto na versão mobile */
   .list-group-item .text {
     display: none !important;
   }
 
-  /* Remover a borda no último ícone do footer */
-  .list-group-item:last-child {
-    border-right: none;
+  .user-avatar {
+    width: 32px;
   }
 
   #sidebar-wrapper .list-group-item:hover a {
-    color: #FFFFFF;
+    color: var(--text-color);
   }
 
   .selected-route {
-    box-shadow: inset 0px 4px 12px rgba(0, 0, 0, 0.4); /* Sombra interna mais destacada */
+    box-shadow: inset 0px 4px 12px rgba(0, 0, 0, 0.4);
   }
-  }
+}
