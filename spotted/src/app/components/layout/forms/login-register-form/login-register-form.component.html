@@ -1,6 +1,6 @@
 <div>
   <h1 class="text-center text-white">Bem-Vindo ao Spotted</h1>
-  <h4 class="text-center">Porfavor coloque seus dados para ingresar.</h4>
+  <h4 class="text-center">Por favor coloque seus dados para entrar.</h4>
   <br />
   <mdb-tabs [pills]="true" [fill]="true">
     <mdb-tab title="Login">
@@ -61,11 +61,19 @@
 
         <mat-form-field>
           <mat-label>Data de Nascimento</mat-label>
-          <input matInput [matDatepicker]="picker" placeholder="DD/MMM/YYYY" [(ngModel)]="dataNascimento"
-            name="dataNascimento" required />
+          <input 
+            matInput 
+            [matDatepicker]="picker" 
+            placeholder="MM/DD/YYYY" 
+            [(ngModel)]="dataNascimento" 
+            name="dataNascimento" 
+            (input)="formatDate($event)"
+            required 
+          />
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+        
 
         <!-- Checkbox -->
         <div class="form-check d-flex justify-content-center mb-4">
