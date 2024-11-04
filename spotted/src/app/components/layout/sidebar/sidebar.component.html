@@ -1,4 +1,4 @@
-<aside class="" id="sidebar-wrapper">
+<aside id="sidebar-wrapper">
   <div class="sidebar-heading">
     <a href="/principal" class="flex items-center ps-2.5 mb-5">
       <img src="../../../../assets/Logo/Layer 1.png" class="h-6 me-3 sm:h-7 img-logo" alt="Logo" />
@@ -6,7 +6,7 @@
   </div>
   <div class="list-group">
     @for(item of menuItems; track $index) {
-      <div class="list-group-item d-flex align-items-center" [ngClass]="{'selected-route': isActive(item.route)}">
+      <div class="list-group-item" [ngClass]="{'selected-route': isActive(item.route)}">
         <a [href]="item.route">
           <span class="icon" [innerHTML]="item.icon"></span>
           <span class="text d-none d-md-inline">{{ item.name }}</span>

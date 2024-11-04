@@ -2,7 +2,7 @@
 :root {
   --primary-bg: #1C2733;
   --text-color: #FFFFFF;
-  --accent-color: #f21d1d;
+  --accent-color: #1DA1F2;
   --border-color: #333;
 }
 
@@ -10,8 +10,8 @@
 #sidebar-wrapper {
   display: flex;
   flex-direction: column;
-  background-color:  #1C2733;
-  width: 16rem;
+  // background-color:  #1C2733;
+  
   margin-left: 1;
 }
 
@@ -23,37 +23,42 @@
 
 /* Estilos de los items */
 .list-group-item {
-  background-color:  #1C2733;
-  color: var(--text-color);
+  background-color: #1C2733;
+  color: #FFFFFF;
   border: 0;
-  width: 5rem;
+  display: flex; /* Hacer que los elementos dentro sean flexibles */
+  align-items: center; /* Alinear verticalmente al centro */
+  padding: 1rem;
+  // width: 5rem;
 }
 
 .list-group-item a {
-  color: var(--text-color);
+  color:  #FFFFFF;
   text-decoration: none;
 }
 
 .list-group-item:hover a {
-  color: var(--accent-color);
-  cursor: pointer;
+  color: #1DA1F2;
+  
 }
 
-/* Estilos para los iconos */
+
 .list-group-item .icon {
-  color: #FFFFFF; /* Color blanco para los iconos */
+  margin-right: 0.5rem;
+  color: #FFFFFF;
 }
+
 
 .list-group-item:hover .icon {
-  color: var(--accent-color); /* Cambiar a color de acento al pasar el ratón */
+  color: #1DA1F2; 
 }
 
-/* Ruta seleccionada */
+
 .selected-route a {
-  color: var(--accent-color) !important;
+  color: #FFFFFF !important;
 }
 
-/* Elementos UI */
+
 .user-avatar {
   width: 1.5rem;
 }
@@ -66,7 +71,7 @@
   width: 2.5rem;
 }
 
-/* Sección de usuario */
+
 .user-info {
   align-items: center;
   border-top: 1px solid var(--border-color);
@@ -77,9 +82,65 @@
 .sidebar-heading {
   padding: 0.875rem 1.25rem 1.75rem;
 }
+/* Media query para tablets (768px a 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  #sidebar-wrapper {
+    margin-left: 1rem;
+    width: 5rem;
+    align-items: center;
+  }
+
+  .list-group-item {
+    display: flex; /* Hacer que los elementos dentro sean flexibles */
+    align-items: center; /* Alinear verticalmente al centro */
+    padding: 1rem; /* Espaciado interno */
+  }
+  
+  .list-group-item .icon {
+    margin-right: 0.5rem; /* Espacio entre el icono y el texto */
+    display: inline-block; /* Asegurar que el icono se comporte como un bloque en línea */
+  }
+  
+  .list-group-item a {
+    display: flex; /* Hacer que el enlace sea un contenedor flexible */
+    align-items: center; /* Alinear verticalmente al centro */
+    text-decoration: none; /* Sin subrayado */
+    color: var(--text-color); /* Color del texto */
+  }
+  
+  .list-group-item a:hover {
+    color: var(--accent-color); /* Color al pasar el ratón */
+  }
+
+  .user-info {
+    padding: 1rem 0; /* Ajustar el espaciado en tablets */
+  }
+
+  .sidebar-heading {
+    padding: 1rem; /* Ajustar el espaciado en tablets */
+  }
+  
+}
+
+/* Media query para desktop (más de 1024px) */
+@media (min-width: 1025px) {
+  #sidebar-wrapper {
+    width: 16rem; /* Mantener el ancho fijo para escritorio */
+  }
+
+  .list-group-item {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color); 
+  }
+
+  .list-group-item:last-child {
+    border-bottom: none; 
+  }
+}
 
 /* Media query para móviles */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .col-md-1 .sidebar {
     flex: 0 0 auto;
     width: 15.3%;
@@ -90,6 +151,7 @@
   .user-name, 
   .sidebar-heading {
     display: none;
+    
   }
 
   #sidebar-wrapper {
@@ -101,6 +163,7 @@
     background-color: #1C2733; 
     z-index: 10; 
     overflow-y: hidden;
+    
   }
 
   .list-group {
@@ -128,11 +191,12 @@
     display: inline-block;
     margin-right: 0 !important;
     width: 30px !important;
-    color: #FFFFFF; /* Color blanco para los iconos en móvil */
+    color: #FFFFFF; 
+    
   }
 
   .list-group-item:hover .icon {
-    color: #1DA1F2; /* Cambiar a color de acento al pasar el ratón */
+    color: #1DA1F2; 
   }
 
   .list-group-item .text {
@@ -144,12 +208,10 @@
   }
 
   #sidebar-wrapper .list-group-item:hover a {
-    color: var(--text-color);
+    color: #1DA1F2;
   }
 
-  .selected-route {
-    box-shadow: inset 0px 4px 12px rgba(0, 0, 0, 0.4);
-  }
+ 
 
   
   #feed-container {

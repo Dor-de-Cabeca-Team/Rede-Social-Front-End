@@ -31,15 +31,12 @@
   :root {
     --column-gap: 3rem;
   }
+  
 }
 
-@media (max-width: 992px) {
-  :root {
-    --column-gap: 2rem;
-  }
-}
 
-@media (max-width: 768px) {
+
+@media (max-width: 767px) {
   .row.g-fixed {
     flex-direction: column;
     gap: 2rem;
@@ -58,5 +55,22 @@
       width: 100%;
       display: none; /* Ocultar el componente trending en móviles */
     }
+  
+}
+@media (max-width: 768px) and (max-width: 1024px) {
+  
+  .col-md-6 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Ajusta la altura según sea necesario */
+  }
+  
+  .mb-4, .card.post.feed.mb-3 {
+    width: 100%;
+    max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
+  }
+  
   
 }

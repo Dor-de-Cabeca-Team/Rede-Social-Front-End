@@ -1,27 +1,26 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row g-4"> <!-- Agregar clase g-4 para espacio entre columnas -->
+    
     <!-- Sidebar -->
-    <div class="col-md-1  sidebar">
+    <div class="col-md-2 sidebar"> <!-- Cambiado a col-md-2 para una mejor distribución -->
       <app-sidebar></app-sidebar>
     </div>
 
     <!-- Feed -->
-    <div class="col-md-6">
+    <div class="col-md-7"> <!-- Cambiado a col-md-7 para que sume 12 -->
       <div class="mb-4">
-        <!-- Vincule o evento (postCreated) ao método onPostCreated do app-feed -->
         <app-create-post (postCreated)="feed.onPostCreated()"></app-create-post>
       </div>
 
       <div class="card post feed mb-3">
-        <!-- Adicione uma referência (#feed) ao componente para acessar seu método -->
         <app-feed #feed></app-feed>
       </div>
     </div>
 
     <!-- Trending -->
     <div class="col-md-3 trending">
-      <app-treding></app-treding>
+      <app-treding></app-treding><!-- Asegúrate de que el nombre sea correcto -->
     </div>
+
   </div>
 </div>
-
