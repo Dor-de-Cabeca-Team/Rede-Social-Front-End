@@ -2,7 +2,7 @@
 :root {
   --primary-bg: #1C2733;
   --text-color: #FFFFFF;
-  --accent-color: #1DA1F2;
+  --accent-color: #f21d1d;
   --border-color: #333;
 }
 
@@ -10,7 +10,7 @@
 #sidebar-wrapper {
   display: flex;
   flex-direction: column;
-  background-color: #1C2733;
+  background-color:  #1C2733;
   width: 16rem;
   margin-left: 1;
 }
@@ -23,7 +23,7 @@
 
 /* Estilos de los items */
 .list-group-item {
-  background-color: var(--primary-bg);
+  background-color:  #1C2733;
   color: var(--text-color);
   border: 0;
   width: 5rem;
@@ -37,6 +37,15 @@
 .list-group-item:hover a {
   color: var(--accent-color);
   cursor: pointer;
+}
+
+/* Estilos para los iconos */
+.list-group-item .icon {
+  color: #FFFFFF; /* Color blanco para los iconos */
+}
+
+.list-group-item:hover .icon {
+  color: var(--accent-color); /* Cambiar a color de acento al pasar el ratón */
 }
 
 /* Ruta seleccionada */
@@ -84,11 +93,14 @@
   }
 
   #sidebar-wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 60px; 
+    background-color: #1C2733; 
+    z-index: 10; 
+    overflow-y: hidden;
   }
 
   .list-group {
@@ -105,7 +117,7 @@
     display: flex;
     justify-content: center !important;
     padding: 0.5rem;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #1DA1F2; /* Cambia el color del borde si es necesario */
   }
 
   .list-group-item:last-child {
@@ -116,6 +128,11 @@
     display: inline-block;
     margin-right: 0 !important;
     width: 30px !important;
+    color: #FFFFFF; /* Color blanco para los iconos en móvil */
+  }
+
+  .list-group-item:hover .icon {
+    color: #1DA1F2; /* Cambiar a color de acento al pasar el ratón */
   }
 
   .list-group-item .text {
@@ -132,5 +149,27 @@
 
   .selected-route {
     box-shadow: inset 0px 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  
+  #feed-container {
+    position: relative;
+  }
+
+  #feed-container::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999; 
+    display: none; 
+  }
+
+
+  #sidebar-wrapper.active ~ #feed-container::before {
+    display: block; 
   }
 }
