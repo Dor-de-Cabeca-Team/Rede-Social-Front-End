@@ -86,39 +86,41 @@
 @media (min-width: 768px) and (max-width: 1024px) {
   
   #sidebar-wrapper {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     width: 5rem;
     align-items: center;
   }
 
   .list-group-item {
-    display: flex; /* Hacer que los elementos dentro sean flexibles */
-    align-items: center; /* Alinear verticalmente al centro */
-    padding: 1rem; /* Espaciado interno */
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    padding: 0.5rem  /* Ajusta el espaciado interno */
   }
-  
+
   .list-group-item .icon {
-    margin-right: 0.5rem; /* Espacio entre el icono y el texto */
-    display: inline-block; /* Asegurar que el icono se comporte como un bloque en línea */
+    
+    color: #FFFFFF; /* Color del icono */
   }
-  
+
+  .list-group-item .text {
+    display: flex; /* Asegúrate de que el texto esté visible */
+  }
+
   .list-group-item a {
-    display: flex; /* Hacer que el enlace sea un contenedor flexible */
-    align-items: center; /* Alinear verticalmente al centro */
     text-decoration: none; /* Sin subrayado */
     color: var(--text-color); /* Color del texto */
   }
-  
+
   .list-group-item a:hover {
     color: var(--accent-color); /* Color al pasar el ratón */
   }
 
   .user-info {
-    padding: 1rem 0; /* Ajustar el espaciado en tablets */
+    padding: 0.5rem; /* Ajustar el espaciado en tablets */
   }
 
   .sidebar-heading {
-    padding: 1rem; /* Ajustar el espaciado en tablets */
+    padding: 0.5rem; /* Ajustar el espaciado en tablets */
   }
   
 }

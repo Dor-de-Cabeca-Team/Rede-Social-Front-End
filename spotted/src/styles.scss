@@ -7,8 +7,9 @@ body {
   background-image: url("assets/login/Home.png");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* Mantém a imagem fixa ao rolar a página */
+  background-repeat: repeat;
+  background-attachment:fixed;
+ /* Mantém a imagem fixa ao rolar a página */
 }
 
 html, body { height: 100%; }
