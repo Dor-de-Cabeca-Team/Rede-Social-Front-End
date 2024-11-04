@@ -1,19 +1,18 @@
- <div class="card post" style="width: 38rem;">
-    <div class="card-header post">
-      <div class="post-container">
-        <img class="animal-pic" [src]="comment.imagem" alt="img">
-        <p><strong>{{ comment.imagemNome }} respondeu:</strong> </p>
-      </div>
-    <div class="card-body">
-      <p><strong>{{ comment.conteudo }}</strong></p>
-      <blockquote class="blockquote mb-0">
-        <footer class="blockquote-footer">{{ comment.data | date:'medium'  }}</footer>
-      </blockquote>
-    </div>
-     <!-- Like Button -->
-     <app-like-button [commentUuid]="comment.uuid" [likes]="comment.likes"></app-like-button>
-     <!-- Complain Button -->
-     <app-complain-button [commentUuid]="comment.uuid"></app-complain-button>
-    </div>
- </div>
-
+<div class="card mb-3" style="max-width: 38rem;">
+  <div class="card-header d-flex align-items-center">
+    <img class="rounded-circle me-2" [src]="comment.imagem" alt="img" style="width: 40px; height: 40px;">
+    <p class="mb-0"><strong>{{ comment.imagemNome }} respondeu:</strong></p>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>{{ comment.conteudo }}</strong></p>
+    <blockquote class="blockquote mb-0">
+      <footer class="blockquote-footer">{{ comment.data | date:'medium' }}</footer>
+    </blockquote>
+  </div>
+  <div class="card-footer d-flex justify-content-between">
+    <!-- Like Button -->
+    <app-like-button [commentUuid]="comment.uuid" [likes]="comment.likes"></app-like-button>
+    <!-- Complain Button -->
+    <app-complain-button [commentUuid]="comment.uuid"></app-complain-button>
+  </div>
+</div>
