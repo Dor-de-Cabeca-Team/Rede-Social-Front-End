@@ -6,22 +6,51 @@
 }
 
 .card {
-  border-radius: 12px;
+  border: none;
   position: relative;
   display: flex;
+  flex-direction: column; /* Asegúrate de que la tarjeta sea vertical */
   height: auto;
   padding: var(--base-size-8) var(--base-size-8) 0;
-  background: #1C2733 ;
+  background: #1C2733;
+}
 
+.card-footer {
+  display: flex;                  
+  justify-content: space-between; 
+  width: 100%;                   
+  padding: 10px;    
+  width: 100%;
+  padding: 10px;
+  border: none;
+               
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 767px) {
+  .card-footer {
+    justify-content:space-around ;         
+  }
+}
+
+/* Estilos para pantallas medianas (tablets) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .card-footer {
+    justify-content: space-around; 
+  }
+}
+
+@media (min-width: 1025px) {
+  .card-footer {
+    justify-content: space-around; 
+  }
 }
 
 .card-footer .btn {
   font-size: 0.875rem;
   display: flex;
   align-items: center;
-  justify-content:space-between;
-  align-items: center; 
-  border: 0;
+  border: none;
 }
 
 .card-header p {

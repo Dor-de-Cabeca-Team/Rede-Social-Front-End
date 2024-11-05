@@ -7,19 +7,22 @@
     </div>
 
     <!-- Feed -->
-    <div class="col-md-7"> <!-- Cambiado a col-md-7 para que sume 12 -->
+    <div class="col-md-7">
       <div class="mb-4">
         <app-create-post (postCreated)="feed.onPostCreated()"></app-create-post>
       </div>
 
       <div class="card post feed mb-3">
-        <app-feed #feed></app-feed>
+        <app-feed #feed>
+          <div class="feed-content">
+          </div>
+        </app-feed>
       </div>
     </div>
 
     <!-- Trending -->
     <div class="col-md-3 trending">
-      <app-treding></app-treding><!-- Asegúrate de que el nombre sea correcto -->
+      <app-treding></app-treding>
     </div>
 
   </div>

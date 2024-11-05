@@ -83,7 +83,7 @@
   padding: 0.875rem 1.25rem 1.75rem;
 }
 /* Media query para tablets (768px a 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1030px) {
   
   #sidebar-wrapper {
     margin-left: 0.5rem;
@@ -135,15 +135,15 @@
 /* Media query para desktop (más de 1024px) */
 @media (min-width: 1025px) {
   #sidebar-wrapper {
-    margin-left: 2rem;
-    width: 10rem;
+    margin-left: 1rem;
+    width:18rem;
     align-items: center;
   }
 
   .list-group-item {
     display: flex;
     align-items: center; 
-    padding: 0.5rem; 
+    padding: 1rem; 
   }
 
   .list-group-item .icon {

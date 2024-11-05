@@ -25,8 +25,8 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Limitar a 2 líneas */
-    text-overflow: ellipsis; /* Agregar "..." al final si hay más texto */
+    -webkit-line-clamp: 2; 
+    text-overflow: ellipsis;
   }
 }
 
@@ -50,8 +50,8 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Limitar a 2 líneas */
-    text-overflow: ellipsis; /* Agregar "..." al final si hay más texto */
+    -webkit-line-clamp: 2; 
+    text-overflow: ellipsis;
   }
 
 }
