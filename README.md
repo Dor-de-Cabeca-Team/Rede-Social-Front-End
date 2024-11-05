@@ -21,7 +21,8 @@ npm install
 
 ## Pré-requisitos
 
-Certifique-se de que o projeto do back-end [Rede Social Back-End](https://github.com/Dor-de-Cabeca-Team/Rede-Social-Back-End.git) esteja em execução antes de iniciar o front-end.
+- Certifique-se de que o projeto do back-end [Rede Social Back-End](https://github.com/Dor-de-Cabeca-Team/Rede-Social-Back-End.git) esteja em execução antes de iniciar o front-end.
+- É necessário ter a **versão 17 do Angular** instalada em sua máquina para garantir a compatibilidade do projeto.
 
 ## Executando o Projeto
 
@@ -30,3 +31,13 @@ Após instalar as dependências e garantir que o back-end esteja rodando, inicie
 ```bash
 ng serve
 ```
+
+---
+
+Certifique-se de ter o Angular CLI atualizado para a versão 17 com o comando:
+
+```bash
+npm install -g @angular/cli@17
+```
+
+Dessa forma, o projeto funcionará corretamente.
