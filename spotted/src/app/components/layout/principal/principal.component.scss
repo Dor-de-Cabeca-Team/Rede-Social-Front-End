@@ -17,52 +17,47 @@
 .sidebar {
   flex-shrink: 0;
 }
+.feed {
+  height: 80vh; 
+  overflow-y: auto; 
+  scrollbar-width: none; 
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.699), rgba(0, 0, 0, 0.966)); 
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.555); 
+  border-radius: 8px; 
+}
+.feed::-webkit-scrollbar {
+  width: 0;
+}
+.card.post {
+  background-image: url('/src/assets/Background/Recurso 2.png'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 16px; 
+  border-radius: 8px; 
+  margin: 10px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.692); 
+}
 
 .feed-column {
   flex-grow: 1;
+
 }
+
+
 
 .trending {
   flex-shrink: 0;
 }
 
-/* Estilo para el contenedor del feed */
-.feed-content {
-  position: relative; /* Posicionamiento relativo */
-  padding: 1rem; /* Espaciado alrededor del contenido */
-  background-image: url('/assets/Background/Recurso 2.png'); /* Ruta de la imagen de fondo */
-  background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
-  background-position: center; /* Centra la imagen */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
-}
-
-/* Capa de brillo (opcional) */
-.feed-content::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.5); /* Capa blanca semi-transparente */
-  border-radius: 8px; /* Coincide con el borde del contenedor */
-  pointer-events: none; /* Permite clics a través de la capa */
-  transition: opacity 0.3s; /* Transición suave */
-  opacity: 0; /* Inicialmente invisible */
-}
-
-/* Efecto al pasar el cursor */
-.feed-content:hover::after {
-  opacity: 1; /* Muestra la capa de brillo al pasar el cursor */
-}
-
-/* Media queries */
 @media (max-width: 1200px) {
   :root {
     --column-gap: 3rem;
   }
+  
 }
+
+
 
 @media (max-width: 767px) {
   .row.g-fixed {
@@ -78,13 +73,15 @@
     width: 100%;
   }
 
+  
   .trending {
-    width: 100%;
-    display: none; /* Ocultar el componente trending en móviles */
-  }
+      width: 100%;
+      display: none; /* Ocultar el componente trending en móviles */
+    }
+  
 }
-
-@media (max-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1027px) {
+  
   .col-md-6 {
     display: flex;
     flex-direction: column;
@@ -92,7 +89,7 @@
     justify-content: center;
     height: 100vh; /* Ajusta la altura según sea necesario */
   }
-
+  
   .mb-4, .card.post.feed.mb-3 {
     width: 100%;
     max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
