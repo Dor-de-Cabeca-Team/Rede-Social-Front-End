@@ -47,7 +47,7 @@ export class PostComponent {
     this.postService.denunciarPost(this.post.uuid, this.userid).subscribe({
       next: (response) => {
         // console.log('Post reported: ' + response);
-        alert('Post reported successfully: ' + response);
+        // alert('Post reported successfully: ' + response);
       },
       error: (err) => {
         console.error('Error: ', err);

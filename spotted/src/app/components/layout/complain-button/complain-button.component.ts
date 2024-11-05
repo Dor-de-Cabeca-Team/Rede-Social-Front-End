@@ -24,7 +24,7 @@ export class ComplainButtonComponent {
     if (userid) {
       this.postService.denunciarPost(this.postUuid, userid).subscribe({
         next: (response) => {
-          console.log('Post reportado: ' + response);
+          // console.log('Post reportado: ' + response);
           // Aqui você pode usar um componente de alerta
           alert('Post reportado com sucesso: ' + response);
         },
