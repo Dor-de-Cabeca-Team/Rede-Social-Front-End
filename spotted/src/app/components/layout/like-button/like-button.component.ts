@@ -31,8 +31,8 @@ export class LikeButtonComponent {
     this.postService.likePost(this.postUuid, userid).subscribe({
       next: (response) => {
         this.isLiked = !this.isLiked; // Alterna o estado do like
-        console.log('Post liked: ' + response);
-        alert('Post liked successfully: ' + response);
+        // console.log('Post liked: ' + response);
+        alert('Like realizado ' + response);
       },
       error: (err) => {
         console.error('Error: ', err);
