@@ -1,0 +1,280 @@
+/* Variables para colores y medidas comunes */
+:root {
+  --primary-bg: #1C2733;
+  --text-color: #FFFFFF;
+  --accent-color: #1DA1F2;
+  --border-color: #333;
+}
+
+/* Estilos base del sidebar */
+#sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  // background-color:  #1C2733;
+  
+  // margin-left: 10px;
+}
+
+#sidebar-wrapper .list-group {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos de los items */
+.list-group-item {
+  background-color: #1C2733;
+  color: #FFFFFF;
+  border: 0;
+  display: flex; /* Hacer que los elementos dentro sean flexibles */
+  align-items: center; /* Alinear verticalmente al centro */
+  padding: 0.1rem;
+  // width: 5rem;
+}
+
+.list-group-item a {
+  color:  #FFFFFF;
+  text-decoration: none;
+}
+
+.list-group-item:hover a {
+  color: #1DA1F2;
+  
+}
+
+
+.list-group-item .icon {
+  margin-right: 0.5rem;
+  color: #FFFFFF;
+}
+
+
+.list-group-item:hover .icon {
+  color: #1DA1F2; 
+}
+
+
+.selected-route a {
+  color: #FFFFFF !important;
+}
+
+
+.user-avatar {
+  width: 1.5rem;
+}
+
+.user-name {
+  font-size: 1rem;
+}
+
+.img-logo {
+  width: 2.5rem;
+  padding-bottom: 1rem;
+}
+
+
+.user-info {
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  padding: 10rem 0 25rem;
+  margin-top: auto;
+}
+
+.sidebar-heading {
+  padding: 0.875rem 1.25rem 1.75rem;
+}
+/* Media query para tablets (768px a 1024px) */
+@media (min-width: 768px) and (max-width: 1030px) {
+  
+  #sidebar-wrapper {
+    margin-left: 0.5rem;
+    width: 5rem;
+    align-items: center;
+  }
+
+  .list-group-item {
+    display: flex;
+    align-items: center; 
+    padding: 0.5rem; 
+  }
+
+  .list-group-item .icon {
+    width: 30px; 
+    height: 30px;
+    display: inline-block; 
+    color: #FFFFFF; 
+    
+  }
+
+  .list-group-item .icon svg {
+    width: 50%; 
+    height: 50%;
+  }
+
+  .list-group-item .text {
+    display: flex;
+  }
+
+  .list-group-item a {
+    text-decoration: none; 
+    color: var(--text-color); 
+  }
+
+  .list-group-item a:hover {
+    color: var(--accent-color); 
+  }
+
+  .user-info {
+    padding: 0.5rem; 
+  }
+
+  .sidebar-heading {
+    padding: 0.5rem; 
+  }
+}
+
+/* Media query para desktop (más de 1024px) */
+@media (min-width: 1025px) {
+  #sidebar-wrapper {
+    margin-left: 1rem;
+    width:18rem;
+    align-items: center;
+  }
+
+  .list-group-item {
+    display: flex;
+    align-items: center; 
+    padding: 1rem; 
+  }
+
+  .list-group-item .icon {
+    width: 30px; 
+    height: 30px;
+    display: inline-block; 
+    color: #FFFFFF; 
+    
+  }
+
+  .list-group-item .icon svg {
+    width: 50%; 
+    height: 50%;
+  }
+
+  .list-group-item .text {
+    display: flex;
+  }
+
+  .list-group-item a {
+    text-decoration: none; 
+    color: var(--text-color); 
+  }
+
+  .list-group-item a:hover {
+    color: var(--accent-color); 
+  }
+
+  .user-info {
+    padding: 0.5rem; 
+  }
+
+  .sidebar-heading {
+    padding: 0.5rem; 
+  }
+}
+
+/* Media query para móviles */
+@media (max-width: 767px) {
+  .col-md-1 .sidebar {
+    flex: 0 0 auto;
+    width: 15.3%;
+    margin-top: 2rem;
+  }
+
+  .user-info, 
+  .user-name, 
+  .sidebar-heading {
+    display: none;
+    
+  }
+
+  #sidebar-wrapper {
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 60px; 
+    background-color: #1C2733; 
+    z-index: 10; 
+    overflow-y: hidden;
+    
+  }
+
+  .list-group {
+    display: flex;
+    flex-direction: row !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .list-group-item {
+    flex: 1;
+    display: flex;
+    justify-content: center !important;
+    padding: 0.5rem;
+    border-right: 1px solid #1DA1F2; /* Cambia el color del borde si es necesario */
+  }
+
+  .list-group-item:last-child {
+    border-right: 0;
+  }
+
+  .list-group-item .icon {
+    display: inline-block;
+    margin-right: 0 !important;
+    width: 30px !important;
+    color: #FFFFFF; 
+    
+  }
+
+  .list-group-item:hover .icon {
+    color: #1DA1F2; 
+  }
+
+  .list-group-item .text {
+    display: none !important;
+  }
+
+  .user-avatar {
+    width: 32px;
+  }
+
+  #sidebar-wrapper .list-group-item:hover a {
+    color: #1DA1F2;
+  }
+
+ 
+
+  
+  #feed-container {
+    position: relative;
+  }
+
+  #feed-container::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999; 
+    display: none; 
+  }
+
+
+  #sidebar-wrapper.active ~ #feed-container::before {
+    display: block; 
+  }
+}

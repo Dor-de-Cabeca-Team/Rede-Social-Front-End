@@ -1,0 +1,8 @@
+.fade-background {
+  position: relative;
+  background-image: url('../../../../assets/login/banner.png');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  min-height: 100vh; /* Asegura que ocupe toda la altura de la vista */
+}

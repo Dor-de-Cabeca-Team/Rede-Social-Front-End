@@ -1,21 +1,24 @@
-<div *ngIf="post.valido">
-  <div class="card post" style="width: 38rem;">
-    <div class="card-header post">
-      <div class="post-container">
-        <img class="animal-pic" [src]="post.imagem" alt="img">
-        <p><strong>{{ post.imagemNome }} Anônimo disse:</strong> </p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p><strong>{{ post.conteudo }}</strong></p>
-      <blockquote class="blockquote mb-0">
-        <footer class="blockquote-footer">{{ post.data | date:'medium'  }}</footer>
-      </blockquote>
+<div *ngIf="post.valido" class="card mb-3">
 
-    <div class="like-button-container">
-      <button class="like-button" (click)="likePost()">
-        <span class="heart-icon" [class.liked]="isLiked">❤️</span>
-      </button>
+  <div class="card-header d-flex align-items-center border-0">
+    <img class="animal-pic me-2" [src]="post.imagem" alt="User Profile" />
+    <div>
+      <p class="mb-0 fw-bold text-white">{{ post.imagemNome }}</p>
+      <small class="text-white">{{ post.data | date : 'medium' }}</small>
     </div>
   </div>
+
+  <div class="card-body">
+    <p class="card-text text-white" [ngClass]="{'overflow-scroll': false}">{{ post.conteudo }}</p>
+  </div>
+
+  <div class="card-footer d-flex justify-content-between border-0">
+    <app-like-button [postUuid]="post.uuid" [likes]="post.likes"></app-like-button>
+    <span class="text-white" (click)="openDialog()" style="cursor: pointer">
+      <i class="far fa-comments"></i>
+      {{ post.comments.length }} Comentários
+    </span>
+    <app-complain-button [postUuid]="post.uuid"></app-complain-button>
+  </div>
+
 </div>

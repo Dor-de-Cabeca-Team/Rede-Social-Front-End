@@ -1,30 +1,71 @@
+.post-box {
+  background-color: white;
+  margin-top: 20px;
+  border-radius: 8px;
+}
 .animal-pic {
-    width: 40px;
-    height: auto;
-    border-radius: 5px;
-    object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.post-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.card {
+  border: none;
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Asegúrate de que la tarjeta sea vertical */
+  height: auto;
+  padding: var(--base-size-8) var(--base-size-8) 0;
+  background: #1C2733;
 }
 
-.post-container p {
-  margin: 0;
+.card-footer {
+  display: flex;                  
+  justify-content: space-between; 
+  width: 100%;                   
+  padding: 10px;    
+  width: 100%;
+  padding: 10px;
+  border: none;
+               
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 767px) {
+  .card-footer {
+    justify-content:space-around ;         
+  }
+}
+
+/* Estilos para pantallas medianas (tablets) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .card-footer {
+    justify-content: space-around; 
+  }
+}
+
+@media (min-width: 1025px) {
+  .card-footer {
+    justify-content: space-around; 
+  }
+}
+
+.card-footer .btn {
+  font-size: 0.875rem;
   display: flex;
   align-items: center;
-  line-height: 1.5;
-  padding-top: 4px;
+  border: none;
 }
 
-.post {
-  width: 100%;
-  margin-bottom: 16px;
-  padding: 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
+.card-header p {
+  margin: 0;
 }
 
+.card-header {
+  padding: 8px 16px;
+}
+
+.card-body {
+  padding: 12px 16px;
+}

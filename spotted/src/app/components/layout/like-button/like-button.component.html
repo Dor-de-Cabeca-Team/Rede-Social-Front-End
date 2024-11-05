@@ -1,0 +1,6 @@
+<div class="like-button-container">
+  <button  type="button" class="btn btn-light btn-sm me-2" (click)="like()">
+    <span class="heart-icon" [class.liked]="isLiked"><i class="far fa-thumbs-up"></i></span>
+    <span class="like-counter">{{ likes.length }}</span>
+  </button>
+</div>

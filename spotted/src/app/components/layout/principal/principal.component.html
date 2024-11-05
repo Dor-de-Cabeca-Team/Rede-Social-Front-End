@@ -1,3 +1,28 @@
-<app-feed></app-feed>
+<div class="container-fluid">
+  <div class="row g-4"> 
+    <!-- Sidebar -->
+    <div class="col-md-2 sidebar"> 
+      <app-sidebar></app-sidebar>
+    </div>
 
+    <!-- Feed -->
+    <div class="col-md-7">
+      <div class="mb-4 rounded-container">
+        <app-create-post (postCreated)="feed.onPostCreated()"></app-create-post>
+      </div>
 
+      <div class="card post feed mb-3">
+        <app-feed #feed>
+          <div class="feed-content">
+          </div>
+        </app-feed>
+      </div>
+    </div>
+
+    <!-- Trending -->
+    <div class="col-md-3 trending">
+      <app-treding></app-treding>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,24 @@
+
+.post-box {
+    background-color: white;
+    margin-top: 20px;
+}
+
+.post-box textarea {
+    border: none;
+    resize: none;
+}
+
+.post-box button {
+    background-color: #1da1f2;
+    border: none;
+    border-radius: 50px;
+    opacity: 0.3;
+    transition: opacity 0.5s;
+    margin-bottom: 2%;
+    margin-right: 2%;
+}
+
+.post-box button:hover {
+    opacity: 1;
+}

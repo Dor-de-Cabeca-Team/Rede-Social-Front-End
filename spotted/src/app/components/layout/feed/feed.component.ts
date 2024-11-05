@@ -1,32 +1,42 @@
 import { Component, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
-import { Post } from '../../../models/post';
+import { Post } from '../../../models/post/post';
 import { PostComponent } from '../post/post.component';
+import { CommentComponent } from '../comment/comment.component';
+import { CommonModule } from '@angular/common';
+import { CreatePostComponent } from "../create-post/create-post.component";
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [PostComponent],
+  imports: [PostComponent, CommentComponent, CommonModule, CreatePostComponent],
   templateUrl: './feed.component.html',
-  styleUrl: './feed.component.scss'
+  styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent {
   postService = inject(PostService);
   posts: Post[] = [];
+  selectedPostId: string | null = null;
+  showModal: boolean = false;
 
   constructor() {
-    this.findAll();
+    this.findAllValidos();
   }
 
   findAll() {
     this.postService.findAll().subscribe({
       next: (value) => {
-        this.posts = value.map(post => {
-          const randomImage = this.getRandomAnimalImage();
+        this.posts = value.map((post) => {
+          const validComments =
+            post.comments?.filter((comment) => comment.valido === true) || [];
+          const randomImage = this.postService.getRandomAnimalImage(
+            post.profileAnimal
+          );
           return {
             ...post,
+            comments: validComments,
             imagem: randomImage.path,
-            imagemNome: randomImage.name
+            imagemNome: randomImage.name,
           };
         });
       },
@@ -37,16 +47,33 @@ export class FeedComponent {
     });
   }
 
-  getRandomAnimalImage(): { name: string, path: string } {
-    const images = [
-      { name: 'Cachorro', path: 'assets/animals/ProfilePicture.png' },
-      { name: 'Borboleta', path: 'assets/animals/ProfilePicture1.png' },
-      { name: 'Galo', path: 'assets/animals/ProfilePicture2.png' },
-      { name: 'Coelho', path: 'assets/animals/ProfilePicture3.png' },
-    ];
-
-    const randomIndex = Math.floor(Math.random() * images.length);
-    return images[randomIndex];
+  findAllValidos() {
+    this.postService.findAllValidos().subscribe({
+      next: (value) => {
+        this.posts = value.map((post) => {
+          const validComments =
+            post.comments?.filter((comment) => comment.valido === true) || [];
+          const randomImage = this.postService.getRandomAnimalImage(
+            post.profileAnimal
+          );
+          return {
+            ...post,
+            comments: validComments,
+            imagem: randomImage.path,
+            imagemNome: randomImage.name,
+          };
+        });
+      },
+      error: (err) => {
+        console.error('Error: ' + err);
+        alert('Error: ' + err);
+      },
+    });
   }
 
+  onPostCreated() {
+    setTimeout(() => {
+      this.findAllValidos();
+    }, 1500); // Atualiza o feed após 2 segundos
+  }
 }
