@@ -1,19 +1,23 @@
 :root {
   --column-gap: 10rem;
 }
+:host {
+  border-radius: 8px; 
+  overflow: hidden;
+}
 
-/* Layout principal */
 .container-fluid {
   padding: 2rem;
 }
 
-/* Configuración del row con gaps fijos */
 .row.g-fixed {
   display: flex;
   gap: var(--column-gap);
 }
+.mb-4{
+  border-radius: 8px;
+}
 
-/* Ajustes de las columnas */
 .sidebar {
   flex-shrink: 0;
 }
@@ -41,7 +45,6 @@
 
 .feed-column {
   flex-grow: 1;
-
 }
 
 
