@@ -36,7 +36,7 @@ export class LikeButtonComponent {
       },
       error: (err) => {
         console.error('Error: ', err);
-        alert('Error: ' + err.error?.error || 'Ocorreu um erro desconhecido');
+        // alert('Error: ' + err.error?.error || 'Ocorreu um erro desconhecido');
       },
     });
   }
