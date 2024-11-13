@@ -12,6 +12,7 @@ import { UserService } from '../../../../services/user/user.service';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../../../auth/login.service';
 import { Login } from '../../../../auth/login';
+import { UserRegister } from '../../../../models/user/interface/user-register';
 
 @Component({
   selector: 'app-login-register-form',
@@ -41,7 +42,7 @@ export class LoginRegisterFormComponent {
   router = inject(Router);
   loginService = inject(LoginService);
   login: Login = new Login();
-  user: UserInterface | null = null;
+  user: UserRegister | null = null;
 
   constructor(private userService: UserService) {}
 
@@ -110,13 +111,11 @@ export class LoginRegisterFormComponent {
     // Calcular a idade a partir da data de nascimento
     this.idade = this.calcularIdade(this.dataNascimento);
 
-    const newUser: UserInterface = {
+    const newUser: UserRegister = {
       nome: this.nome,
       idade: this.idade,
       email: this.email,
       senha: this.senha,
-      uuid: '',
-      ativo: false,
     };
 
     this.userService.register(newUser).subscribe(
