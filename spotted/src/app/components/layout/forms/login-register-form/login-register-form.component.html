@@ -7,7 +7,7 @@
       <form (submit)="onLoginSubmit($event)">
         <!-- Email input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="email" id="loginName" class="form-control text-white" [(ngModel)]="email" name="email"
+          <input mdbInput type="email" id="loginName" class="form-control text-white" [(ngModel)]="login.email" name="email"
             required />
           <label mdbLabel class="form-label text-white" for="loginName">
             Email
@@ -16,7 +16,7 @@
 
         <!-- Password input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="password" id="loginPassword" class="form-control text-white" [(ngModel)]="senha"
+          <input mdbInput type="password" id="loginPassword" class="form-control text-white" [(ngModel)]="login.password"
             name="senha" required />
           <label mdbLabel class="form-label text-white" for="loginPassword">
             Senha
