@@ -1,24 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { jwtDecode, JwtPayload } from "jwt-decode";
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { Login } from './login';
 import { Usuario } from './usuario';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
   http = inject(HttpClient);
-  API = "http://localhost:8080/api/auth/login";
+  API = 'http://localhost:8080/api/auth/login';
 
-
-  constructor() { }
-
+  constructor() {}
 
   logar(login: Login): Observable<string> {
-    return this.http.post<string>(this.API, login, {responseType: 'text' as 'json'});
+    return this.http.post<string>(this.API, login, {
+      responseType: 'text' as 'json',
+    });
   }
 
   addToken(token: string) {
@@ -33,21 +32,31 @@ export class LoginService {
     return localStorage.getItem('token');
   }
 
-  jwtDecode() {
-    let token = this.getToken();
+  jwtDecode(): Usuario | null {
+    const token = this.getToken();
     if (token) {
-      return jwtDecode<JwtPayload>(token);
+      const payload = jwtDecode<JwtPayload & { id?: string; role?: string }>(
+        token
+      );
+      return {
+        id: payload.id || '',
+        role: payload.role || '',
+      } as Usuario;
     }
-    return "";
+    return null;
   }
 
-  hasPermission(role: string) {
+  hasPermission(role: string): boolean {
+    const user = this.jwtDecode();
+    return user?.role === role;
+  }
+
+  getUsuarioLogado(role: string) {
     let user = this.jwtDecode() as Usuario;
-    if (user.role == role)
-      return true;
-    else
-      return false;
   }
 
-
+  getIdUsuarioLogado(): string | null {
+    const user = this.jwtDecode();
+    return user?.id || null;
+  }
 }
