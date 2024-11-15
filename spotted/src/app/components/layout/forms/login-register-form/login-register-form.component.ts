@@ -10,6 +10,9 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { UserInterface } from '../../../../models/user/interface/user-interface';
 import { UserService } from '../../../../services/user/user.service';
 import { FormsModule } from '@angular/forms';
+import { LoginService } from '../../../../auth/login.service';
+import { Login } from '../../../../auth/login';
+import { UserRegister } from '../../../../models/user/interface/user-register';
 
 @Component({
   selector: 'app-login-register-form',
@@ -37,43 +40,47 @@ export class LoginRegisterFormComponent {
   termosAceitos: boolean = false;
 
   router = inject(Router);
-  user: UserInterface | null = null;
+  loginService = inject(LoginService);
+  login: Login = new Login();
+  user: UserRegister | null = null;
 
   constructor(private userService: UserService) {}
+
+  onLoginSubmit(event: Event): void {
+    event.preventDefault();
+    this.logar();
+  }
+
+  //PARTE DO LOGIN!!
+
+  logar() {
+    this.loginService.logar(this.login).subscribe({
+      next: (token) => {
+        if (token) {
+          this.loginService.addToken(token);
+          this.router.navigate(['/principal']);
+        } else {
+          alert('email ou senha incorretos');
+        }
+      },
+      error: (erro) => {},
+    });
+  }
+
+  //PARTE DE REGISTRAR!!
 
   formatDate(event: Event): void {
     const input = event.target as HTMLInputElement;
     let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-  
+
     if (value.length >= 2) {
       value = value.slice(0, 2) + '/' + value.slice(2);
     }
     if (value.length >= 5) {
       value = value.slice(0, 5) + '/' + value.slice(5);
     }
-  
+
     input.value = value;
-  }
-  
-
-  onLoginSubmit(event: Event): void {
-    event.preventDefault();
-    this.logar(this.email, this.senha);
-  }
-
-  logar(email: string, senha: string): void {
-    this.userService.login(email, senha).subscribe(
-      (user) => {
-        this.user = user;
-        localStorage.setItem('loggedUser', JSON.stringify(user));
-        console.log('Usuário logado com sucesso', user);
-        this.router.navigate(['/principal']);
-      },
-      (error) => {
-        console.error('Erro ao fazer login', error);
-        alert('Erro ao fazer login');
-      }
-    );
   }
 
   calcularIdade(dataNascimento: Date): number {
@@ -98,19 +105,17 @@ export class LoginRegisterFormComponent {
 
     if (!this.termosAceitos) {
       alert('Você deve aceitar os termos.');
-      return; 
+      return;
     }
 
     // Calcular a idade a partir da data de nascimento
     this.idade = this.calcularIdade(this.dataNascimento);
 
-    const newUser: UserInterface = {
+    const newUser: UserRegister = {
       nome: this.nome,
       idade: this.idade,
       email: this.email,
       senha: this.senha,
-      uuid: '',
-      ativo: false,
     };
 
     this.userService.register(newUser).subscribe(
@@ -128,12 +133,12 @@ export class LoginRegisterFormComponent {
     );
   }
 
-  limparFormulario(){
+  limparFormulario() {
     this.email = '';
     this.senha = '';
     this.repeatPassword = '';
     this.nome = '';
-    this.dataNascimento = new Date(); 
+    this.dataNascimento = new Date();
     this.termosAceitos = false;
   }
 }

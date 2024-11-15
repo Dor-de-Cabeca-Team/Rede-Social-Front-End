@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user/class/user';
 import { UserInterface } from '../../models/user/interface/user-interface';
+import { UserRegister } from '../../models/user/interface/user-register';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private API_URL = 'http://localhost:8080/api/user';
+  private API_URL = "http://localhost:8080/api/auth";
 
   http = inject(HttpClient);
 
@@ -22,8 +23,8 @@ export class UserService {
     );
   }
 
-  register(user: UserInterface): Observable<UserInterface> {
-    return this.http.post<UserInterface>(`${this.API_URL}/save`, user);
+  register(user: UserRegister): Observable<UserRegister> {
+    return this.http.post<UserRegister>(`${this.API_URL}/register`, user);
   }
 
   constructor() {}
