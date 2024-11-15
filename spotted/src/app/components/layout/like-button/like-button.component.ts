@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { IdGlobalService } from '../../../services/user/login/id-global.service';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-like-button',
@@ -15,20 +16,16 @@ export class LikeButtonComponent {
   @Input() likes: any[] = [];
   postService = inject(PostService);
   isLiked = false;
-  idGlobalService = inject(IdGlobalService);
-
-  private getUserId(): string | null {
-    return this.idGlobalService.getUserUuid(); // Chama a função para obter o UUID
-  }
+  loginService = inject(LoginService);
 
   likePost() {
-    const userid = this.getUserId();
-    if (!userid) {
+    const userId = this.loginService.getIdUsuarioLogado();
+    if (!userId) {
       alert('Usuário não logado.');
       return; // Retorna caso o usuário não esteja logado
     }
 
-    this.postService.likePost(this.postUuid, userid).subscribe({
+    this.postService.likePost(this.postUuid, userId).subscribe({
       next: (response) => {
         this.isLiked = !this.isLiked; // Alterna o estado do like
         // console.log('Post liked: ' + response);
@@ -42,13 +39,13 @@ export class LikeButtonComponent {
   }
 
   likeComment() {
-    const userid = this.getUserId();
-    if (!userid) {
+    const userId = this.loginService.getIdUsuarioLogado();
+    if (!userId) {
       alert('Usuário não logado.');
       return; // Retorna caso o usuário não esteja logado
     }
 
-    this.postService.likeComment(this.commentUuid, userid).subscribe({
+    this.postService.likeComment(this.commentUuid, userId).subscribe({
       next: (response) => {
         this.isLiked = !this.isLiked; // Alterna o estado do like
         console.log('Comment liked: ' + response);

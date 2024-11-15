@@ -22,7 +22,7 @@ export class CreatePostComponent {
   isLoading = false;
 
   createPost(): void {
-    const userId = this.loginService.getIdUsuarioLogado(); // Ajuste aqui para pegar o ID do usuário
+    const userId = this.loginService.getIdUsuarioLogado();
 
     if (!userId) {
       alert('Usuário não logado. Faça login para criar um post.');
