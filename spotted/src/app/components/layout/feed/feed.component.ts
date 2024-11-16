@@ -50,12 +50,14 @@ export class FeedComponent {
   findAllValidos() {
     this.postService.findAllValidos().subscribe({
       next: (value) => {
+        const imagesLength = 20; // Número de imagens disponíveis
         this.posts = value.map((post) => {
           const validComments =
             post.comments?.filter((comment) => comment.valido === true) || [];
-          const randomImage = this.postService.getRandomAnimalImage(
-            post.profileAnimal
-          );
+          const randomIndex = Math.floor(Math.random() * imagesLength);
+          const randomImage =
+            this.postService.getRandomAnimalImage(randomIndex);
+
           return {
             ...post,
             comments: validComments,

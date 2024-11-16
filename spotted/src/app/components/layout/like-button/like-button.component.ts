@@ -28,7 +28,7 @@ export class LikeButtonComponent {
       next: (response) => {
         this.isLiked = !this.isLiked; // Alterna o estado do like
         this.isLiked ? this.likes.push(userId) : this.likes.pop(); // Atualiza o contador de likes
-        alert('Like realizado com sucesso!');
+        //alert('Like realizado com sucesso!');
       },
       error: (err) => {
         console.error('Erro: ', err);
@@ -47,7 +47,7 @@ export class LikeButtonComponent {
       next: (response) => {
         this.isLiked = !this.isLiked; // Alterna o estado do like
         this.isLiked ? this.likes.push(userId) : this.likes.pop(); // Atualiza o contador de likes
-        alert('Like no comentário realizado com sucesso!');
+        //alert('Like no comentário realizado com sucesso!');
       },
       error: (err) => {
         console.error('Erro: ', err);
