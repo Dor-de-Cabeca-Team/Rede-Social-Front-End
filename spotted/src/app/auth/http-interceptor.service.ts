@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
 export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
-
   let router = inject(Router);
 
   let token = localStorage.getItem('token');
@@ -17,19 +16,17 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
   return next(request).pipe(
     catchError((err: any) => {
       if (err instanceof HttpErrorResponse) {
-	  
-	  
         if (err.status === 401) {
-          alert('401 - tratar aqui');
+          console.log('401- tratar');
+          //alert('401 - tratar aqui');
           router.navigate(['/login']);
         } else if (err.status === 403) {
-          alert('403 - tratar aqui');
-		  router.navigate(['/login']);
+          console.log('403- tratar');
+          //alert('403 - tratar aqui');
+          router.navigate(['/login']);
         } else {
           console.error('HTTP error:', err);
         }
-		
-		
       } else {
         console.error('An error occurred:', err);
       }

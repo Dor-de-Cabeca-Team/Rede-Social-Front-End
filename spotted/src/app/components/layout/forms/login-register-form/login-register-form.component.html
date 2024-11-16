@@ -3,12 +3,20 @@
   <h4 class="text-center">Por favor coloque seus dados para entrar.</h4>
   <br />
   <mdb-tabs [pills]="true" [fill]="true">
+    <!-- Formulário de Login -->
     <mdb-tab title="Login">
       <form (submit)="onLoginSubmit($event)">
         <!-- Email input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="email" id="loginName" class="form-control text-white" [(ngModel)]="login.email" name="email"
-            required />
+          <input
+            mdbInput
+            type="email"
+            id="loginName"
+            class="form-control text-white"
+            [(ngModel)]="login.email"
+            name="email"
+            required
+          />
           <label mdbLabel class="form-label text-white" for="loginName">
             Email
           </label>
@@ -16,66 +24,125 @@
 
         <!-- Password input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="password" id="loginPassword" class="form-control text-white" [(ngModel)]="login.password"
-            name="senha" required />
+          <input
+            mdbInput
+            type="password"
+            id="loginPassword"
+            class="form-control text-white"
+            [(ngModel)]="login.password"
+            name="senha"
+            required
+          />
           <label mdbLabel class="form-label text-white" for="loginPassword">
             Senha
           </label>
         </mdb-form-control>
 
         <!-- Submit button -->
-        <button mdbRipple type="submit" class="btn btn-primary btn-block mb-4">
-          Logar
+        <button
+          mdbRipple
+          type="submit"
+          class="btn btn-primary btn-block mb-4"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">Logar</span>
+          <span
+            *ngIf="isLoading"
+            class="spinner-border spinner-border-sm"
+          ></span>
         </button>
       </form>
+
+      <!-- Mensagem de erro -->
+      <div *ngIf="errorMessage" class="alert alert-danger text-center">
+        {{ errorMessage }}
+      </div>
     </mdb-tab>
+
+    <!-- Formulário de Registro -->
     <mdb-tab title="Register">
       <form (submit)="onRegisterSubmit($event)">
-        <!-- Name input -->
+        <!-- Nome input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="text" id="registerName" class="form-control text-white" [(ngModel)]="nome" name="nome"
-            required />
-          <label mdbLabel class="form-label text-white" for="registerName">Nome</label>
+          <input
+            mdbInput
+            type="text"
+            id="registerName"
+            class="form-control text-white"
+            [(ngModel)]="nome"
+            name="nome"
+            required
+          />
+          <label mdbLabel class="form-label text-white" for="registerName">
+            Nome
+          </label>
         </mdb-form-control>
 
         <!-- Email input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="email" id="registerEmail" class="form-control text-white" [(ngModel)]="email"
-            name="email" required />
-          <label mdbLabel class="form-label text-white" for="registerEmail">Email</label>
+          <input
+            mdbInput
+            type="email"
+            id="registerEmail"
+            class="form-control text-white"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+          <label mdbLabel class="form-label text-white" for="registerEmail">
+            Email
+          </label>
         </mdb-form-control>
 
-        <!-- Password input -->
+        <!-- Senha input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="password" id="registerPassword" class="form-control text-white" [(ngModel)]="senha"
-            name="senha" required />
-          <label mdbLabel class="form-label text-white" for="registerPassword">Senha</label>
+          <input
+            mdbInput
+            type="password"
+            id="registerPassword"
+            class="form-control text-white"
+            [(ngModel)]="senha"
+            name="senha"
+            required
+          />
+          <label mdbLabel class="form-label text-white" for="registerPassword">
+            Senha
+          </label>
         </mdb-form-control>
 
-        <!-- Repeat Password input -->
+        <!-- Repetir Senha input -->
         <mdb-form-control class="mb-4">
-          <input mdbInput type="password" id="registerRepeatPassword" class="form-control text-white"
-            [(ngModel)]="repeatPassword" name="repeatSenha" required />
-          <label mdbLabel class="form-label text-white" for="registerRepeatPassword">Repetir senha</label>
+          <input
+            mdbInput
+            type="password"
+            id="registerRepeatPassword"
+            class="form-control text-white"
+            [(ngModel)]="repeatPassword"
+            name="repeatSenha"
+            required
+          />
+          <label mdbLabel class="form-label text-white" for="registerRepeatPassword">
+            Repetir Senha
+          </label>
         </mdb-form-control>
 
+        <!-- Data de Nascimento -->
         <mat-form-field>
           <mat-label>Data de Nascimento</mat-label>
-          <input 
-            matInput 
-            [matDatepicker]="picker" 
-            placeholder="MM/DD/YYYY" 
-            [(ngModel)]="dataNascimento" 
-            name="dataNascimento" 
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="MM/DD/YYYY"
+            [(ngModel)]="dataNascimento"
+            name="dataNascimento"
             (input)="formatDate($event)"
-            required 
+            required
           />
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        
 
-        <!-- Checkbox -->
+        <!-- Termos de Aceite -->
         <div class="form-check d-flex justify-content-center mb-4">
           <input
             mdbCheckbox
@@ -90,10 +157,23 @@
             Eu li e concordo com os termos
           </label>
         </div>
-        
+
         <!-- Submit button -->
-        <button mdbRipple type="submit" class="btn btn-primary btn-block mb-3">
-          Registrar
+        <button
+          mdbRipple
+          type="submit"
+          class="btn btn-primary btn-block mb-3"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">Registrar</span>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
         </button>
       </form>
+
+      <!-- Mensagem de erro -->
+      <div *ngIf="errorMessage" class="alert alert-danger text-center">
+        {{ errorMessage }}
+      </div>
     </mdb-tab>
+  </mdb-tabs>
+</div>

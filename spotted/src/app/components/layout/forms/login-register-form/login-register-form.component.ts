@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../../../auth/login.service';
 import { Login } from '../../../../auth/login';
 import { UserRegister } from '../../../../models/user/interface/user-register';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-register-form',
@@ -25,6 +26,7 @@ import { UserRegister } from '../../../../models/user/interface/user-register';
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
+    CommonModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './login-register-form.component.html',
@@ -38,6 +40,8 @@ export class LoginRegisterFormComponent {
   idade!: number;
   dataNascimento!: Date;
   termosAceitos: boolean = false;
+  isLoading: boolean = false;
+  errorMessage: string = '';
 
   router = inject(Router);
   loginService = inject(LoginService);
@@ -54,16 +58,31 @@ export class LoginRegisterFormComponent {
   //PARTE DO LOGIN!!
 
   logar() {
+    this.isLoading = true;
+    this.errorMessage = '';
+
     this.loginService.logar(this.login).subscribe({
       next: (token) => {
+        this.isLoading = false; // Garantir que pare o carregamento
         if (token) {
           this.loginService.addToken(token);
           this.router.navigate(['/principal']);
-        } else {
-          alert('email ou senha incorretos');
         }
       },
-      error: (erro) => {},
+      error: (erro) => {
+        this.isLoading = false; // Garantir que pare o carregamento em caso de erro
+        switch (erro.status) {
+          case 401:
+            this.errorMessage = 'Email ou senha incorretos.';
+            break;
+          case 500:
+            this.errorMessage =
+              'Erro interno no servidor. Por favor, tente novamente.';
+            break;
+          default:
+            this.errorMessage = 'Erro inesperado. Tente novamente.';
+        }
+      },
     });
   }
 
@@ -94,21 +113,24 @@ export class LoginRegisterFormComponent {
   }
 
   onRegisterSubmit(event: Event): void {
+    this.errorMessage = '';
     event.preventDefault();
 
-    console.log('Termos Aceitos:', this.termosAceitos);
+    //console.log('Termos Aceitos:', this.termosAceitos);
 
     if (this.senha !== this.repeatPassword) {
-      alert('As senhas não coincidem');
+      this.errorMessage = 'As senhas não coincidem';
+      //alert('As senhas não coincidem');
       return;
     }
 
     if (!this.termosAceitos) {
-      alert('Você deve aceitar os termos.');
+      this.errorMessage = 'As senhas não coincidem';
+      //alert('Você deve aceitar os termos.');
       return;
     }
 
-    // Calcular a idade a partir da data de nascimento
+    this.isLoading = true; // Ativar carregamento
     this.idade = this.calcularIdade(this.dataNascimento);
 
     const newUser: UserRegister = {
@@ -118,19 +140,28 @@ export class LoginRegisterFormComponent {
       senha: this.senha,
     };
 
-    this.userService.register(newUser).subscribe(
-      (user) => {
+    this.userService.register(newUser).subscribe({
+      next: (user) => {
+        this.isLoading = false; // Garantir que pare o carregamento
         this.user = user;
-        alert('Usuário registrado com sucesso');
+        //alert('Usuário registrado com sucesso');
         console.log('Usuário registrado:', user);
-
         this.limparFormulario();
       },
-      (error) => {
+      error: (error) => {
+        this.isLoading = false; // Garantir que pare o carregamento em caso de erro
         console.error('Erro ao registrar usuário', error);
-        alert('Erro ao registrar usuário');
-      }
-    );
+        
+        if (
+          error.status === 400 &&
+          error.error === 'Email ja esta sendo usado'
+        ) {
+          this.errorMessage = 'Este email já está em uso. Tente outro.';
+        } else {
+          this.errorMessage = 'Erro ao registrar usuário';
+        }
+      },
+    });
   }
 
   limparFormulario() {
