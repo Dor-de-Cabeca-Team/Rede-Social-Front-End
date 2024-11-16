@@ -5,6 +5,7 @@ import { PostComponent } from '../post/post.component';
 import { CommentComponent } from '../comment/comment.component';
 import { CommonModule } from '@angular/common';
 import { CreatePostComponent } from "../create-post/create-post.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -14,10 +15,12 @@ import { CreatePostComponent } from "../create-post/create-post.component";
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent {
+  router = inject(Router);
   postService = inject(PostService);
   posts: Post[] = [];
   selectedPostId: string | null = null;
   showModal: boolean = false;
+  
 
   constructor() {
     this.findAllValidos();
@@ -68,7 +71,9 @@ export class FeedComponent {
       },
       error: (err) => {
         console.error('Error: ' + err);
-        alert('Error: ' + err);
+        //alert('Error: ' + err);
+        alert('Faça login novamente!');
+        this.router.navigate(['/login']);
       },
     });
   }
