@@ -3,32 +3,31 @@ import { PostService } from '../../../services/post/post.service';
 import { FormsModule } from '@angular/forms';
 import { Post } from '../../../models/post/post';
 import { IdGlobalService } from '../../../services/user/login/id-global.service';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-create-comment',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './create-comment.component.html',
-  styleUrls: ['./create-comment.component.scss'] // Corrected from styleUrl to styleUrls
+  styleUrls: ['./create-comment.component.scss'], // Corrected from styleUrl to styleUrls
 })
 export class CreateCommentComponent {
   @Input() post!: Post;
   commentContent = '';
 
-  private idGlobalService = inject(IdGlobalService);
+  loginService = inject(LoginService);
 
   constructor(private postService: PostService) {}
 
-  private getUserId(): string | null {
-    return this.idGlobalService.getUserUuid(); // Fetches the UUID
-  }
-
   createComment(postUuid: string): void {
-    const userId = this.getUserId();
-  
+    const userId = this.loginService.getIdUsuarioLogado();
+
     if (this.commentContent.trim()) {
-      if (userId) { // Check if userId is not null
-        this.postService.createComment(this.commentContent, userId, postUuid)
+      if (userId) {
+        // Check if userId is not null
+        this.postService
+          .createComment(this.commentContent, userId, postUuid)
           .subscribe({
             next: (response) => {
               console.log('Comment created successfully:', response);
@@ -36,7 +35,7 @@ export class CreateCommentComponent {
             },
             error: (error) => {
               console.error('Error creating comment:', error);
-            }
+            },
           });
       } else {
         alert('User ID is not available.'); // Handle the case when userId is null
@@ -45,5 +44,4 @@ export class CreateCommentComponent {
       alert('Please insert some content before commenting.');
     }
   }
-  
 }

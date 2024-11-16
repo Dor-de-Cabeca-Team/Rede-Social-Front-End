@@ -130,7 +130,15 @@ export class PostService {
       { name: 'Hipopótamo Anônimo', path: 'assets/animals/Recurso21@2x.png' },
     ];
 
-    return images[index];
+    // Garante que o índice esteja no intervalo do array
+    if (index < 0 || index >= images.length) {
+      console.warn(`Índice inválido (${index}). Usando uma imagem padrão.`);
+      // Retorna uma imagem padrão
+      return { name: 'Imagem Padrão', path: 'assets/animals/default.png' };
+    }
+
+    // Usa o índice válido
+    return images[index % images.length];
   }
   constructor() {}
 }
