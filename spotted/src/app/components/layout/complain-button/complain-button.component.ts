@@ -1,6 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
-import { IdGlobalService } from '../../../services/user/login/id-global.service';
 import { LoginService } from '../../../auth/login.service';
 
 @Component({

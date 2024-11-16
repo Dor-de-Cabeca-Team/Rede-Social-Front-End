@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Post } from '../../models/post/post';
 import { Comment } from '../../models/comment/comment';
 import { Tag } from '../../models/tag/tag';
+import { environment } from '../../../environments/environment';
 
 
 
@@ -12,7 +13,7 @@ import { Tag } from '../../models/tag/tag';
 })
 export class PostService {
   http = inject(HttpClient);
-  API = 'http://localhost:8080/api';
+  API = environment.SERVIDOR+'/api';
 
   createPost(content: string, userId: string, tags: Tag[]): Observable<Post> {
     const payload = {

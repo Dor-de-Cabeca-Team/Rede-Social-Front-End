@@ -2,7 +2,6 @@ import { Component, inject, Input } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { FormsModule } from '@angular/forms';
 import { Post } from '../../../models/post/post';
-import { IdGlobalService } from '../../../services/user/login/id-global.service';
 import { LoginService } from '../../../auth/login.service';
 
 @Component({
