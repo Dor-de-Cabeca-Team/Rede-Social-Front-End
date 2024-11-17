@@ -2,22 +2,23 @@ import { CommentDto } from '../commentDTO/comment-dto';
 import { Tag } from '../tag/tag';
 
 export class PostDTO {
-    uuid!:string
+    id!:string
     conteudo!: string;
-    isLiked?: boolean;
+    liked?: boolean;
+    reported?:boolean;
     likeCount!: number;
-    comments!: CommentDto[];
     data!:Date;
-    valido!: boolean;
     profileAnimal!: number;
     imagem?: string;
     imagemNome?: string;
+    userId!: String;
     tags!: Tag[];
+    comments!: CommentDto[];
 
-    constructor(conteudo: string, isLiked: boolean, likeCount: number, profileAnimal: number, tags: Tag[]) {
-        this.uuid = '';
+    constructor(conteudo: string, liked: boolean, likeCount: number, profileAnimal: number, tags: Tag[]) {
+        this.id = '';
         this.conteudo = conteudo;
-        this.isLiked = isLiked;
+        this.liked = liked;
         this.likeCount = likeCount;
         this.comments = [];
         this.data = new Date();

@@ -36,23 +36,23 @@ export class FeedComponent {
         next: (posts) => {
           const imagesLength = 20;
           this.posts = posts.map((post) => {
-            const validComments: CommentDto[] = post.comments?.filter(commentDto => commentDto.valido) || [];
+            const validComments: CommentDto[] = post.comments;
             const randomIndex = Math.floor(Math.random() * imagesLength);
-            const randomImage =
-              this.postService.getRandomAnimalImage(randomIndex);
-
+            const randomImage = this.postService.getRandomAnimalImage(randomIndex);
+  
             return {
               ...post,
               comments: validComments,
               imagem: randomImage.path,
               imagemNome: randomImage.name,
+              liked: post.liked,
+              reported: post.reported,
             };
           });
         },
         error: (err) => {
           console.error('Error: ' + err);
-          //alert('Error: ' + err);
-         alert('Faça login novamente!');
+          alert('Faça login novamente!');
           this.router.navigate(['/login']);
         },
       });
@@ -61,7 +61,7 @@ export class FeedComponent {
       alert('Você precisa estar logado para ver os posts.');
     }
   }
-
+  
   onPostCreated() {
     setTimeout(() => {
       this.findAllValidos();

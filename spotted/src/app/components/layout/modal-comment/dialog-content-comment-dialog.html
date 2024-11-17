@@ -3,11 +3,11 @@
 
 <mat-dialog-content class="mat-typography">
   <!-- Sessão Post -->
-  <div *ngIf="post.valido">
+  <div>
   <!-- Sessão Comentario -->
   </div>
     @for (comment of post.comments; track $index) {
-      <app-comment *ngIf="comment.valido" [comment]="comment"></app-comment>
+      <app-comment [comment]="comment"></app-comment>
     }
   </mat-dialog-content>
 

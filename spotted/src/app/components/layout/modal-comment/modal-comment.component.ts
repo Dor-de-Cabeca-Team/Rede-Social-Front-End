@@ -2,7 +2,7 @@ import { Component, Inject, inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { PostComponent } from '../post/post.component';
-import { Post } from '../../../models/post/post';
+import { PostDTO } from '../../../models/postDTO/post-dto';
 import { CommonModule } from '@angular/common';
 import { CommentComponent } from '../comment/comment.component';
 import { LikeButtonComponent } from '../like-button/like-button.component';
@@ -29,11 +29,11 @@ export class ModalCommentComponent {
   imports: [MatDialogModule, MatButtonModule, PostComponent, CommentComponent, CommonModule, LikeButtonComponent, ComplainButtonComponent, CreateCommentComponent],
 })
 export class DialogContentCommentDialog {
-  post: Post;
+  post: PostDTO;
   postService = inject(PostService);
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { post: Post },
+    @Inject(MAT_DIALOG_DATA) public data: { post: PostDTO },
     public dialogRef: MatDialogRef<DialogContentCommentDialog>
   ) {
     this.post = data.post;

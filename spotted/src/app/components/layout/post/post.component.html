@@ -1,4 +1,4 @@
-<div *ngIf="post.valido" class="card mb-3">
+<div class="card mb-3">
 
   <div class="card-header d-flex align-items-center border-0">
     <img class="animal-pic me-2" [src]="post.imagem" alt="User Profile" />
@@ -13,12 +13,13 @@
   </div>
 
   <div class="card-footer d-flex justify-content-between border-0">
-    <app-like-button [postUuid]="post.uuid" [likeCount]="post.likeCount"></app-like-button>
+    <app-like-button [likeCount]="post.likeCount"
+    [postUuid]="post.id"
+    [liked]="post.liked ?? false"></app-like-button>
     <!--<span class="text-white" (click)="openDialog()" style="cursor: pointer">
       <i class="far fa-comments"></i>
       {{ post.comments.length }} Comentários
     </span>-->
-    <app-complain-button [postUuid]="post.uuid"></app-complain-button>
+    <app-complain-button [postUuid]="post.id"></app-complain-button><!--[reported] = "post.reported ?? false" ADD PARA VERIFICAÇÃO DA DENUNCIA-->
   </div>
-
 </div>

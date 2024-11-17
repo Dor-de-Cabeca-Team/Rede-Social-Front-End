@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Post } from '../../models/post/post';
 import { CommentDto } from '../../models/commentDTO/comment-dto'
 import { Tag } from '../../models/tag/tag';
 import { environment } from '../../../environments/environment';
@@ -16,14 +15,14 @@ export class PostService {
   http = inject(HttpClient);
   API = environment.SERVIDOR+'/api';
 
-  createPost(content: string, userId: string, tags: Tag[]): Observable<Post> {
+  createPost(content: string, userId: string, tags: Tag[]): Observable<PostDTO> {
     const payload = {
       conteudo: content,
       tags: tags.map((tag) => ({ uuid: tag.uuid })),
-      user: { uuid: userId },
+      userId: userId,
     };
 
-    return this.http.post<Post>(`${this.API}/post/save`, payload);
+    return this.http.post<PostDTO>(`${this.API}/post/save`, payload);
   }
 
   createComment(
@@ -40,16 +39,16 @@ export class PostService {
     return this.http.post<CommentDto>(`${this.API}/comment/save`, payload);
   }
 
-  findAll(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.API}/post/findAll`);
+  findAll(): Observable<PostDTO[]> {
+    return this.http.get<PostDTO[]>(`${this.API}/post/findAll`);
   }
 
   findAllValidos(idUser:string): Observable<PostDTO[]> {
     return this.http.get<PostDTO[]>(`${this.API}/post/postsValidos?idUser=${idUser}`);
   }
 
-  findById(uuid: string): Observable<Post> {
-    return this.http.get<Post>(`${this.API}/post/findById/${uuid}`);
+  findById(uuid: string): Observable<PostDTO> {
+    return this.http.get<PostDTO>(`${this.API}/post/findById/${uuid}`);
   }
 
   likePost(idPost: string, idUser: string): Observable<string> {
@@ -98,8 +97,8 @@ export class PostService {
     );
   }
 
-  top10PostsComLike(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.API}/post/top10PostsComLike`);
+  top10PostsComLike(): Observable<PostDTO[]> {
+    return this.http.get<PostDTO[]>(`${this.API}/post/top10PostsComLike`);
   }
 
   // comentarPost(idPost: string, idUser: string, comentario: string): Observable<string> {
