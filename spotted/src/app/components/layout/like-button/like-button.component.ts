@@ -10,6 +10,7 @@ import { LoginService } from '../../../auth/login.service';
   styleUrls: ['./like-button.component.scss'],
 })
 export class LikeButtonComponent {
+  @Input() likeCount: number = 0;
   @Input() postUuid!: string;
   @Input() commentUuid!: string;
   @Input() likes: any[] = [];
@@ -26,12 +27,13 @@ export class LikeButtonComponent {
 
     this.postService.likePost(this.postUuid, userId).subscribe({
       next: (response) => {
-        this.isLiked = !this.isLiked; // Alterna o estado do like
-        this.isLiked ? this.likes.push(userId) : this.likes.pop(); // Atualiza o contador de likes
-        //alert('Like realizado com sucesso!');
+        this.isLiked = !this.isLiked; 
+        this.isLiked ? this.likes.push(userId) : this.likes.pop(); 
+        
+        this.toggleLike(userId);
       },
       error: (err) => {
-        console.error('Erro: ', err);
+        console.error('Erro ao dar like no post: ', err);
       },
     });
   }
@@ -45,14 +47,28 @@ export class LikeButtonComponent {
 
     this.postService.likeComment(this.commentUuid, userId).subscribe({
       next: (response) => {
-        this.isLiked = !this.isLiked; // Alterna o estado do like
-        this.isLiked ? this.likes.push(userId) : this.likes.pop(); // Atualiza o contador de likes
+         this.isLiked = !this.isLiked;
+        this.isLiked ? this.likes.push(userId) : this.likes.pop();
         //alert('Like no comentário realizado com sucesso!');
+
+        this.toggleLike(userId);
       },
       error: (err) => {
-        console.error('Erro: ', err);
+        console.error('Erro ao dar like no comentário: ', err);
       },
     });
+  }
+
+  toggleLike(userId: string) {
+    this.isLiked = !this.isLiked;
+    if (this.isLiked) {
+      this.likes.push(userId);
+    } else {
+      const index = this.likes.indexOf(userId);
+      if (index > -1) {
+        this.likes.splice(index, 1);
+      }
+    }
   }
 
   like() {

@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../../models/post/post';
-import { Comment } from '../../models/comment/comment';
+import { CommentDto } from '../../models/commentDTO/comment-dto'
 import { Tag } from '../../models/tag/tag';
 import { environment } from '../../../environments/environment';
+import { PostDTO } from '../../models/postDTO/post-dto';
 
 
 
@@ -29,22 +30,22 @@ export class PostService {
     content: string,
     userId: string,
     postId: string
-  ): Observable<Comment> {
+  ): Observable<CommentDto> {
     const payload = {
       conteudo: content,
       post: { uuid: postId },
       user: { uuid: userId },
     };
 
-    return this.http.post<Comment>(`${this.API}/comment/save`, payload);
+    return this.http.post<CommentDto>(`${this.API}/comment/save`, payload);
   }
 
   findAll(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.API}/post/findAll`);
   }
 
-  findAllValidos(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.API}/post/postsValidos`);
+  findAllValidos(idUser:string): Observable<PostDTO[]> {
+    return this.http.get<PostDTO[]>(`${this.API}/post/postsValidos?idUser=${idUser}`);
   }
 
   findById(uuid: string): Observable<Post> {
@@ -56,7 +57,7 @@ export class PostService {
       `${this.API}/post/like-post?idPost=${idPost}&idUser=${idUser}`,
       null,
       {
-        responseType: 'text' as 'json', // Faz o Angular tratar a resposta como texto
+        responseType: 'text' as 'json',
       }
     );
   }
@@ -91,9 +92,9 @@ export class PostService {
     );
   }
 
-  showComments(idPost: string): Observable<Comment[]> {
-    return this.http.get<Comment[]>(
-      `${this.API}/comment/findAllByPost_Uuid?uuid=${idPost}`
+  showComments(idPost: string, idUser:string): Observable<CommentDto[]> {
+    return this.http.get<CommentDto[]>(
+      `${this.API}/comment/findAllValidosByPost_Uuid?idPost=${idPost}&idUser=${idUser}`
     );
   }
 

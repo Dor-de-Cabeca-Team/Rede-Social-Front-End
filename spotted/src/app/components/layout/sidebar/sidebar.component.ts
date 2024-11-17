@@ -48,7 +48,6 @@ export class SidebarComponent {
 
   isActive(path: string): boolean {
     const currentUrl = this.router.url;
-    console.log('Current URL:', currentUrl);
     return currentUrl.toLowerCase() === path.toLowerCase();
   }
 

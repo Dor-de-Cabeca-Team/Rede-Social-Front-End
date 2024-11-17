@@ -13,11 +13,11 @@
   </div>
 
   <div class="card-footer d-flex justify-content-between border-0">
-    <app-like-button [postUuid]="post.uuid" [likes]="post.likes"></app-like-button>
-    <span class="text-white" (click)="openDialog()" style="cursor: pointer">
+    <app-like-button [postUuid]="post.uuid" [likeCount]="post.likeCount"></app-like-button>
+    <!--<span class="text-white" (click)="openDialog()" style="cursor: pointer">
       <i class="far fa-comments"></i>
       {{ post.comments.length }} Comentários
-    </span>
+    </span>-->
     <app-complain-button [postUuid]="post.uuid"></app-complain-button>
   </div>
 
