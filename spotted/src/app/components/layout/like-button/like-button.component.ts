@@ -28,45 +28,46 @@ export class LikeButtonComponent {
       return;
     }
 
-    if (this.isPending) return; //tudo que usa isso é para tentar fazer com que ele pegue a última ação feita
-  
+    if (this.isPending) return;
+
     this.toggleLike(userId);
     this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
-  
-    setTimeout(() => {
-      this.postService.likePost(this.postUuid, userId).subscribe({
-        next: (response) => {
-          console.log
-          this.pendingLikeStatus = this.liked;
-        },
-        error: (err) => {
-          console.error('Erro ao dar like no post: ', err);
-        },
-        complete: () => {
-          this.isPending = false;
-        }
-      });
-    }, 0);
+
+    this.postService.likePost(this.postUuid, userId).subscribe({
+      next: (response) => {
+        this.pendingLikeStatus = this.liked;
+      },
+      error: (err) => {
+        console.error('Erro ao dar like no post: ', err);
+      },
+      complete: () => {
+        this.isPending = false;
+      }
+    });
   }
-  
-  
-  
+
+
+
   likeComment() {
     const userId = this.loginService.getIdUsuarioLogado();
     if (!userId) {
       alert('Usuário não logado.');
       return;
     }
-  
+
+    this.toggleLike(userId);
+    this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
+
     this.postService.likeComment(this.commentUuid, userId).subscribe({
       next: (response) => {
-        this.liked = !this.liked;
-        this.liked ? this.likes.push(userId) : this.likes.pop();
-        this.toggleLike(userId);
+        this.pendingLikeStatus = this.liked;
       },
       error: (err) => {
         console.error('Erro ao dar like no comentário: ', err);
       },
+      complete: () => {
+        this.isPending = false;
+      }
     });
   }
 
@@ -88,5 +89,5 @@ export class LikeButtonComponent {
     } else if (this.commentUuid) {
       this.likeComment();
     }
-  }  
+  }
 }

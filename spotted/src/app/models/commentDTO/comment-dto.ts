@@ -1,19 +1,21 @@
 export class CommentDto {
-    uuid!: string;
+  id!: string;
     data!: Date;
+    liked!:boolean;
+    reported!:boolean;
     conteudo!: string;
-    valido!: boolean;
     complaints!: number[];
-    likes!: number[];
+    likeCount!: number;
     profileAnimal!: number;
     imagem?: string;
     imagemNome?: string;
+    post!:string;
+    user!:string;
   
-    constructor(uuid: string, data: Date, conteudo: string, valido: boolean) {
-      this.uuid = uuid;
+    constructor(id: string, data: Date, conteudo: string) {
+      this.id = id;
       this.data = data;
       this.conteudo = conteudo;
-      this.valido = valido;
     }
   }
   
