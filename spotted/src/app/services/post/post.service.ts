@@ -22,7 +22,9 @@ export class PostService {
       userId: userId,
     };
 
-    return this.http.post<PostDTO>(`${this.API}/post/save`, payload);
+    return this.http.post<PostDTO>(`${this.API}/post/save`, payload, {
+      responseType: 'text' as 'json',
+    });
   }
 
   createComment(
