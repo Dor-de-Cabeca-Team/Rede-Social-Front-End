@@ -72,6 +72,6 @@ export class DialogContentCommentDialog {
 onCreateComments() {
   setTimeout(() => {
     this.findAllCommentsValidos();
-  }, 5000);
+  }, 1500);
 }
 }
