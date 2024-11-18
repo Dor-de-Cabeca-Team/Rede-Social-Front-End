@@ -1,9 +1,79 @@
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: var(--spacing-xlarge);
+  margin-left: 5rem;
+}
+.logo-container {
+  width: 100%;
+  margin-bottom: var(--spacing-large);
+}
+.logo-img {
+  width: 10rem;
+  height: auto;
+  padding-bottom: 5rem;
+}
+.contenedor_texto {
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-bottom: var(--spacing-large);
+  padding-bottom: 5rem;
+  overflow: hidden;
+}
+.typed-text {
+  font-size: 3rem;
+  font-weight: bold;
+  border-right: 3px solid #2563eb;
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 2s steps(5, end) forwards,
+             blink 0.75s step-end infinite;
+}
+.buttons-container {
+  display: flex;
+  gap: var(--spacing-medium);
+  margin-bottom: var(--spacing-large);
+}
+.btn {
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  min-width: 150px;
+  cursor: pointer;
+}
+.btn-crear {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+}
+.btn-crear:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(37, 99, 235, 0.2);
+}
+.btn-login {
+  
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+.btn-login:hover {
+  background-color: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+}
 .animate {
   position: relative;
   background-size: cover;
   background-position: center;
   overflow: hidden;
-  min-height: 6.25rem; 
+  min-height: 6.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,3 +81,12 @@
   color: white;
   text-align: center;
 }
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink {
+  from, to { border-color: transparent }
+  10% { border-color: #2563eb; }
+}
+
