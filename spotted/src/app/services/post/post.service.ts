@@ -29,14 +29,16 @@ export class PostService {
     content: string,
     userId: string,
     postId: string
-  ): Observable<CommentDto> {
+  ): Observable<String> {
     const payload = {
       conteudo: content,
-      post: { uuid: postId },
-      user: { uuid: userId },
+      post: postId,
+      user: userId,
     };
 
-    return this.http.post<CommentDto>(`${this.API}/comment/save`, payload);
+    return this.http.post<string>(`${this.API}/comment/save`, payload, {
+      responseType: 'text' as 'json',
+    });
   }
 
   findAll(): Observable<PostDTO[]> {

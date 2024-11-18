@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { FormsModule } from '@angular/forms';
 import { PostDTO } from '../../../models/postDTO/post-dto';
@@ -14,6 +14,7 @@ import { LoginService } from '../../../auth/login.service';
 export class CreateCommentComponent {
   @Input() post!: PostDTO;
   commentContent = '';
+  @Output() commentCreated = new EventEmitter<void>();
 
   loginService = inject(LoginService);
 
@@ -31,6 +32,7 @@ export class CreateCommentComponent {
             next: (response) => {
               console.log('Comment created successfully:', response);
               this.commentContent = ''; // Reset comment content after successful creation
+              this.commentCreated.emit();
             },
             error: (error) => {
               console.error('Error creating comment:', error);

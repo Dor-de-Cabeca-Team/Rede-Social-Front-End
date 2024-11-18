@@ -9,6 +9,7 @@ import { LikeButtonComponent } from '../like-button/like-button.component';
 import { ComplainButtonComponent } from '../complain-button/complain-button.component';
 import { PostService } from '../../../services/post/post.service';
 import { CreateCommentComponent } from '../create-comment/create-comment.component';
+import { LoginService } from '../../../auth/login.service';
 
 @Component({
   selector: 'app-modal-comment',
@@ -29,23 +30,48 @@ export class ModalCommentComponent { }
 export class DialogContentCommentDialog {
   post: PostDTO;
   postService = inject(PostService);
+  loginService = inject(LoginService);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { post: PostDTO },
     public dialogRef: MatDialogRef<DialogContentCommentDialog>
   ) {
     this.post = data.post;
-    this.assignRandomImagesToComments();
+    this.findAllCommentsValidos();
   }
 
-  private assignRandomImagesToComments(): void {
-    this.post.comments = this.post.comments.map(comment => {
-      const randomImage = this.postService.getRandomAnimalImage(comment.profileAnimal);
-      return {
-        ...comment,
-        imagem: randomImage.path,
-        imagemNome: randomImage.name
-      };
+  findAllCommentsValidos() {
+    console.log("atualizou");
+  const idUser = this.loginService.getIdUsuarioLogado();
+  if (idUser) {
+    this.postService.showComments(this.post.id, idUser).subscribe({
+      next: (comments) => {
+        const imagesLength = 20; // Número de imagens disponíveis para os comentários
+        this.post.comments = comments.map((comment) => {
+          const randomIndex = Math.floor(Math.random() * imagesLength);
+          const randomImage = this.postService.getRandomAnimalImage(randomIndex);
+
+          return {
+            ...comment,
+            imagem: randomImage.path,
+            imagemNome: randomImage.name,
+          };
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao buscar comentários válidos: ' + err);
+        alert('Ocorreu um erro ao carregar os comentários. Tente novamente mais tarde.');
+      },
     });
+  } else {
+    console.error('Usuário não está logado');
+    alert('Você precisa estar logado para ver os comentários.');
   }
+}
+
+onCreateComments() {
+  setTimeout(() => {
+    this.findAllCommentsValidos();
+  }, 5000);
+}
 }

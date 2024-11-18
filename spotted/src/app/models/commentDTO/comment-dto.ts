@@ -4,7 +4,6 @@ export class CommentDto {
     liked!:boolean;
     reported!:boolean;
     conteudo!: string;
-    complaints!: number[];
     likeCount!: number;
     profileAnimal!: number;
     imagem?: string;

@@ -11,7 +11,7 @@
     }
   </mat-dialog-content>
 
-  <app-create-comment [post]="post"></app-create-comment>
+  <app-create-comment [post]="post" (commentCreated)="onCreateComments()"></app-create-comment>
 <!-- Botoes pra sair do modal -->
 <!-- <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
