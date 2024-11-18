@@ -23,7 +23,7 @@ export class TredingComponent {
     this.postService.top10PostsComLike().subscribe({
       next: (posts: PostDTO[]) => {
         this.trendingList = posts.map((post) => ({
-          tags: post.tags.map((tag) => tag.nome), // Extrai o nome de cada tag
+          tags: Array.isArray(post.tags) ? post.tags.map((tag) => tag.nome) : [], // Verificação se tags é um array
           description: post.conteudo,
         }));
       },
@@ -31,5 +31,5 @@ export class TredingComponent {
         console.error('Error loading trending posts: ' + err);
       },
     });
-  }
+  }  
 }

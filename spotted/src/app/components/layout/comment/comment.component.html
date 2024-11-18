@@ -11,8 +11,8 @@
   </div>
   <div class="card-footer d-flex justify-content-between">
     <!-- Like Button -->
-    <app-like-button [commentUuid]="comment.id" [likeCount]="comment.likeCount"></app-like-button>
+    <app-like-button [commentUuid]="comment.id" [likeCount]="comment.likeCount" [liked]="comment.liked"></app-like-button>
     <!-- Complain Button -->
-    <app-complain-button [commentUuid]="comment.id"></app-complain-button>
+    <app-complain-button [commentUuid]="comment.id" [reported] = "comment.reported"></app-complain-button>
   </div>
 </div>

@@ -8,27 +8,30 @@ import { CreatePostComponent } from "../create-post/create-post.component";
 import { Router } from '@angular/router';
 import { LoginService } from '../../../auth/login.service';
 import { CommentDto } from '../../../models/commentDTO/comment-dto';
+import { TredingComponent } from '../trending/treding.component';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [PostComponent, CommentComponent, CommonModule, CreatePostComponent],
+  imports: [PostComponent, CommentComponent, CommonModule, CreatePostComponent, TredingComponent],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent {
+  
   router = inject(Router);
   postService = inject(PostService);
   posts: PostDTO[] = [];
   selectedPostId: string | null = null;
   showModal: boolean = false;
-
+  
   loginService = inject(LoginService);
-
+  
   constructor() {
     this.findAllValidos();
   }
-
+  
+  
   findAllValidos() {
     const idUser = this.loginService.getIdUsuarioLogado();
     if (idUser) {

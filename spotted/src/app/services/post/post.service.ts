@@ -18,7 +18,7 @@ export class PostService {
   createPost(content: string, userId: string, tags: Tag[]): Observable<PostDTO> {
     const payload = {
       conteudo: content,
-      tags: tags.map((tag) => ({ uuid: tag.uuid })),
+      tagsId: tags.map((tag) => tag.uuid),
       userId: userId,
     };
 
@@ -63,7 +63,7 @@ export class PostService {
 
   likeComment(idComment: string, idUser: string): Observable<string> {
     return this.http.post<string>(
-      `${this.API}/post/like-comentario?idComentario=${idComment}&idUser=${idUser}`,
+      `${this.API}/post/like-comentario?idComment=${idComment}&idUser=${idUser}`,
       null,
       {
         responseType: 'text' as 'json',
@@ -83,7 +83,7 @@ export class PostService {
 
   denunciarComentario(idComment: string, idUser: string): Observable<string> {
     return this.http.post<string>(
-      `${this.API}/post/denunciar-comentario?idComentario=${idComment}&idUser=${idUser}`,
+      `${this.API}/post/denunciar-comentario?idComment=${idComment}&idUser=${idUser}`,
       null,
       {
         responseType: 'text' as 'json',

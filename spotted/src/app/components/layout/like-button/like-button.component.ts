@@ -46,8 +46,6 @@ export class LikeButtonComponent {
     });
   }
 
-
-
   likeComment() {
     const userId = this.loginService.getIdUsuarioLogado();
     if (!userId) {
@@ -55,6 +53,7 @@ export class LikeButtonComponent {
       return;
     }
 
+    console.log(this.commentUuid)
     this.toggleLike(userId);
     this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
 

@@ -1,6 +1,6 @@
 import { Component, Inject, inject } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { PostComponent } from '../post/post.component';
 import { PostDTO } from '../../../models/postDTO/post-dto';
 import { CommonModule } from '@angular/common';
@@ -17,9 +17,7 @@ import { CreateCommentComponent } from '../create-comment/create-comment.compone
   templateUrl: './modal-comment.component.html',
   styleUrl: './modal-comment.component.scss'
 })
-export class ModalCommentComponent {
-
-}
+export class ModalCommentComponent { }
 
 @Component({
   selector: 'dialog-content-example-dialog',
@@ -41,13 +39,13 @@ export class DialogContentCommentDialog {
   }
 
   private assignRandomImagesToComments(): void {
-  this.post.comments = this.post.comments.map(comment => {
-    const randomImage = this.postService.getRandomAnimalImage(comment.profileAnimal);
-    return {
-      ...comment,
-      imagem: randomImage.path,
-      imagemNome: randomImage.name
-    };
-  });
+    this.post.comments = this.post.comments.map(comment => {
+      const randomImage = this.postService.getRandomAnimalImage(comment.profileAnimal);
+      return {
+        ...comment,
+        imagem: randomImage.path,
+        imagemNome: randomImage.name
+      };
+    });
   }
 }
