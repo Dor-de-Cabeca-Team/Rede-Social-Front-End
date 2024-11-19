@@ -5,6 +5,7 @@ import { CommentDto } from '../../models/commentDTO/comment-dto'
 import { Tag } from '../../models/tag/tag';
 import { environment } from '../../../environments/environment';
 import { PostDTO } from '../../models/postDTO/post-dto';
+import { PostTop10 } from '../../models/trending/post-top10';
 
 
 
@@ -13,9 +14,13 @@ import { PostDTO } from '../../models/postDTO/post-dto';
 })
 export class PostService {
   http = inject(HttpClient);
-  API = environment.SERVIDOR+'/api';
+  API = environment.SERVIDOR + '/api';
 
-  createPost(content: string, userId: string, tags: Tag[]): Observable<PostDTO> {
+  createPost(
+    content: string,
+    userId: string,
+    tags: Tag[]
+  ): Observable<PostDTO> {
     const payload = {
       conteudo: content,
       tagsId: tags.map((tag) => tag.uuid),
@@ -47,8 +52,10 @@ export class PostService {
     return this.http.get<PostDTO[]>(`${this.API}/post/findAll`);
   }
 
-  findAllValidos(idUser:string): Observable<PostDTO[]> {
-    return this.http.get<PostDTO[]>(`${this.API}/post/postsValidos?idUser=${idUser}`);
+  findAllValidos(idUser: string): Observable<PostDTO[]> {
+    return this.http.get<PostDTO[]>(
+      `${this.API}/post/postsValidos?idUser=${idUser}`
+    );
   }
 
   findById(uuid: string): Observable<PostDTO> {
@@ -95,14 +102,14 @@ export class PostService {
     );
   }
 
-  showComments(idPost: string, idUser:string): Observable<CommentDto[]> {
+  showComments(idPost: string, idUser: string): Observable<CommentDto[]> {
     return this.http.get<CommentDto[]>(
       `${this.API}/comment/findAllValidosByPost_Uuid?idPost=${idPost}&idUser=${idUser}`
     );
   }
 
-  top10PostsComLike(): Observable<PostDTO[]> {
-    return this.http.get<PostDTO[]>(`${this.API}/post/top10PostsComLike`);
+  top10PostsComLike(): Observable<PostTop10[]> {
+    return this.http.get<PostTop10[]>(`${this.API}/post/top10PostsComLike`);
   }
 
   // comentarPost(idPost: string, idUser: string, comentario: string): Observable<string> {
