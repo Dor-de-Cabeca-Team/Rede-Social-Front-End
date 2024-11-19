@@ -48,13 +48,15 @@ export class DialogContentCommentDialog {
       next: (comments) => {
         const imagesLength = 20; // Número de imagens disponíveis para os comentários
         this.post.comments = comments.map((comment) => {
-          const randomIndex = Math.floor(Math.random() * imagesLength);
-          const randomImage = this.postService.getRandomAnimalImage(randomIndex);
+          const animalIndex = comment.profileAnimal ?? 0;
+          const animalImage = this.postService.getRandomAnimalImage(animalIndex % imagesLength);
 
           return {
             ...comment,
-            imagem: randomImage.path,
-            imagemNome: randomImage.name,
+            imagem: animalImage.path,
+              imagemNome: animalImage.name,
+              liked: comment.liked,
+              reported: comment.reported,
           };
         });
       },

@@ -40,14 +40,14 @@ export class FeedComponent {
           const imagesLength = 20;
           this.posts = posts.map((post) => {
             const validComments: CommentDto[] = post.comments;
-            const randomIndex = Math.floor(Math.random() * imagesLength);
-            const randomImage = this.postService.getRandomAnimalImage(randomIndex);
-  
+            const animalIndex = post.profileAnimal ?? 0;
+            const animalImage = this.postService.getRandomAnimalImage(animalIndex % imagesLength);
+
             return {
               ...post,
               comments: validComments,
-              imagem: randomImage.path,
-              imagemNome: randomImage.name,
+              imagem: animalImage.path,
+              imagemNome: animalImage.name,
               liked: post.liked,
               reported: post.reported,
             };
