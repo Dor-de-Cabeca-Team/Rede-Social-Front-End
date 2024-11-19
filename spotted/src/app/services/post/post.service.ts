@@ -19,15 +19,16 @@ export class PostService {
   createPost(
     content: string,
     userId: string,
-    tags: Tag[]
-  ): Observable<PostDTO> {
+    tags: { nome: string }[]
+  ): Observable<string> {
     const payload = {
       conteudo: content,
-      tagsId: tags.map((tag) => tag.uuid),
+      tags: tags,
       userId: userId,
     };
 
-    return this.http.post<PostDTO>(`${this.API}/post/save`, payload, {
+    // Especifica que a resposta é texto, não JSON
+    return this.http.post<string>(`${this.API}/post/save`, payload, {
       responseType: 'text' as 'json',
     });
   }
