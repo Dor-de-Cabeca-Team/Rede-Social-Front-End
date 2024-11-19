@@ -9,12 +9,5 @@ export class CommentDto {
     imagem?: string;
     imagemNome?: string;
     post!:string;
-    user!:string;
-  
-    constructor(id: string, data: Date, conteudo: string) {
-      this.id = id;
-      this.data = data;
-      this.conteudo = conteudo;
-    }
   }
   

@@ -11,18 +11,6 @@ export class PostDTO {
     profileAnimal!: number;
     imagem?: string;
     imagemNome?: string;
-    userId!: String;
     tags!: Tag[];
     comments!: CommentDto[];
-
-    constructor(conteudo: string, liked: boolean, likeCount: number, profileAnimal: number, tags: Tag[]) {
-        this.id = '';
-        this.conteudo = conteudo;
-        this.liked = liked;
-        this.likeCount = likeCount;
-        this.comments = [];
-        this.data = new Date();
-        this.profileAnimal = profileAnimal;
-        this.tags = tags;
-    }    
 }
