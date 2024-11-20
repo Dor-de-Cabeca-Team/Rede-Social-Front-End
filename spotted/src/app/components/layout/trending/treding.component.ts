@@ -2,7 +2,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
-import { Post } from '../../../models/post/post';
+import { PostDTO } from '../../../models/postDTO/post-dto';
+import { PostTop10 } from '../../../models/trending/post-top10';
 
 @Component({
   selector: 'app-treding',
@@ -21,9 +22,11 @@ export class TredingComponent {
 
   loadTrendingPosts() {
     this.postService.top10PostsComLike().subscribe({
-      next: (posts: Post[]) => {
+      next: (posts: PostTop10[]) => {
         this.trendingList = posts.map((post) => ({
-          tags: post.tags.map((tag) => tag.nome), // Extrai o nome de cada tag
+          tags: Array.isArray(post.tags)
+            ? post.tags.map((tag) => tag.nome)
+            : [],
           description: post.conteudo,
         }));
       },

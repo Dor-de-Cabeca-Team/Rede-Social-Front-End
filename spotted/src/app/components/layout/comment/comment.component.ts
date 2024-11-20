@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Comment } from '../../../models/comment/comment';
+import { CommentDto } from '../../../models/commentDTO/comment-dto';
 import { LikeButtonComponent } from '../like-button/like-button.component';
 import { ComplainButtonComponent } from '../complain-button/complain-button.component';
 
@@ -12,5 +12,5 @@ import { ComplainButtonComponent } from '../complain-button/complain-button.comp
   styleUrl: './comment.component.scss'
 })
 export class CommentComponent {
-  @Input() comment!: Comment;
+  @Input() comment!: CommentDto;
 }

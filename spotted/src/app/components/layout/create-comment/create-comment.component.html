@@ -3,6 +3,6 @@
     <textarea [(ngModel)]="commentContent" class="form-control" placeholder="Dê seu comentário" maxlength="250" rows="3"></textarea>
   </div>
   <div class="btn-div position-relative">
-    <button (click)="createComment(post.uuid)" class="btn btn-primary position-absolute bottom-0 end-0">Send</button>
+    <button (click)="createComment(post.id)" class="btn btn-primary position-absolute bottom-0 end-0">Send</button>
   </div>
 </div>

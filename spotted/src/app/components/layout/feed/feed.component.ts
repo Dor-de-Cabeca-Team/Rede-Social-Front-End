@@ -1,86 +1,73 @@
 import { Component, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
-import { Post } from '../../../models/post/post';
+import { PostDTO } from '../../../models/postDTO/post-dto';
 import { PostComponent } from '../post/post.component';
 import { CommentComponent } from '../comment/comment.component';
 import { CommonModule } from '@angular/common';
 import { CreatePostComponent } from "../create-post/create-post.component";
 import { Router } from '@angular/router';
+import { LoginService } from '../../../auth/login.service';
+import { CommentDto } from '../../../models/commentDTO/comment-dto';
+import { TredingComponent } from '../trending/treding.component';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [PostComponent, CommentComponent, CommonModule, CreatePostComponent],
+  imports: [PostComponent, CommentComponent, CommonModule, CreatePostComponent, TredingComponent],
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent {
+  
   router = inject(Router);
   postService = inject(PostService);
-  posts: Post[] = [];
+  posts: PostDTO[] = [];
   selectedPostId: string | null = null;
   showModal: boolean = false;
   
-
+  loginService = inject(LoginService);
+  
   constructor() {
     this.findAllValidos();
   }
-
-  findAll() {
-    this.postService.findAll().subscribe({
-      next: (value) => {
-        this.posts = value.map((post) => {
-          const validComments =
-            post.comments?.filter((comment) => comment.valido === true) || [];
-          const randomImage = this.postService.getRandomAnimalImage(
-            post.profileAnimal
-          );
-          return {
-            ...post,
-            comments: validComments,
-            imagem: randomImage.path,
-            imagemNome: randomImage.name,
-          };
-        });
-      },
-      error: (err) => {
-        console.error('Error: ' + err);
-        alert('Error: ' + err);
-      },
-    });
-  }
-
+  
+  
   findAllValidos() {
-    this.postService.findAllValidos().subscribe({
-      next: (value) => {
-        const imagesLength = 20; // Número de imagens disponíveis
-        this.posts = value.map((post) => {
-          const validComments =
-            post.comments?.filter((comment) => comment.valido === true) || [];
-          const randomIndex = Math.floor(Math.random() * imagesLength);
-          const randomImage =
-            this.postService.getRandomAnimalImage(randomIndex);
+    const idUser = this.loginService.getIdUsuarioLogado();
+    if (idUser) {
+      this.postService.findAllValidos(idUser).subscribe({
+        next: (posts) => {
+          const imagesLength = 20;
+          this.posts = posts.map((post) => {
+            const validComments: CommentDto[] = post.comments;
+            const animalIndex = post.profileAnimal ?? 0;
+            const animalImage = this.postService.getRandomAnimalImage(animalIndex % imagesLength);
 
-          return {
-            ...post,
-            comments: validComments,
-            imagem: randomImage.path,
-            imagemNome: randomImage.name,
-          };
-        });
-      },
-      error: (err) => {
-        console.error('Error: ' + err);
-        //alert('Error: ' + err);
-        alert('Faça login novamente!');
-        this.router.navigate(['/login']);
-      },
-    });
+            return {
+              ...post,
+              comments: validComments,
+              imagem: animalImage.path,
+              imagemNome: animalImage.name,
+              liked: post.liked,
+              reported: post.reported,
+            };
+          });
+        },
+        error: (err) => {
+          console.error('Error: ' + err);
+          alert('Faça login novamente!');
+          this.router.navigate(['/login']);
+        },
+      });
+    } else {
+      console.error('User is not logged in');
+      alert('Você precisa estar logado para ver os posts.');
+    }
   }
-
+  
   onPostCreated() {
     setTimeout(() => {
       this.findAllValidos();
-    }, 1500); // Atualiza o feed após 2 segundos
+    }, 1500);
   }
 }

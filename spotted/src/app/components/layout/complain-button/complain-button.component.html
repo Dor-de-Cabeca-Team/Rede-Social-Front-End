@@ -1,3 +1,11 @@
-<button title="denuncia" class="btn btn-outline-danger btn-sm" (click)="denunciar()">
- <i class="fas fa-flag"></i>
+<button
+  title="denuncia"
+  class="btn"
+  [ngClass]="{
+    'btn-outline-danger': !reported,
+    'btn-danger': reported
+  }"
+  (click)="denunciar()"
+>
+  <i class="fas fa-flag"></i>
 </button>
