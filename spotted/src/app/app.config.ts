@@ -6,14 +6,14 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { meuhttpInterceptor } from './auth/http-interceptor.service';
-import { spinnerInterceptor } from './interceptors/spinner.interceptor'; // Solo cambié este nombre
+import { spinnerInterceptor } from './interceptors/spinner.interceptor'; 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(
-      withInterceptors([meuhttpInterceptor, spinnerInterceptor])), // Y este nombre
+      withInterceptors([meuhttpInterceptor, spinnerInterceptor])), 
     provideClientHydration(),
     provideZoneChangeDetection(),
     provideAnimations(),

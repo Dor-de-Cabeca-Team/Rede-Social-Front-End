@@ -21,21 +21,27 @@
   margin-bottom: var(--spacing-large);
   padding-bottom: 5rem;
   overflow: hidden;
+  font-size: 1rem;
+}
+.sub-contenedor_texto{
+  font-weight: 800;
+  color: white;
+  font-size: 3rem;
+  margin-top: 0.5rem;
 }
 .typed-text {
-  font-size: 3rem;
-  font-weight: bold;
+ 
   border-right: 3px solid #2563eb;
-  width: 0;
   white-space: nowrap;
   overflow: hidden;
-  animation: typing 2s steps(5, end) forwards,
-             blink 0.75s step-end infinite;
+  animation: typing 5s steps(3, end) forwards,
+             blink 0.75s step-start infinite;
 }
 .buttons-container {
   display: flex;
   gap: var(--spacing-medium);
   margin-bottom: var(--spacing-large);
+  
 }
 .btn {
   padding: 0.75rem 2rem;
@@ -45,12 +51,14 @@
   font-size: 1rem;
   min-width: 150px;
   cursor: pointer;
+
 }
 .btn-crear {
   background-color: #2563eb;
   color: white;
   border: none;
   box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+  margin-right: 3rem;
 }
 .btn-crear:hover {
   background-color: #1d4ed8;
@@ -61,7 +69,7 @@
   
   background-color: transparent;
   color: #ffffff;
-  border: 2px solid #ffffff;
+  border: 2px solid #2563eb;
 }
 .btn-login:hover {
   background-color: #2563eb;
