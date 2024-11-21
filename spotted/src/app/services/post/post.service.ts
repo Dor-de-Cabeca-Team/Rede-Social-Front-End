@@ -60,8 +60,8 @@ export class PostService {
   }
 
   findById(uuid: string): Observable<PostDTO> {
-    return this.http.get<PostDTO>(`${this.API}/post/findById/${uuid}`);
-  }
+    return this.http.get<PostDTO>(`${this.API}/post/findById?uuid=${uuid}`);
+  }  
 
   likePost(idPost: string, idUser: string): Observable<string> {
     return this.http.post<string>(
@@ -109,8 +109,8 @@ export class PostService {
     );
   }
 
-  top10PostsComLike(idUser:string): Observable<PostTop10[]> {
-    return this.http.get<PostTop10[]>(`${this.API}/post/top10PostsComLike?idUser=${idUser}`);
+  top10PostsComLike(): Observable<PostTop10[]> {
+    return this.http.get<PostTop10[]>(`${this.API}/post/top10PostsComLike`);
   }
 
   // comentarPost(idPost: string, idUser: string, comentario: string): Observable<string> {

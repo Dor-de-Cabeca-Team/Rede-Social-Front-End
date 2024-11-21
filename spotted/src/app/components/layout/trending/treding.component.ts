@@ -19,7 +19,7 @@ import { LoginService } from '../../../auth/login.service';
 export class TredingComponent {
   post!:PostDTO;
   postService = inject(PostService);
-  trendingList: { id: string; tags: string[]; description: string; comments: CommentDto[] }[] = [];
+  trendingList: { id: string; tags: string[]; description: string;}[] = [];
   showModal: boolean = false;
   loginService = inject(LoginService);
 
@@ -29,20 +29,12 @@ export class TredingComponent {
   }
 
   loadTrendingPosts() {
-    const idUser = this.loginService.getIdUsuarioLogado();
-
-    if (!idUser) {
-      console.error("Usuário não está logado ou ID inválido.");
-      return;
-    }
-    
-    this.postService.top10PostsComLike(idUser).subscribe({
+    this.postService.top10PostsComLike().subscribe({
       next: (posts: PostTop10[]) => {
         this.trendingList = posts.map((post) => ({
           id: post.id,
           tags: Array.isArray(post.tags) ? post.tags.map((tag) => tag.nome) : [],
-          description: post.conteudo,
-          comments: post.comments,
+          description: post.conteudo
         }));
       },
       error: (err) => {
@@ -50,25 +42,19 @@ export class TredingComponent {
       },
     });
   }
-  
-  
 
   openDialog(postId: string) {
-    const selectedPost = this.trendingList.find(post => post.id === postId);
-    
-    if (selectedPost) {
-      this.dialog.open(DialogContentCommentDialog, {
-        data: {
-          post: selectedPost
-        }
-      });
-    } else {
-      console.error("Post não encontrado!");
-    }
-  }
-  
-
-  toggleModal() {
-    this.showModal = !this.showModal;
+    this.postService.findById(postId).subscribe({
+      next: (post: PostDTO) => {
+        this.dialog.open(DialogContentCommentDialog, {
+          data: {
+            post: post
+          }
+        });
+      },
+      error: (err) => {
+        console.error("Erro ao carregar o post: " + err);
+      }
+    });
   }
 }
