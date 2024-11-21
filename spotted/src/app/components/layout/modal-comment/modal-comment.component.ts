@@ -31,6 +31,7 @@ export class DialogContentCommentDialog {
   post: PostDTO;
   postService = inject(PostService);
   loginService = inject(LoginService);
+  showComments:boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { post: PostDTO },

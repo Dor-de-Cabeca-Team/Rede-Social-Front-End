@@ -24,6 +24,7 @@ export class FeedComponent {
   posts: PostDTO[] = [];
   selectedPostId: string | null = null;
   showModal: boolean = false;
+  showComments:boolean = true
   
   loginService = inject(LoginService);
   
@@ -34,6 +35,7 @@ export class FeedComponent {
   
   findAllValidos() {
     const idUser = this.loginService.getIdUsuarioLogado();
+    console.log(idUser)
     if (idUser) {
       this.postService.findAllValidos(idUser).subscribe({
         next: (posts) => {

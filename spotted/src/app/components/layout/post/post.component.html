@@ -16,10 +16,12 @@
     <app-like-button [likeCount]="post.likeCount"
     [postUuid]="post.id"
     [liked]="post.liked ?? false"></app-like-button>
+    @if(showComments == true){
     <span class="text-white" (click)="openDialog()" style="cursor: pointer">
       <i class="far fa-comments"></i>
       {{ post.comments.length}} Comentários
     </span>
+  }
     <app-complain-button [postUuid]="post.id" [reported] = "post.reported ?? false"></app-complain-button>
   </div>
 </div>

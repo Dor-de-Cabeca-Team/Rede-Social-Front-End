@@ -2,13 +2,16 @@
 
 
 <mat-dialog-content class="mat-typography">
-  <!-- Sessão Post -->
   <div>
-  <!-- Sessão Comentario -->
+  <!-- Sessão Post -->
+    <!--<app-post [showComments]="showComments" [post]="post"></app-post>-->
   </div>
+  <div>
+    <!-- Sessão Comentario -->
     @for (comment of post.comments; track $index) {
       <app-comment [comment]="comment"></app-comment>
     }
+  </div>
   </mat-dialog-content>
 
   <app-create-comment [post]="post" (commentCreated)="onCreateComments()"></app-create-comment>

@@ -109,8 +109,8 @@ export class PostService {
     );
   }
 
-  top10PostsComLike(): Observable<PostTop10[]> {
-    return this.http.get<PostTop10[]>(`${this.API}/post/top10PostsComLike`);
+  top10PostsComLike(idUser:string): Observable<PostTop10[]> {
+    return this.http.get<PostTop10[]>(`${this.API}/post/top10PostsComLike?idUser=${idUser}`);
   }
 
   // comentarPost(idPost: string, idUser: string, comentario: string): Observable<string> {

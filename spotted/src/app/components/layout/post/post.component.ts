@@ -19,14 +19,12 @@ import { ComplainButtonComponent } from '../complain-button/complain-button.comp
 })
 export class PostComponent {
   @Input() post!: PostDTO;
+  @Input() showComments!:boolean;
 
   postService = inject(PostService);
   liked: boolean = false;
   reported: boolean = false;
-  showCommentsComponent: boolean = false;
   showModal: boolean = false;
-  
-  userid = '9efc06b5-2e29-4c9a-bcfa-68a28ac475cd'; // fixo por enquanto
 
   constructor(private dialog: MatDialog) {}
 
@@ -40,17 +38,5 @@ export class PostComponent {
 
   toggleModal() {
     this.showModal = !this.showModal;
-  }
-
-  denunciarPost() {
-    this.postService.denunciarPost(this.post.id, this.userid).subscribe({
-      next: (response) => {
-        // Sucesso
-      },
-      error: (err) => {
-        console.error('Error: ', err);
-        alert('Error: ' + err.error?.error || 'Ocorreu um erro desconhecido');
-      },
-    });
   }
 }
