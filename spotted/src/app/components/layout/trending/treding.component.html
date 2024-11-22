@@ -3,6 +3,7 @@
   <div
     *ngFor="let item of trendingList"
     class="list-group-item text-white mb-2 rounded cor"
+    (click)="openDialog(item.id)" style="cursor: pointer"
   >
     <small class="text-muted">
       <span *ngFor="let tag of item.tags">#{{ tag }} </span>

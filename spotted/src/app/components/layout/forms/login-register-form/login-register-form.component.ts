@@ -144,7 +144,7 @@ export class LoginRegisterFormComponent {
       next: (user) => {
         this.isLoading = false; // Garantir que pare o carregamento
         this.user = user;
-        //alert('Usuário registrado com sucesso');
+        alert('Usuário registrado com sucesso');
         console.log('Usuário registrado:', user);
         this.limparFormulario();
       },

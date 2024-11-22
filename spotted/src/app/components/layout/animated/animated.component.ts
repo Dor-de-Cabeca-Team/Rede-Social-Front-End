@@ -10,8 +10,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-10px)' }), 
-        animate('1500ms ease-in', style({ opacity: 1, transform: 'translateY(300)' })) 
+        style({ opacity: 0, transform: 'translateY(-200px)' }), 
+        animate('5500ms ease-in', style({ opacity: 1, transform: 'translateY(1200)' })) 
       ]),
     ]),
   ],

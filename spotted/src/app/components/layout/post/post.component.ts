@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { Post } from '../../../models/post/post';
+import { PostDTO } from '../../../models/postDTO/post-dto';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PostService } from '../../../services/post/post.service';
@@ -15,19 +15,16 @@ import { ComplainButtonComponent } from '../complain-button/complain-button.comp
   standalone: true,
   imports: [CommonModule, RouterLink, CommentComponent, ModalCommentComponent, MatDialogModule, LikeButtonComponent, ComplainButtonComponent],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.scss'
+  styleUrls: ['./post.component.scss']
 })
 export class PostComponent {
-  // vai receber os posts que são passados pelo findAll dentro do feed.component
-  // por isso o @Input()
-  @Input() post!: Post;
+  @Input() post!: PostDTO;
+  @Input() showComments!:boolean;
 
   postService = inject(PostService);
-  isLiked: boolean = false;
-  showCommentsComponent: boolean = false;
+  liked: boolean = false;
+  reported: boolean = false;
   showModal: boolean = false;
-
-  userid = '88fc4171-c04e-4659-a8f3-073745701517'; // fixo por enquanto
 
   constructor(private dialog: MatDialog) {}
 
@@ -42,19 +39,4 @@ export class PostComponent {
   toggleModal() {
     this.showModal = !this.showModal;
   }
-
-  denunciarPost() {
-    this.postService.denunciarPost(this.post.uuid, this.userid).subscribe({
-      next: (response) => {
-        // console.log('Post reported: ' + response);
-        // alert('Post reported successfully: ' + response);
-      },
-      error: (err) => {
-        console.error('Error: ', err);
-        alert('Error: ' + err.error?.error || 'Ocorreu um erro desconhecido');
-      },
-    });
-  }
-
-
 }

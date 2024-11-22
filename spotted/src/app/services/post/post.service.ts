@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Post } from '../../models/post/post';
-import { Comment } from '../../models/comment/comment';
+import { CommentDto } from '../../models/commentDTO/comment-dto'
 import { Tag } from '../../models/tag/tag';
+import { environment } from '../../../environments/environment';
+import { PostDTO } from '../../models/postDTO/post-dto';
+import { PostTop10 } from '../../models/trending/post-top10';
 
 
 
@@ -12,57 +14,68 @@ import { Tag } from '../../models/tag/tag';
 })
 export class PostService {
   http = inject(HttpClient);
-  API = 'http://localhost:8080/api';
+  API = environment.SERVIDOR + '/api';
 
-  createPost(content: string, userId: string, tags: Tag[]): Observable<Post> {
+  createPost(
+    content: string,
+    userId: string,
+    tags: { nome: string }[]
+  ): Observable<string> {
     const payload = {
       conteudo: content,
-      tags: tags.map((tag) => ({ uuid: tag.uuid })),
-      user: { uuid: userId },
+      tags: tags,
+      userId: userId,
     };
 
-    return this.http.post<Post>(`${this.API}/post/save`, payload);
+    // Especifica que a resposta é texto, não JSON
+    return this.http.post<string>(`${this.API}/post/save`, payload, {
+      responseType: 'text' as 'json',
+    });
   }
 
   createComment(
     content: string,
     userId: string,
     postId: string
-  ): Observable<Comment> {
+  ): Observable<String> {
     const payload = {
       conteudo: content,
-      post: { uuid: postId },
-      user: { uuid: userId },
+      post: postId,
+      user: userId,
     };
 
-    return this.http.post<Comment>(`${this.API}/comment/save`, payload);
+    return this.http.post<string>(`${this.API}/comment/save`, payload, {
+      responseType: 'text' as 'json',
+    });
   }
 
-  findAll(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.API}/post/findAll`);
+  findAll(): Observable<PostDTO[]> {
+    return this.http.get<PostDTO[]>(`${this.API}/post/findAll`);
   }
 
-  findAllValidos(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.API}/post/postsValidos`);
+  findAllValidos(idUser: string): Observable<PostDTO[]> {
+    return this.http.get<PostDTO[]>(
+      `${this.API}/post/postsValidos?idUser=${idUser}`
+    );
   }
 
-  findById(uuid: string): Observable<Post> {
-    return this.http.get<Post>(`${this.API}/post/findById/${uuid}`);
-  }
+  findById(uuid: string): Observable<PostDTO> {
+    return this.http.get<PostDTO>(`${this.API}/post/findById?uuid=${uuid}`);
+  }  
 
   likePost(idPost: string, idUser: string): Observable<string> {
     return this.http.post<string>(
       `${this.API}/post/like-post?idPost=${idPost}&idUser=${idUser}`,
       null,
       {
-        responseType: 'text' as 'json', // Faz o Angular tratar a resposta como texto
+        responseType: 'text' as 'json',
       }
     );
   }
 
   likeComment(idComment: string, idUser: string): Observable<string> {
     return this.http.post<string>(
-      `${this.API}/post/like-comentario?idComentario=${idComment}&idUser=${idUser}`,
+      `${this.API}/post/like-comentario?idComment=${idComment}&idUser=${idUser}`,
       null,
       {
         responseType: 'text' as 'json',
@@ -82,7 +95,7 @@ export class PostService {
 
   denunciarComentario(idComment: string, idUser: string): Observable<string> {
     return this.http.post<string>(
-      `${this.API}/post/denunciar-comentario?idComentario=${idComment}&idUser=${idUser}`,
+      `${this.API}/post/denunciar-comentario?idComment=${idComment}&idUser=${idUser}`,
       null,
       {
         responseType: 'text' as 'json',
@@ -90,14 +103,14 @@ export class PostService {
     );
   }
 
-  showComments(idPost: string): Observable<Comment[]> {
-    return this.http.get<Comment[]>(
-      `${this.API}/comment/findAllByPost_Uuid?uuid=${idPost}`
+  showComments(idPost: string, idUser: string): Observable<CommentDto[]> {
+    return this.http.get<CommentDto[]>(
+      `${this.API}/comment/findAllValidosByPost_Uuid?idPost=${idPost}&idUser=${idUser}`
     );
   }
 
-  top10PostsComLike(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.API}/post/top10PostsComLike`);
+  top10PostsComLike(): Observable<PostTop10[]> {
+    return this.http.get<PostTop10[]>(`${this.API}/post/top10PostsComLike`);
   }
 
   // comentarPost(idPost: string, idUser: string, comentario: string): Observable<string> {

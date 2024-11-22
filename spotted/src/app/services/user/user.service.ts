@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { User } from '../../models/user/class/user';
 import { UserInterface } from '../../models/user/interface/user-interface';
 import { UserRegister } from '../../models/user/interface/user-register';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private API_URL = "http://localhost:8080/api/auth";
+  private API_URL = environment.SERVIDOR+"/api/auth";
 
   http = inject(HttpClient);
 

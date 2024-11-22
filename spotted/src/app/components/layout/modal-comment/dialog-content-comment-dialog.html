@@ -2,16 +2,19 @@
 
 
 <mat-dialog-content class="mat-typography">
+  <div>
   <!-- Sessão Post -->
-  <div *ngIf="post.valido">
-  <!-- Sessão Comentario -->
+    <!--<app-post [showComments]="showComments" [post]="post"></app-post>-->
   </div>
+  <div>
+    <!-- Sessão Comentario -->
     @for (comment of post.comments; track $index) {
-      <app-comment *ngIf="comment.valido" [comment]="comment"></app-comment>
+      <app-comment [comment]="comment"></app-comment>
     }
+  </div>
   </mat-dialog-content>
 
-  <app-create-comment [post]="post"></app-create-comment>
+  <app-create-comment [post]="post" (commentCreated)="onCreateComments()"></app-create-comment>
 <!-- Botoes pra sair do modal -->
 <!-- <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>

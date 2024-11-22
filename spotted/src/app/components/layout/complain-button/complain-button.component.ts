@@ -1,18 +1,19 @@
 import { Component, Input, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
-import { IdGlobalService } from '../../../services/user/login/id-global.service';
 import { LoginService } from '../../../auth/login.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-complain-button',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './complain-button.component.html',
   styleUrls: ['./complain-button.component.scss'],
 })
 export class ComplainButtonComponent {
   @Input() postUuid!: string;
   @Input() commentUuid!: string;
+  @Input() reported: boolean = false;
   postService = inject(PostService);
   loginService = inject(LoginService);
 
@@ -21,9 +22,11 @@ export class ComplainButtonComponent {
     if (userId) {
       this.postService.denunciarPost(this.postUuid, userId).subscribe({
         next: (response) => {
-          // console.log('Post reportado: ' + response);
-          // Aqui você pode usar um componente de alerta
-          alert('Post reportado com sucesso: ' + response);
+          if(this.reported == false){
+            this.reported = true;
+          } else{
+            this.reported = false
+          }
         },
         error: (err) => {
           console.error('Error: ', err);
@@ -42,9 +45,11 @@ export class ComplainButtonComponent {
     if (userId) {
       this.postService.denunciarComentario(this.commentUuid, userId).subscribe({
         next: (response) => {
-          console.log('Comment reported: ' + response);
-          // Aqui você pode usar um componente de alerta
-          alert('Comment reported successfully: ' + response);
+          if(this.reported == false){
+            this.reported = true;
+          } else{
+            this.reported = false
+          }
         },
         error: (err) => {
           console.error('Error: ', err);

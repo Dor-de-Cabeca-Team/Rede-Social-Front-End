@@ -1,21 +1,25 @@
 import { Component, Input, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { LoginService } from '../../../auth/login.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-like-button',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './like-button.component.html',
   styleUrls: ['./like-button.component.scss'],
 })
 export class LikeButtonComponent {
+  @Input() likeCount: number = 0;
   @Input() postUuid!: string;
   @Input() commentUuid!: string;
   @Input() likes: any[] = [];
+  @Input() liked: boolean = false;
   postService = inject(PostService);
-  isLiked = false;
   loginService = inject(LoginService);
+  private pendingLikeStatus: boolean = this.liked;
+  private isPending: boolean = false;
 
   likePost() {
     const userId = this.loginService.getIdUsuarioLogado();
@@ -24,15 +28,21 @@ export class LikeButtonComponent {
       return;
     }
 
+    if (this.isPending) return;
+
+    this.toggleLike(userId);
+    this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
+
     this.postService.likePost(this.postUuid, userId).subscribe({
       next: (response) => {
-        this.isLiked = !this.isLiked; // Alterna o estado do like
-        this.isLiked ? this.likes.push(userId) : this.likes.pop(); // Atualiza o contador de likes
-        //alert('Like realizado com sucesso!');
+        this.pendingLikeStatus = this.liked;
       },
       error: (err) => {
-        console.error('Erro: ', err);
+        console.error('Erro ao dar like no post: ', err);
       },
+      complete: () => {
+        this.isPending = false;
+      }
     });
   }
 
@@ -43,16 +53,33 @@ export class LikeButtonComponent {
       return;
     }
 
+    console.log(this.commentUuid)
+    this.toggleLike(userId);
+    this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
+
     this.postService.likeComment(this.commentUuid, userId).subscribe({
       next: (response) => {
-        this.isLiked = !this.isLiked; // Alterna o estado do like
-        this.isLiked ? this.likes.push(userId) : this.likes.pop(); // Atualiza o contador de likes
-        //alert('Like no comentário realizado com sucesso!');
+        this.pendingLikeStatus = this.liked;
       },
       error: (err) => {
-        console.error('Erro: ', err);
+        console.error('Erro ao dar like no comentário: ', err);
       },
+      complete: () => {
+        this.isPending = false;
+      }
     });
+  }
+
+  toggleLike(userId: string) {
+    this.liked = !this.liked;
+    if (this.liked) {
+      this.likes.push(userId);
+    } else {
+      const index = this.likes.indexOf(userId);
+      if (index > -1) {
+        this.likes.splice(index, 1);
+      }
+    }
   }
 
   like() {
