@@ -4,7 +4,7 @@ import { SpinnerService } from '../../../services/spinner/spinner.service';@Comp
   selector: 'app-spinner',
   standalone: true,
   imports: [CommonModule],
-  template: './spinner.component.html'
+  template: ''
 })
 export class SpinnerComponent {
   constructor(public spinnerService: SpinnerService) {}

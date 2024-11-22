@@ -4,7 +4,15 @@
       <app-login-register-form></app-login-register-form>
     </div>
     <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center fade-background">
-      <!-- Conteúdo da segunda coluna aqui -->
+      <div class="content-overlay">
+     
+      </div>
     </div>
   </div>
 </div>
+@if (isLoading) {
+  <div class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+}
+
