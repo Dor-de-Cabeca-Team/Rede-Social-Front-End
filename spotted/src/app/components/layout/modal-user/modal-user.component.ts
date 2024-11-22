@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal'
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 
 @Component({
