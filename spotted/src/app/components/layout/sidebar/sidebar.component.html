@@ -12,12 +12,21 @@
           <span class="text d-none d-md-inline">{{ item.name }}</span>
         </a>
       </div>
-    }  
-   <div class="list-group-item">
-    <a (click)="openModal()">
-     <i class="fas fa-cog icon fa-2x"></i>
-     <span class="text d-none d-md-inline">Config</span>
-    </a>
-   </div>
+    }
+    <div mdbDropdown class="dropdown list-group-item">
+      <a
+        class="d-flex align-items-center"
+        type="button"
+        id="dropdownMenuButton2"
+        mdbDropdownToggle
+      >
+        <i class="fas fa-cog icon fa-2x"></i>
+        <span class="text d-none d-md-inline">Menu</span>
+      </a>
+      <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+        <li><a class="dropdown-item" (click)="openModal()">Conta</a></li>
+        <li><a class="dropdown-item" (click)="sair()">Sair</a></li>
+      </ul>
+    </div>
   </div>
 </aside>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
 
 interface User {
   username: string;
@@ -13,12 +14,15 @@ interface User {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MdbDropdownModule],
   providers: [MdbModalService],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
+
+
+
   menuItems = [
     {
       route: '/principal',
@@ -68,5 +72,11 @@ export class SidebarComponent {
     this.modalRef = this.modalService.open(ModalUserComponent, {
       modalClass: 'modal-dialog-centered',
     });
+  }
+
+  sair() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('loggedUser');
+    this.router.navigate(['/login']);
   }
 }
