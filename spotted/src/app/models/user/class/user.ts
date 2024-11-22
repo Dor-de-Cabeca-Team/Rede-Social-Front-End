@@ -1,13 +1,9 @@
 export class User {
-    nome!:string;
-    email!:string;
-    senha!:string;
-    idade!:number;
+  id!: string;
+  nome!: string;
+  email!: string;
 
-    constructor(nome:string, email:string, senha:string, idade:number){
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.idade = idade;
-    }
+  constructor(init?: Partial<User>) {
+    Object.assign(this, init); // Inicializa as propriedades do objeto
+  }
 }
