@@ -13,9 +13,11 @@
         </a>
       </div>
     }  
-    <div class="user-info d-flex align-items-center list-group-item">
-      <img [src]="user.picture" alt="User Profile" class="rounded-circle user-avatar">
-      <span class="user-name ms-2">{{ user.username }}</span>
-    </div>
+   <div class="list-group-item">
+    <a (click)="openModal()">
+     <i class="fas fa-cog icon fa-2x"></i>
+     <span class="text d-none d-md-inline">Config</span>
+    </a>
+   </div>
   </div>
 </aside>
