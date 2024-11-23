@@ -44,7 +44,9 @@ export class TredingComponent {
   }
 
   openDialog(postId: string) {
-    this.postService.findById(postId).subscribe({
+    const idUser = this.loginService.getIdUsuarioLogado();
+    if (idUser) {
+    this.postService.findById(postId, idUser).subscribe({
       next: (post: PostDTO) => {
         if (post.profileAnimal !== undefined) {
           const imagesLength = 20;
@@ -65,5 +67,9 @@ export class TredingComponent {
         console.error("Erro ao carregar o post: " + err);
       }
     });
+  } else {
+    console.error('User is not logged in');
+    alert('Você precisa estar logado para ver os posts.');
+  }
   }  
 }
