@@ -16,13 +16,13 @@ import { LoginService } from '../../../auth/login.service';
   templateUrl: './treding.component.html',
   styleUrls: ['./treding.component.scss'],
 })
+// Em trending.component.ts
 export class TredingComponent {
-  post!:PostDTO;
+  post!: PostDTO;
   postService = inject(PostService);
-  trendingList: { id: string; tags: string[]; description: string;}[] = [];
+  trendingList: { id: string; tags: string[]; description: string; }[] = [];  // Não precisa da imagem aqui
   showModal: boolean = false;
   loginService = inject(LoginService);
-
 
   constructor(private dialog: MatDialog) {
     this.loadTrendingPosts();
@@ -46,6 +46,15 @@ export class TredingComponent {
   openDialog(postId: string) {
     this.postService.findById(postId).subscribe({
       next: (post: PostDTO) => {
+        if (post.profileAnimal !== undefined) {
+          const imagesLength = 20;
+          const animalIndex = post.profileAnimal ?? 0;
+          const animalImage = this.postService.getRandomAnimalImage(animalIndex % imagesLength);
+  
+          post.imagem = animalImage.path;
+          post.imagemNome = animalImage.name;
+        }
+  
         this.dialog.open(DialogContentCommentDialog, {
           data: {
             post: post
@@ -56,5 +65,5 @@ export class TredingComponent {
         console.error("Erro ao carregar o post: " + err);
       }
     });
-  }
+  }  
 }

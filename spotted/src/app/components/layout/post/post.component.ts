@@ -24,7 +24,6 @@ export class PostComponent {
   postService = inject(PostService);
   liked: boolean = false;
   reported: boolean = false;
-  showModal: boolean = false;
 
   constructor(private dialog: MatDialog) {}
 
@@ -34,9 +33,5 @@ export class PostComponent {
         post: this.post,
       }
     });
-  }
-
-  toggleModal() {
-    this.showModal = !this.showModal;
   }
 }
