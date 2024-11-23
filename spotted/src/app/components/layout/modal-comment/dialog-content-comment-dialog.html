@@ -13,9 +13,17 @@
 
       <div class="card-body">
         <p class="card-text"><strong>{{ post.conteudo }}</strong></p>
-        <blockquote class="blockquote mb-0">
-          <footer class="blockquote-footer">{{ post.data | date:'medium' }}</footer>
-        </blockquote>
+      </div>
+
+      <blockquote class="blockquote mb-0">
+        <footer class="blockquote-footer">{{ post.data | date:'medium' }}</footer>
+      </blockquote>
+      <div class="card-footer d-flex justify-content-between border-0">
+        <app-like-button [likeCount]="post.likeCount"
+        [postUuid]="post.id"
+        [liked]="post.liked ?? false"></app-like-button>
+
+        <app-complain-button [postUuid]="post.id" [reported] = "post.reported ?? false"></app-complain-button>
       </div>
     </div>
   </div>
