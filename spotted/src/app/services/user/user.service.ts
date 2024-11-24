@@ -40,5 +40,20 @@ export class UserService {
       );
   }
 
+  trocarSenha(
+    idUser: string,
+    senhaAntiga: string,
+    senhaNova: string
+  ): Observable<string> {
+    const body = {
+      idUser,
+      senhaAntiga,
+      senhaNova,
+    };
+    return this.http.post(`${this.API_URL}/trocar-senha`, body, {
+      responseType: 'text',
+    });
+  }
+
   constructor() {}
 }
