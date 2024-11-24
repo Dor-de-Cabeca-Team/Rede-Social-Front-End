@@ -31,7 +31,7 @@ export class DialogContentCommentDialog {
   post: PostDTO;
   postService = inject(PostService);
   loginService = inject(LoginService);
-  showComments:boolean = false;
+  showComments: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { post: PostDTO },
@@ -42,39 +42,39 @@ export class DialogContentCommentDialog {
   }
 
   findAllCommentsValidos() {
-    console.log("atualizou");
-  const idUser = this.loginService.getIdUsuarioLogado();
-  if (idUser) {
-    this.postService.showComments(this.post.id, idUser).subscribe({
-      next: (comments) => {
-        const imagesLength = 20; // Número de imagens disponíveis para os comentários
-        this.post.comments = comments.map((comment) => {
-          const animalIndex = comment.profileAnimal ?? 0;
-          const animalImage = this.postService.getRandomAnimalImage(animalIndex % imagesLength);
+    console.log(this.post.profileAnimal);
+    const idUser = this.loginService.getIdUsuarioLogado();
+    if (idUser) {
+      this.postService.showComments(this.post.id, idUser).subscribe({
+        next: (comments) => {
+          const imagesLength = 20;
+          this.post.comments = comments.map((comment) => {
+            const animalIndex = comment.profileAnimal ?? 0;
+            const animalImage = this.postService.getRandomAnimalImage(animalIndex % imagesLength);
 
-          return {
-            ...comment,
-            imagem: animalImage.path,
+            return {
+              ...comment,
+              imagem: animalImage.path,
               imagemNome: animalImage.name,
               liked: comment.liked,
               reported: comment.reported,
-          };
-        });
-      },
-      error: (err) => {
-        console.error('Erro ao buscar comentários válidos: ' + err);
-        alert('Ocorreu um erro ao carregar os comentários. Tente novamente mais tarde.');
-      },
-    });
-  } else {
-    console.error('Usuário não está logado');
-    alert('Você precisa estar logado para ver os comentários.');
+            };
+          });
+        },
+        error: (err) => {
+          console.error('Erro ao buscar comentários válidos: ' + err);
+          alert('Ocorreu um erro ao carregar os comentários. Tente novamente mais tarde.');
+        },
+      });
+    } else {
+      console.error('Usuário não está logado');
+      alert('Você precisa estar logado para ver os comentários.');
+    }
   }
-}
 
-onCreateComments() {
-  setTimeout(() => {
-    this.findAllCommentsValidos();
-  }, 1500);
-}
+  onCreateComments() {
+    setTimeout(() => {
+      this.findAllCommentsValidos();
+    }, 1500);
+  }
 }

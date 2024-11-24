@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLabel">Conta</h5>
+  <h5 class="modal-title fw-bold" id="exampleModalLabel">Conta</h5>
   <button
     type="button"
     class="btn-close"
@@ -7,26 +7,103 @@
     (click)="modalRef.close()"
   ></button>
 </div>
-<div class="modal-body"><form>
-  <!-- 2 column grid layout with text inputs for the first and last names -->
-  <div class="row mb-4">
-    <div class="col">
-      <mdb-form-control>
-        <input mdbInput type="text" id="form6Example1" class="form-control" />
-        <label mdbLabel class="form-label" for="form6Example1">name</label>
-      </mdb-form-control>
+
+<div class="modal-body">
+  <form>
+    <!-- Nome -->
+    <div class="row mb-4">
+      <div class="col">
+        <mdb-form-control>
+          <input
+            mdbInput
+            type="text"
+            id="form6Example1"
+            class="form-control"
+            [(ngModel)]="user.nome"
+            name="nome"
+            disabled=""
+          />
+          <label mdbLabel class="form-label fw-bold" for="form6Example1">Nome</label>
+        </mdb-form-control>
+      </div>
     </div>
+
+    <!-- Email -->
+    <mdb-form-control class="mb-4">
+      <input
+        mdbInput
+        type="email"
+        id="form6Example5"
+        class="form-control"
+        [(ngModel)]="user.email"
+        name="email"
+        disabled=""
+      />
+      <label mdbLabel class="form-label fw-bold" for="form6Example5">Email</label>
+    </mdb-form-control>
+  </form>
+
+  <div class="text-center my-4">
+    <p class="fw-bold">Deseja trocar a senha?</p>
   </div>
 
-  <!-- Email input -->
-  <mdb-form-control class="mb-4">
-    <input mdbInput type="email" id="form6Example5" class="form-control" />
-    <label mdbLabel class="form-label" for="form6Example5">Email</label>
-  </mdb-form-control>
+  <!-- Formulário de troca de senha -->
+  <form (ngSubmit)="trocarSenha()">
+    <div class="row gy-2 gx-3 align-items-center">
+      <div class="col-auto">
+        <mdb-form-control>
+          <input
+            mdbInput
+            type="password"
+            id="senhaAntiga"
+            class="form-control"
+            [(ngModel)]="senhaAntiga"
+            name="senhaAntiga"
+            required
+          />
+          <label mdbLabel class="form-label fw-bold" for="senhaAntiga">Senha Antiga</label>
+        </mdb-form-control>
+      </div>
 
-</form></div>
+      <div class="col-auto">
+        <mdb-form-control>
+          <input
+            mdbInput
+            type="password"
+            id="senhaNova"
+            class="form-control"
+            [(ngModel)]="senhaNova"
+            name="senhaNova"
+            required
+          />
+          <label mdbLabel class="form-label fw-bold" for="senhaNova">Senha Nova</label>
+        </mdb-form-control>
+      </div>
+
+      <div class="col-auto">
+        <mdb-form-control>
+          <input
+            mdbInput
+            type="password"
+            id="confirmSenhaNova"
+            class="form-control"
+            [(ngModel)]="confirmSenhaNova"
+            name="confirmSenhaNova"
+            required
+          />
+          <label mdbLabel class="form-label fw-bold" for="confirmSenhaNova">Confirmar Senha Nova</label>
+        </mdb-form-control>
+      </div>
+
+      <div class="col-auto">
+        <button mdbRipple type="submit" class="btn btn-primary">
+          Atualizar Senha
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
-    Fechar
-  </button>
+  <button type="button" class="btn btn-secondary" (click)="modalRef.close()">Fechar</button>
 </div>

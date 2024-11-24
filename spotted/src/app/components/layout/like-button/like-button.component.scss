@@ -1,9 +1,12 @@
 .liked-class {
-    color: blue;
+  background-color: rgb(34, 103, 206);
     font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 6px rgb(73, 98, 134);
   }
 
   .unliked-class {
-    color: rgb(80, 80, 80);
+    background-color: #f0f0f0;
     font-weight: bold;
+    color: rgb(80, 80, 80);
   }

@@ -35,7 +35,6 @@ export class FeedComponent {
   
   findAllValidos() {
     const idUser = this.loginService.getIdUsuarioLogado();
-    console.log(idUser)
     if (idUser) {
       this.postService.findAllValidos(idUser).subscribe({
         next: (posts) => {

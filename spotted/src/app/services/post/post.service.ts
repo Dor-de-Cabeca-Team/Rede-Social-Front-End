@@ -59,8 +59,8 @@ export class PostService {
     );
   }
 
-  findById(uuid: string): Observable<PostDTO> {
-    return this.http.get<PostDTO>(`${this.API}/post/findById?uuid=${uuid}`);
+  findById(idPost: string, idUser:string): Observable<PostDTO> {
+    return this.http.get<PostDTO>(`${this.API}/post/findById?idPost=${idPost}&idUser=${idUser}`);
   }  
 
   likePost(idPost: string, idUser: string): Observable<string> {
