@@ -22,7 +22,12 @@ export class CreateCommentComponent {
 
   constructor(private postService: PostService) {}
 
-  createComment(postUuid: string): void {
+  createComment(postUuid: string, event?: Event): void {
+    if (event) {
+      const keyboardEvent = event as KeyboardEvent;
+      keyboardEvent.preventDefault();
+    }
+
     const userId = this.loginService.getIdUsuarioLogado();
 
     if (!userId) {
@@ -31,6 +36,7 @@ export class CreateCommentComponent {
     }
 
     if (this.commentContent.trim()) {
+<<<<<<< HEAD
       this.isLoading = true;
 
       this.postService.createComment(this.commentContent, userId, postUuid).subscribe({
@@ -47,6 +53,25 @@ export class CreateCommentComponent {
           this.isLoading = false; // Reativa o botão ao finalizar
         },
       });
+=======
+      if (userId) {
+        // Check if userId is not null
+        this.postService
+          .createComment(this.commentContent, userId, postUuid)
+          .subscribe({
+            next: (response) => {
+              console.log('Comment created successfully:', response);
+              this.commentContent = '';
+              this.commentCreated.emit();
+            },
+            error: (error) => {
+              console.error('Error creating comment:', error);
+            },
+          });
+      } else {
+        alert('User ID is not available.');
+      }
+>>>>>>> 1df784837061eee29ba2ee230b83bd131bcb65d2
     } else {
       alert('Por favor, insira algum conteúdo antes de comentar.');
     }
