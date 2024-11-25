@@ -26,6 +26,10 @@ export class CreatePostComponent {
       keyboardEvent.preventDefault();
     }
 
+    if(this.isLoading) {
+      return;
+    }
+
     const userId = this.loginService.getIdUsuarioLogado();
 
     if (!userId) {

@@ -27,7 +27,11 @@ export class CreateCommentComponent {
       const keyboardEvent = event as KeyboardEvent;
       keyboardEvent.preventDefault();
     }
-    
+
+    if (this.isLoading) {
+      return;
+    }
+
     const userId = this.loginService.getIdUsuarioLogado();
 
     if (!userId) {
@@ -53,25 +57,7 @@ export class CreateCommentComponent {
           this.isLoading = false; // Reativa o botão ao finalizar
         },
       });
-      if (userId) {
-        // Check if userId is not null
-        this.postService
-          .createComment(this.commentContent, userId, postUuid)
-          .subscribe({
-            next: (response) => {
-              console.log('Comment created successfully:', response);
-              this.commentContent = '';
-              this.commentCreated.emit();
-            },
-            error: (error) => {
-              console.error('Error creating comment:', error);
-            },
-          });
-      } else {
-        alert('User ID is not available.');
-      }
-    } else {
-      alert('Por favor, insira algum conteúdo antes de comentar.');
     }
   }
 }
+
