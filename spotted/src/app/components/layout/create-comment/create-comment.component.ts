@@ -9,12 +9,14 @@ import { LoginService } from '../../../auth/login.service';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './create-comment.component.html',
-  styleUrls: ['./create-comment.component.scss'], // Corrected from styleUrl to styleUrls
+  styleUrls: ['./create-comment.component.scss'],
 })
 export class CreateCommentComponent {
   @Input() post!: PostDTO;
-  commentContent = '';
   @Output() commentCreated = new EventEmitter<void>();
+
+  commentContent = '';
+  isLoading = false;
 
   loginService = inject(LoginService);
 
@@ -23,26 +25,30 @@ export class CreateCommentComponent {
   createComment(postUuid: string): void {
     const userId = this.loginService.getIdUsuarioLogado();
 
+    if (!userId) {
+      alert('Usuário não logado. Faça login para comentar.');
+      return;
+    }
+
     if (this.commentContent.trim()) {
-      if (userId) {
-        // Check if userId is not null
-        this.postService
-          .createComment(this.commentContent, userId, postUuid)
-          .subscribe({
-            next: (response) => {
-              console.log('Comment created successfully:', response);
-              this.commentContent = ''; // Reset comment content after successful creation
-              this.commentCreated.emit();
-            },
-            error: (error) => {
-              console.error('Error creating comment:', error);
-            },
-          });
-      } else {
-        alert('User ID is not available.'); // Handle the case when userId is null
-      }
+      this.isLoading = true;
+
+      this.postService.createComment(this.commentContent, userId, postUuid).subscribe({
+        next: (response) => {
+          console.log('Comentário criado com sucesso:', response);
+          this.commentContent = ''; // Limpa o conteúdo após o envio
+          this.commentCreated.emit();
+        },
+        error: (error) => {
+          console.error('Erro ao criar comentário:', error);
+          alert('Erro ao criar comentário. Tente novamente.');
+        },
+        complete: () => {
+          this.isLoading = false; // Reativa o botão ao finalizar
+        },
+      });
     } else {
-      alert('Please insert some content before commenting.');
+      alert('Por favor, insira algum conteúdo antes de comentar.');
     }
   }
 }
