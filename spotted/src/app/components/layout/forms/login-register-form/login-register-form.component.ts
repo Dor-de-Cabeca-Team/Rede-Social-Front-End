@@ -75,6 +75,9 @@ export class LoginRegisterFormComponent {
           case 401:
             this.errorMessage = 'Email ou senha incorretos.';
             break;
+          case 403:
+            this.errorMessage = 'Confirme seu e-mail para logar.';
+            break;
           case 500:
             this.errorMessage =
               'Erro interno no servidor. Por favor, tente novamente.';
