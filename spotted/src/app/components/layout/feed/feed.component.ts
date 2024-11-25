@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../../auth/login.service';
 import { CommentDto } from '../../../models/commentDTO/comment-dto';
 import { TredingComponent } from '../trending/treding.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContentCommentDialog } from '../modal-comment/modal-comment.component';
 
 @Component({
   selector: 'app-feed',
@@ -18,13 +20,12 @@ import { TredingComponent } from '../trending/treding.component';
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent {
-  
+  dialog = inject(MatDialog);
   router = inject(Router);
   postService = inject(PostService);
   posts: PostDTO[] = [];
   selectedPostId: string | null = null;
   showModal: boolean = false;
-  showComments:boolean = true
   
   loginService = inject(LoginService);
   
@@ -32,7 +33,16 @@ export class FeedComponent {
     this.findAllValidos();
   }
   
-  
+  openCommentModal(post: PostDTO) {
+    const dialogRef = this.dialog.open(DialogContentCommentDialog, {
+      data: { post },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.findAllValidos();
+    });
+  }
+
   findAllValidos() {
     const idUser = this.loginService.getIdUsuarioLogado();
     if (idUser) {
