@@ -256,10 +256,6 @@
   #sidebar-wrapper .list-group-item:hover a {
     color: #1DA1F2;
   }
-
- 
-
-  
   #feed-container {
     position: relative;
   }
@@ -280,4 +276,5 @@
   #sidebar-wrapper.active ~ #feed-container::before {
     display: block; 
   }
+ 
 }
