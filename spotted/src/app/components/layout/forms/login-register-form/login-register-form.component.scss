@@ -2,3 +2,18 @@
     font-weight: 800;
     font-size: 2rem;
 }
+
+.pad{
+    padding-bottom: 15px;
+}
+
+.link-light-blue {
+  color: #1ab1fcc0; /* Azul claro */
+  text-decoration: none; /* Remove o sublinhado */
+  font-weight: bold; /* Deixa o texto mais destacado (opcional) */
+}
+
+.link-light-blue:hover {
+  color: #1ab1fcc0;; /* Um azul um pouco mais escuro para hover */
+  text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
