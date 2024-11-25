@@ -20,7 +20,12 @@ export class CreatePostComponent {
   tagsInput = ''; // Input de tags como string
   isLoading = false;
 
-  createPost(): void {
+  createPost(event?: Event): void {
+    if (event) {
+      const keyboardEvent = event as KeyboardEvent;
+      keyboardEvent.preventDefault();
+    }
+
     const userId = this.loginService.getIdUsuarioLogado();
 
     if (!userId) {

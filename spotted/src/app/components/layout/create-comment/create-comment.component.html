@@ -1,22 +1,11 @@
 <div class="post-box">
   <div class="textarea-div">
-<<<<<<< HEAD
-    <textarea
-      [(ngModel)]="commentContent"
-      class="form-control"
-      placeholder="Dê seu comentário"
-      maxlength="250"
-      rows="3"
-      (input)="isLoading = false"
-    ></textarea>
-=======
     <textarea [(ngModel)]="commentContent" 
     class="form-control" 
     placeholder="Faça um comentário" 
     maxlength="250" 
     rows="3" 
     (keydown.enter)="createComment(post.id, $event)"></textarea>
->>>>>>> 1df784837061eee29ba2ee230b83bd131bcb65d2
   </div>
   <div class="btn-div position-relative">
     <button

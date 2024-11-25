@@ -27,7 +27,7 @@ export class CreateCommentComponent {
       const keyboardEvent = event as KeyboardEvent;
       keyboardEvent.preventDefault();
     }
-
+    
     const userId = this.loginService.getIdUsuarioLogado();
 
     if (!userId) {
