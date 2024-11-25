@@ -55,5 +55,20 @@ export class UserService {
     });
   }
 
+  solicitarRedefinicaoSenha(email: string): Observable<string> {
+    return this.http.post(`${this.API_URL}/forgot-password`, null, {
+      params: { email },
+      responseType: 'text', // Indica que a resposta será uma string
+    });
+  }
+
+  // Função para redefinir a senha
+  redefinirSenha(token: string, novaSenha: string): Observable<string> {
+    const body = { token, novaSenha };
+    return this.http.post(`${this.API_URL}/resetar-conta`, body, {
+      responseType: 'text', // Esperamos uma resposta em formato texto
+    });
+  }
+
   constructor() {}
 }
