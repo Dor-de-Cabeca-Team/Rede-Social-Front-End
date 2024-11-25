@@ -5,8 +5,11 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule } from '@angular/material/core';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import {
+  MatNativeDateModule,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { UserInterface } from '../../../../models/user/interface/user-interface';
 import { UserService } from '../../../../services/user/user.service';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +17,19 @@ import { LoginService } from '../../../../auth/login.service';
 import { Login } from '../../../../auth/login';
 import { UserRegister } from '../../../../models/user/interface/user-register';
 import { CommonModule } from '@angular/common';
+
+// Defina o formato da data fora da classe
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-login-register-form',
@@ -28,7 +44,10 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     CommonModule,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }, // Idioma em português
+  ],
   templateUrl: './login-register-form.component.html',
   styleUrls: ['./login-register-form.component.scss'],
 })
@@ -50,7 +69,7 @@ export class LoginRegisterFormComponent {
 
   constructor(private userService: UserService) {}
 
-  mandarParaEsqueciSenha(){
+  mandarParaEsqueciSenha() {
     this.router.navigate(['/forgot-password']);
   }
 
@@ -58,8 +77,6 @@ export class LoginRegisterFormComponent {
     event.preventDefault();
     this.logar();
   }
-
-  //PARTE DO LOGIN!!
 
   logar() {
     this.isLoading = true;
@@ -93,23 +110,27 @@ export class LoginRegisterFormComponent {
     });
   }
 
-  //PARTE DE REGISTRAR!!
-
   formatDate(event: Event): void {
     const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    let value = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
 
-    if (value.length >= 2) {
+    // Aplica a máscara no formato DD/MM/YYYY
+    if (value.length > 2) {
       value = value.slice(0, 2) + '/' + value.slice(2);
     }
-    if (value.length >= 5) {
-      value = value.slice(0, 5) + '/' + value.slice(5);
+    if (value.length > 5) {
+      value = value.slice(0, 5) + '/' + value.slice(5, 9);
     }
 
-    input.value = value;
+    input.value = value; // Atualiza o valor no input
   }
 
-  calcularIdade(dataNascimento: Date): number {
+  calcularIdade(dataNascimento: Date | null): number {
+    if (!dataNascimento) {
+      // Retorna 0 ou outro valor padrão se dataNascimento for inválido
+      return 0;
+    }
+
     const hoje = new Date();
     let idade = hoje.getFullYear() - dataNascimento.getFullYear();
     const mes = hoje.getMonth() - dataNascimento.getMonth();
@@ -123,21 +144,17 @@ export class LoginRegisterFormComponent {
     this.errorMessage = '';
     event.preventDefault();
 
-    //console.log('Termos Aceitos:', this.termosAceitos);
-
     if (this.senha !== this.repeatPassword) {
       this.errorMessage = 'As senhas não coincidem';
-      //alert('As senhas não coincidem');
       return;
     }
 
     if (!this.termosAceitos) {
-      this.errorMessage = 'As senhas não coincidem';
-      //alert('Você deve aceitar os termos.');
+      this.errorMessage = 'Você deve aceitar os termos.';
       return;
     }
 
-    this.isLoading = true; // Ativar carregamento
+    this.isLoading = true;
     this.idade = this.calcularIdade(this.dataNascimento);
 
     const newUser: UserRegister = {
@@ -149,16 +166,13 @@ export class LoginRegisterFormComponent {
 
     this.userService.register(newUser).subscribe({
       next: (user) => {
-        this.isLoading = false; // Garantir que pare o carregamento
+        this.isLoading = false;
         this.user = user;
         alert('Usuário registrado com sucesso');
-        console.log('Usuário registrado:', user);
         this.limparFormulario();
       },
       error: (error) => {
-        this.isLoading = false; // Garantir que pare o carregamento em caso de erro
-        console.error('Erro ao registrar usuário', error);
-
+        this.isLoading = false;
         if (
           error.status === 400 &&
           error.error === 'Email ja esta sendo usado'

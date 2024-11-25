@@ -138,18 +138,19 @@
 
         <!-- Data de Nascimento -->
         <mat-form-field>
-          <mat-label>Data de Nascimento</mat-label>
+          <mat-label>Data de Nascimento*</mat-label>
           <input
             matInput
             [matDatepicker]="picker"
-            placeholder="MM/DD/YYYY"
+            placeholder="DD/MM/YYYY"
+            (input)="formatDate($event)"
             [(ngModel)]="dataNascimento"
             name="dataNascimento"
-            (input)="formatDate($event)"
             required
           />
+
           <mat-datepicker-toggle
-            matIconSuffix
+            matSuffix
             [for]="picker"
           ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
