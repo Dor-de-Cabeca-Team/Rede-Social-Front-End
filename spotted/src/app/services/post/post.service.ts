@@ -6,6 +6,7 @@ import { Tag } from '../../models/tag/tag';
 import { environment } from '../../../environments/environment';
 import { PostDTO } from '../../models/postDTO/post-dto';
 import { PostTop10 } from '../../models/trending/post-top10';
+import { Page } from '../../models/page/page';
 
 
 
@@ -53,9 +54,9 @@ export class PostService {
     return this.http.get<PostDTO[]>(`${this.API}/post/findAll`);
   }
 
-  findAllValidos(idUser: string): Observable<PostDTO[]> {
-    return this.http.get<PostDTO[]>(
-      `${this.API}/post/postsValidos?idUser=${idUser}`
+  findAllValidos(idUser: string, page: number, size: number): Observable<Page<PostDTO>> {
+    return this.http.get<Page<PostDTO>>(
+      `${this.API}/post/postsValidos?idUser=${idUser}&page=${page}&size=${size}`
     );
   }
 
