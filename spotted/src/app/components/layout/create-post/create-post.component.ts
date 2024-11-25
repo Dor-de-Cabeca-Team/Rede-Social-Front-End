@@ -20,21 +20,25 @@ export class CreatePostComponent {
   tagsInput = ''; // Input de tags como string
   isLoading = false;
 
-  createPost(): void {
+  createPost(event?: Event): void {
+    if (event) {
+      const keyboardEvent = event as KeyboardEvent;  // Type assertion
+      keyboardEvent.preventDefault(); // Impede a quebra de linha ao pressionar Enter
+    }
+  
     const userId = this.loginService.getIdUsuarioLogado();
-
+  
     if (!userId) {
       alert('Usuário não logado. Faça login para criar um post.');
       return;
     }
-
+  
     if (this.postContent.trim()) {
       this.isLoading = true;
-
+  
       const extractedTags = this.extractHashtags(this.postContent);
-
       const tags = [...extractedTags, ...this.parseTags(this.tagsInput)];
-
+  
       this.postService.createPost(this.postContent, userId, tags).subscribe({
         next: (response) => {
           console.log('Post criado com sucesso:', response);
@@ -53,7 +57,7 @@ export class CreatePostComponent {
     } else {
       alert('Por favor, insira algum conteúdo antes de postar.');
     }
-  }
+  }    
 
   private parseTags(tagsInput: string): { nome: string }[] {
     return tagsInput

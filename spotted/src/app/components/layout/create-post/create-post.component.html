@@ -1,14 +1,22 @@
 <div class="post-box">
   <div class="textarea-div">
-    <textarea [(ngModel)]="postContent" class="form-control" placeholder="What's happening?" maxlength="250" rows="3"></textarea>
+    <textarea 
+      [(ngModel)]="postContent" 
+      class="form-control" 
+      placeholder="O que está acontecendo?" 
+      maxlength="250" 
+      rows="3" 
+      (keydown.enter)="createPost($event)">
+    </textarea>
   </div>
   <div class="btn-div position-relative">
     <button (click)="createPost()" class="btn btn-primary position-absolute bottom-0 end-0" [disabled]="isLoading">
-      @if (isLoading) {
+      @if(isLoading){
         <div class="spinner-border text-light" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
-      } @else {
+      }
+      @else {
         Post
       }
     </button>

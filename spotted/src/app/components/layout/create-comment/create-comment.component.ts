@@ -9,7 +9,7 @@ import { LoginService } from '../../../auth/login.service';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './create-comment.component.html',
-  styleUrls: ['./create-comment.component.scss'], // Corrected from styleUrl to styleUrls
+  styleUrls: ['./create-comment.component.scss'],
 })
 export class CreateCommentComponent {
   @Input() post!: PostDTO;
@@ -20,7 +20,12 @@ export class CreateCommentComponent {
 
   constructor(private postService: PostService) {}
 
-  createComment(postUuid: string): void {
+  createComment(postUuid: string, event?: Event): void {
+    if (event) {
+      const keyboardEvent = event as KeyboardEvent;
+      keyboardEvent.preventDefault();
+    }
+
     const userId = this.loginService.getIdUsuarioLogado();
 
     if (this.commentContent.trim()) {
@@ -31,7 +36,7 @@ export class CreateCommentComponent {
           .subscribe({
             next: (response) => {
               console.log('Comment created successfully:', response);
-              this.commentContent = ''; // Reset comment content after successful creation
+              this.commentContent = '';
               this.commentCreated.emit();
             },
             error: (error) => {
@@ -39,7 +44,7 @@ export class CreateCommentComponent {
             },
           });
       } else {
-        alert('User ID is not available.'); // Handle the case when userId is null
+        alert('User ID is not available.');
       }
     } else {
       alert('Please insert some content before commenting.');
