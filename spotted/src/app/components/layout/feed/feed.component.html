@@ -1,5 +1,5 @@
 <article class="feed-container">
   @for (post of posts; track $index) {
-    <app-post [post]="post" [showComments]="showComments"></app-post>
+    <app-post [post]="post" (modalClosed)="findAllValidos()"></app-post>
   }
 </article>

@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { PostDTO } from '../../../models/postDTO/post-dto';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -19,7 +19,7 @@ import { ComplainButtonComponent } from '../complain-button/complain-button.comp
 })
 export class PostComponent {
   @Input() post!: PostDTO;
-  @Input() showComments!:boolean;
+  @Output() modalClosed: EventEmitter<void> = new EventEmitter<void>();
 
   postService = inject(PostService);
   liked: boolean = false;
@@ -28,10 +28,12 @@ export class PostComponent {
   constructor(private dialog: MatDialog) {}
 
   openDialog() {
-    this.dialog.open(DialogContentCommentDialog, {
-      data: {
-        post: this.post,
-      }
+    const dialogRef = this.dialog.open(DialogContentCommentDialog, {
+      data: { post: this.post },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.modalClosed.emit(); 
     });
   }
 }

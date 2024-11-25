@@ -1,5 +1,5 @@
 <div>
-  <h1 class="text-center text-white">Bem-Vindo ao Spotted</h1>
+  <h1 class="text text-center text-white">Bem-Vindo ao Spotted</h1>
   <h4 class="text-center">Por favor coloque seus dados para entrar.</h4>
   <br />
   <mdb-tabs [pills]="true" [fill]="true">
@@ -37,6 +37,12 @@
             Senha
           </label>
         </mdb-form-control>
+
+        <div class="col-md-6 d-flex justify-content-center pad">
+          <a class="link-light-blue" (click)="mandarParaEsqueciSenha()"
+            >Esqueci minha senha?</a
+          >
+        </div>
 
         <!-- Submit button -->
         <button
@@ -121,7 +127,11 @@
             name="repeatSenha"
             required
           />
-          <label mdbLabel class="form-label text-white" for="registerRepeatPassword">
+          <label
+            mdbLabel
+            class="form-label text-white"
+            for="registerRepeatPassword"
+          >
             Repetir Senha
           </label>
         </mdb-form-control>
@@ -138,7 +148,10 @@
             (input)="formatDate($event)"
             required
           />
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
@@ -166,7 +179,10 @@
           [disabled]="isLoading"
         >
           <span *ngIf="!isLoading">Registrar</span>
-          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+          <span
+            *ngIf="isLoading"
+            class="spinner-border spinner-border-sm"
+          ></span>
         </button>
       </form>
 

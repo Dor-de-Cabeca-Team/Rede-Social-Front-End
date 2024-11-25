@@ -1,6 +1,6 @@
 // trending.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { PostDTO } from '../../../models/postDTO/post-dto';
 import { PostTop10 } from '../../../models/trending/post-top10';
@@ -20,6 +20,8 @@ import { LoginService } from '../../../auth/login.service';
 export class TredingComponent {
   post!: PostDTO;
   postService = inject(PostService);
+  @Output() modalClosed: EventEmitter<void> = new EventEmitter<void>();
+
   trendingList: { id: string; tags: string[]; description: string; }[] = [];  // Não precisa da imagem aqui
   showModal: boolean = false;
   loginService = inject(LoginService);
@@ -57,10 +59,12 @@ export class TredingComponent {
           post.imagemNome = animalImage.name;
         }
   
-        this.dialog.open(DialogContentCommentDialog, {
-          data: {
-            post: post
-          }
+        const dialogRef = this.dialog.open(DialogContentCommentDialog, {
+          data: { post: post },
+        });
+    
+        dialogRef.afterClosed().subscribe(() => {
+          this.modalClosed.emit(); 
         });
       },
       error: (err) => {

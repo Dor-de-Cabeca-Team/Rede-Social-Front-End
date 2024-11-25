@@ -50,6 +50,10 @@ export class LoginRegisterFormComponent {
 
   constructor(private userService: UserService) {}
 
+  mandarParaEsqueciSenha(){
+    this.router.navigate(['/forgot-password']);
+  }
+
   onLoginSubmit(event: Event): void {
     event.preventDefault();
     this.logar();
@@ -74,6 +78,9 @@ export class LoginRegisterFormComponent {
         switch (erro.status) {
           case 401:
             this.errorMessage = 'Email ou senha incorretos.';
+            break;
+          case 403:
+            this.errorMessage = 'Confirme seu e-mail para logar.';
             break;
           case 500:
             this.errorMessage =
@@ -151,7 +158,7 @@ export class LoginRegisterFormComponent {
       error: (error) => {
         this.isLoading = false; // Garantir que pare o carregamento em caso de erro
         console.error('Erro ao registrar usuário', error);
-        
+
         if (
           error.status === 400 &&
           error.error === 'Email ja esta sendo usado'

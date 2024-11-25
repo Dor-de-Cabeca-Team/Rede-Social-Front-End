@@ -7,7 +7,14 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
   let router = inject(Router);
 
   let token = localStorage.getItem('token');
-  if (token && !router.url.includes('/login')) {
+
+  // Verifique se o token existe e se a URL não é a rota de login, "esqueci minha senha" nem "reset-password"
+  if (
+    token &&
+    !router.url.includes('/login') &&
+    !router.url.includes('/forgot-password') &&
+    !router.url.includes('/reset-password')
+  ) {
     request = request.clone({
       setHeaders: { Authorization: 'Bearer ' + token },
     });
@@ -17,21 +24,27 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
     catchError((err: any) => {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
-          console.log('401- tratar');
-          //alert('401 - tratar aqui');
+          // Tratar 401 - Não autorizado
+          console.log(
+            'Erro 401 - Token inválido ou expirado. Redirecionando para login.'
+          );
           router.navigate(['/login']);
         } else if (err.status === 403) {
-          console.log('403- tratar');
-          //alert('403 - tratar aqui');
+          // Tratar 403 - Acesso negado
+          console.log('Erro 403 - Acesso negado. Redirecionando para login.');
           router.navigate(['/login']);
+        } else if (err.status === 500) {
+          // Tratar erro 500 - Erro no servidor
+          console.error('Erro no servidor:', err);
+          alert('Erro no servidor. Tente novamente mais tarde.');
         } else {
-          console.error('HTTP error:', err);
+          console.error('Erro HTTP:', err);
         }
       } else {
-        console.error('An error occurred:', err);
+        console.error('Erro desconhecido:', err);
       }
 
-      return throwError(() => err);
+      return throwError(() => err); // Repassa o erro para a aplicação
     })
   );
 };

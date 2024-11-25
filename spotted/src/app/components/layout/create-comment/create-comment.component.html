@@ -1,8 +1,25 @@
 <div class="post-box">
   <div class="textarea-div">
-    <textarea [(ngModel)]="commentContent" class="form-control" placeholder="Dê seu comentário" maxlength="250" rows="3"></textarea>
+    <textarea [(ngModel)]="commentContent" 
+    class="form-control" 
+    placeholder="Faça um comentário" 
+    maxlength="250" 
+    rows="3" 
+    (keydown.enter)="createComment(post.id, $event)"></textarea>
   </div>
   <div class="btn-div position-relative">
-    <button (click)="createComment(post.id)" class="btn btn-primary position-absolute bottom-0 end-0">Send</button>
+    <button
+      (click)="createComment(post.id)"
+      class="btn btn-primary position-absolute bottom-0 end-0"
+      [disabled]="isLoading"
+    >
+      @if (isLoading) {
+        <div class="spinner-border text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      } @else {
+        Send
+      }
+    </button>
   </div>
 </div>
