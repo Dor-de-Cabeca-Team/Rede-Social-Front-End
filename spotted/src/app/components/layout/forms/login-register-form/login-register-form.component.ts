@@ -57,7 +57,6 @@ export class LoginRegisterFormComponent {
   repeatPassword: string = '';
   nome: string = '';
   idade!: number;
-  dataNascimento!: Date;
   termosAceitos: boolean = false;
   isLoading: boolean = false;
   errorMessage: string = '';
@@ -110,6 +109,9 @@ export class LoginRegisterFormComponent {
     });
   }
 
+  formattedDataNascimento: string = ''; // Armazena a string formatada
+  dataNascimento: Date | null = null; // Armazena o objeto Date (se necessário)
+
   formatDate(event: Event): void {
     const input = event.target as HTMLInputElement;
     let value = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
@@ -123,6 +125,20 @@ export class LoginRegisterFormComponent {
     }
 
     input.value = value; // Atualiza o valor no input
+    this.formattedDataNascimento = value; // Atualiza o modelo com a string formatada
+
+    // Valida e converte para Date
+    const [day, month, year] = value.split('/').map(Number);
+    if (day && month && year && year > 1900) {
+      const parsedDate = new Date(year, month - 1, day);
+      if (!isNaN(parsedDate.getTime())) {
+        this.dataNascimento = parsedDate; // Armazena o objeto Date
+      } else {
+        this.dataNascimento = null; // Define como null se a data for inválida
+      }
+    } else {
+      this.dataNascimento = null;
+    }
   }
 
   calcularIdade(dataNascimento: Date | null): number {

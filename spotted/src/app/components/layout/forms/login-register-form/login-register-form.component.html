@@ -137,24 +137,22 @@
         </mdb-form-control>
 
         <!-- Data de Nascimento -->
-        <mat-form-field>
-          <mat-label>Data de Nascimento*</mat-label>
+        <div class="mb-4">
+          <label for="birthdate" class="form-label text-white"
+            >Data de Nascimento*</label
+          >
           <input
-            matInput
-            [matDatepicker]="picker"
+            mdbInput
+            type="text"
+            id="birthdate"
+            class="form-control text-black"
             placeholder="DD/MM/YYYY"
             (input)="formatDate($event)"
-            [(ngModel)]="dataNascimento"
+            [(ngModel)]="formattedDataNascimento"
             name="dataNascimento"
             required
           />
-
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        </div>
 
         <!-- Termos de Aceite -->
         <div class="form-check d-flex justify-content-center mb-4">
