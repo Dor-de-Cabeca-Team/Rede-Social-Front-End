@@ -14,9 +14,10 @@
 
   <div class="card-footer d-flex justify-content-between border-0">
     <app-like-button [likeCount]="post.likeCount"
-    [postUuid]="post.id"
-    [liked]="post.liked ?? false"></app-like-button>
-    <span class="text-white" (click)="openDialog()" style="cursor: pointer">
+                 [postUuid]="post.id"
+                 [liked]="post.liked ?? false"
+                 (likedChanged)="post.liked = $event; post.likeCount = $event ? post.likeCount + 1 : post.likeCount - 1"></app-like-button>
+      <span class="text-white" (click)="openDialog()" style="cursor: pointer">
       <i class="far fa-comments"></i>
       {{ post.comments.length}} Comentários
     </span>

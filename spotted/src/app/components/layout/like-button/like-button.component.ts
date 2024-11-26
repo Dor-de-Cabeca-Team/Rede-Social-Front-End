@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { LoginService } from '../../../auth/login.service';
 import { CommonModule } from '@angular/common';
@@ -19,32 +19,41 @@ export class LikeButtonComponent {
   postService = inject(PostService);
   loginService = inject(LoginService);
   private pendingLikeStatus: boolean = this.liked;
-  private isPending: boolean = false;
 
-  likePost() {
-    const userId = this.loginService.getIdUsuarioLogado();
-    if (!userId) {
-      alert('Usuário não logado.');
-      return;
-    }
+  @Output() likedChanged = new EventEmitter<boolean>();
 
-    if (this.isPending) return;
-
-    this.toggleLike(userId);
-    this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
-
-    this.postService.likePost(this.postUuid, userId).subscribe({
-      next: (response) => {
-        this.pendingLikeStatus = this.liked;
-      },
-      error: (err) => {
-        console.error('Erro ao dar like no post: ', err);
-      },
-      complete: () => {
-        this.isPending = false;
-      }
-    });
+likePost() {
+  const userId = this.loginService.getIdUsuarioLogado();
+  if (!userId) {
+    alert('Usuário não logado.');
+    return;
   }
+
+  // Atualize o estado local antes de enviar a requisição
+  this.liked = !this.liked;
+  this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
+
+  // Emitir a alteração do liked para o componente pai
+  this.likedChanged.emit(this.liked);
+
+  // Faça a requisição para o backend
+  this.postService.likePost(this.postUuid, userId).subscribe({
+    next: () => {
+      console.log('Like atualizado com sucesso no backend');
+    },
+    error: (err) => {
+      console.error('Erro ao dar like no post: ', err);
+      alert('Erro ao dar like. Tente novamente.');
+
+      // Reverte as mudanças locais caso haja erro
+      this.liked = !this.liked;
+      this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
+      this.likedChanged.emit(this.liked);
+    }
+  });
+}
+
+
 
   likeComment() {
     const userId = this.loginService.getIdUsuarioLogado();
@@ -63,9 +72,6 @@ export class LikeButtonComponent {
       },
       error: (err) => {
         console.error('Erro ao dar like no comentário: ', err);
-      },
-      complete: () => {
-        this.isPending = false;
       }
     });
   }
