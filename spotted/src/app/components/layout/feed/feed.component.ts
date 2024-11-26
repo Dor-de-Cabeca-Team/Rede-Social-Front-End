@@ -38,16 +38,6 @@ export class FeedComponent {
     this.findAllValidos();
   }
 
-  openCommentModal(post: PostDTO) {
-    const dialogRef = this.dialog.open(DialogContentCommentDialog, {
-      data: { post },
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.findAllValidos();
-    });
-  }
-
   findAllValidos(page: number = 0, append: boolean = false) {
     const idUser = this.loginService.getIdUsuarioLogado();
     if (idUser) {
@@ -101,4 +91,25 @@ export class FeedComponent {
     }
     this.findAllValidos(this.currentPage + 1, true);
   }
+
+  updatePost(idPost: string) {
+    const idUser = this.loginService.getIdUsuarioLogado();
+    if (idUser) {
+      this.postService.findById(idPost, idUser).subscribe({
+        next: (updatedPost) => {
+          const index = this.posts.findIndex((post) => post.id === idPost);
+          if (index !== -1) {
+            this.posts[index] = {
+              ...this.posts[index],
+              ...updatedPost,
+            };
+          }
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar o post:', err);
+        },
+      });
+    }
+  }
+  
 }

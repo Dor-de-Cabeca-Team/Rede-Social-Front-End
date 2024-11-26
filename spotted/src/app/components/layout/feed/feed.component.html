@@ -1,6 +1,6 @@
 <article class="feed-container">
   @for (post of posts; track $index) {
-    <app-post [post]="post" (modalClosed)="findAllValidos(currentPage, false)"></app-post>
+    <app-post [post]="post" (modalClosed)="updatePost($event)"></app-post>
   }
 </article>
 @if(!isLoading && currentPage + 1 < totalPages){
