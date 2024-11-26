@@ -19,7 +19,7 @@ import { ComplainButtonComponent } from '../complain-button/complain-button.comp
 })
 export class PostComponent {
   @Input() post!: PostDTO;
-  @Output() modalClosed: EventEmitter<void> = new EventEmitter<void>();
+  @Output() modalClosed: EventEmitter<string> = new EventEmitter<string>();
 
   postService = inject(PostService);
   liked: boolean = false;
@@ -33,7 +33,8 @@ export class PostComponent {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.modalClosed.emit(); 
+      this.modalClosed.emit(this.post.id);
     });
+    
   }
 }

@@ -2,7 +2,7 @@
   
   
   <!-- Sessão Post -->
-  <h2 mat-dialog-title>Postagem</h2>
+  <h2 mat-dialog-title class="titulo">Postagem </h2>
   <div>
     <div class="card mb-3" style="max-width: 38rem;">
 
@@ -30,7 +30,7 @@
   
   
   <!-- Sessão Comentario -->
-  <h2 mat-dialog-title>Comentários</h2> 
+  <h2 mat-dialog-title class="titulo">Comentários</h2> 
   <div>
     @for (comment of post.comments; track $index) {
     <app-comment [comment]="comment"></app-comment>

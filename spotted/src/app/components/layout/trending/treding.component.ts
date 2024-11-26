@@ -20,7 +20,7 @@ import { LoginService } from '../../../auth/login.service';
 export class TredingComponent {
   post!: PostDTO;
   postService = inject(PostService);
-  @Output() modalClosed: EventEmitter<void> = new EventEmitter<void>();
+  @Output() modalClosed: EventEmitter<string> = new EventEmitter<string>();
 
   trendingList: { id: string; tags: string[]; description: string; }[] = [];  // Não precisa da imagem aqui
   showModal: boolean = false;
@@ -64,7 +64,7 @@ export class TredingComponent {
         });
     
         dialogRef.afterClosed().subscribe(() => {
-          this.modalClosed.emit(); 
+          this.modalClosed.emit(postId);
         });
       },
       error: (err) => {

@@ -1,5 +1,10 @@
 <article class="feed-container">
   @for (post of posts; track $index) {
-    <app-post [post]="post" (modalClosed)="findAllValidos()"></app-post>
+    <app-post [post]="post" (modalClosed)="updatePost($event)"></app-post>
   }
 </article>
+@if(!isLoading && currentPage + 1 < totalPages){
+<button (click)="loadMorePosts()" class="btn btn-primary btn-block mb-4">
+  Ver mais
+</button>
+}

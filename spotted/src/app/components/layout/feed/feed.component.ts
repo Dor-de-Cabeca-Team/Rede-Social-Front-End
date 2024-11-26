@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { PostDTO } from '../../../models/postDTO/post-dto';
 import { PostComponent } from '../post/post.component';
@@ -26,30 +26,26 @@ export class FeedComponent {
   posts: PostDTO[] = [];
   selectedPostId: string | null = null;
   showModal: boolean = false;
-  
+
   loginService = inject(LoginService);
-  
+
+  currentPage: number = 0;
+  totalPages: number = 0;
+  pageSize: number = 10;
+  isLoading: boolean = false;
+
   constructor() {
     this.findAllValidos();
   }
-  
-  openCommentModal(post: PostDTO) {
-    const dialogRef = this.dialog.open(DialogContentCommentDialog, {
-      data: { post },
-    });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.findAllValidos();
-    });
-  }
-
-  findAllValidos() {
+  findAllValidos(page: number = 0, append: boolean = false) {
     const idUser = this.loginService.getIdUsuarioLogado();
     if (idUser) {
-      this.postService.findAllValidos(idUser).subscribe({
-        next: (posts) => {
+      this.isLoading = true;
+      this.postService.findAllValidos(idUser, page, this.pageSize).subscribe({
+        next: (data) => {
           const imagesLength = 20;
-          this.posts = posts.map((post) => {
+          const newPosts = data.content.map((post) => {
             const validComments: CommentDto[] = post.comments;
             const animalIndex = post.profileAnimal ?? 0;
             const animalImage = this.postService.getRandomAnimalImage(animalIndex % imagesLength);
@@ -63,11 +59,18 @@ export class FeedComponent {
               reported: post.reported,
             };
           });
+
+          this.posts = append ? [...this.posts, ...newPosts] : newPosts;
+
+          this.currentPage = data.number;
+          this.totalPages = data.totalPages;
+          this.isLoading = false;
         },
         error: (err) => {
           console.error('Error: ' + err);
           alert('Faça login novamente!');
           this.router.navigate(['/login']);
+          this.isLoading = false;
         },
       });
     } else {
@@ -75,10 +78,38 @@ export class FeedComponent {
       alert('Você precisa estar logado para ver os posts.');
     }
   }
-  
+
   onPostCreated() {
     setTimeout(() => {
-      this.findAllValidos();
+      this.findAllValidos(0, false);
     }, 1500);
   }
+
+  loadMorePosts() {
+    if (this.isLoading || this.currentPage + 1 >= this.totalPages) {
+      return;
+    }
+    this.findAllValidos(this.currentPage + 1, true);
+  }
+
+  updatePost(idPost: string) {
+    const idUser = this.loginService.getIdUsuarioLogado();
+    if (idUser) {
+      this.postService.findById(idPost, idUser).subscribe({
+        next: (updatedPost) => {
+          const index = this.posts.findIndex((post) => post.id === idPost);
+          if (index !== -1) {
+            this.posts[index] = {
+              ...this.posts[index],
+              ...updatedPost,
+            };
+          }
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar o post:', err);
+        },
+      });
+    }
+  }
+  
 }
