@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user/user.service';
 import { CommonModule } from '@angular/common';
+import { FotterComponent } from "../fotter/fotter.component";
 
 @Component({
   selector: 'app-email-validador',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FotterComponent],
   templateUrl: './email-validador.component.html',
   styleUrl: './email-validador.component.scss',
 })
