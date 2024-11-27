@@ -70,5 +70,12 @@ export class UserService {
     });
   }
 
+  validarConta(idUser: string, hash: string): Observable<string> {
+    return this.http.get(`${this.API_URL2}/validar-conta`, {
+      params: { idUser, hash },
+      responseType: 'text', // Indica que a resposta será texto
+    });
+  }
+
   constructor() {}
 }

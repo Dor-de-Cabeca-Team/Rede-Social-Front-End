@@ -13,7 +13,8 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
     token &&
     !router.url.includes('/login') &&
     !router.url.includes('/forgot-password') &&
-    !router.url.includes('/reset-password')
+    !router.url.includes('/reset-password') &&
+    !router.url.includes('/email-validador')
   ) {
     request = request.clone({
       setHeaders: { Authorization: 'Bearer ' + token },
