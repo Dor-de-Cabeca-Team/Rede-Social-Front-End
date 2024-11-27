@@ -137,22 +137,22 @@
         </mdb-form-control>
 
         <!-- Data de Nascimento -->
-        <div class="mb-4">
-          <label for="birthdate" class="form-label text-white"
-            >Data de Nascimento*</label
-          >
+        <mdb-form-control class="mb-4">
           <input
             mdbInput
             type="text"
             id="birthdate"
-            class="form-control text-black"
+            class="form-control text-white"
             placeholder="DD/MM/YYYY"
             (input)="formatDate($event)"
             [(ngModel)]="formattedDataNascimento"
             name="dataNascimento"
             required
           />
-        </div>
+          <label mdbLabel class="form-label text-white" for="birthdate">
+            Data de Nascimento*
+          </label>
+        </mdb-form-control>
 
         <!-- Termos de Aceite -->
         <div class="form-check d-flex justify-content-center mb-4">
