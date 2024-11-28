@@ -1,0 +1,25 @@
+<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+  <div class="row">
+    <div class="col-12">
+      <!-- Carregando -->
+      <div *ngIf="isLoading" class="text-center">
+        <p class="text-white">Validando sua conta, por favor aguarde...</p>
+      </div>
+
+      <!-- Sucesso -->
+      <div *ngIf="isValid" class="text-center text-success">
+        <h3 class="text">Sua conta foi validada com sucesso! 🎉</h3>
+        <p class="text-p">Agora você pode acessar sua conta.</p>
+        <a class="btn btn-primary" (click)="login()">Ir para Login</a>
+      </div>
+
+      <!-- Falha -->
+      <div *ngIf="isValid === false" class="text-center text-danger">
+        <h3>Falha na validação da conta. 😢</h3>
+        <p>{{ errorMessage }}</p>
+        <a class="btn btn-primary" routerLink="/ajuda">Entrar em contato com suporte</a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-fotter></app-fotter>

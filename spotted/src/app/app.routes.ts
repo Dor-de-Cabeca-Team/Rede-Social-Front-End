@@ -6,6 +6,7 @@ import { AnimatedComponent } from './components/layout/animated/animated.compone
 import { loginGuard } from './auth/login.guard';
 import { ResetPasswordComponent } from './components/layout/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './components/layout/forgot-password/forgot-password.component';
+import { EmailValidadorComponent } from './components/layout/email-validador/email-validador.component';
 
 
 
@@ -17,4 +18,5 @@ export const routes: Routes = [
   { path: "animated", component: AnimatedComponent},
   { path: "reset-password", component: ResetPasswordComponent},
   { path: "forgot-password", component: ForgotPasswordComponent},
+  { path: "email-validador", component: EmailValidadorComponent},
 ];
