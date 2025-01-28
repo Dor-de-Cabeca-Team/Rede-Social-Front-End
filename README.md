@@ -2,6 +2,14 @@
 
 Este é o repositório do front-end de uma aplicação de rede social desenvolvida com Angular.
 
+## Imagens do Projeto
+
+Aqui estão algumas imagens do projeto:
+
+![Tela de Login](spotted/imgDoProjeto/1.jpg)
+![Feed de Notícias](spotted/imgDoProjeto/2.jpg)
+![Perfil do Usuário](spotted/imgDoProjeto/3.jpg)
+
 ## Clonando o Repositório
 
 Para começar, clone este repositório em sua máquina local:
