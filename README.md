@@ -1,4 +1,4 @@
-# Rede Social Front-End
+# Spotted Front-End
 
 Este é o repositório do front-end de uma aplicação de rede social desenvolvida com Angular.
 
